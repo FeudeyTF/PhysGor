@@ -1,5 +1,6 @@
 @use "sass:meta";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import '../styles/themes.scss';
 
 :root {
   --primary-color: #3a7bd5;
@@ -107,7 +108,7 @@ button {
   padding: 0 var(--spacing-md);
 }
 
-// Анимации
+/* Анимации */
 .fade-in {
   animation: fadeIn 0.5s ease-in;
 }
@@ -144,6 +145,7 @@ button {
 @include meta.load-css("./components/SearchBar.scss");
 @include meta.load-css("./components/TrainingCard.scss");
 @include meta.load-css("./components/Filters.scss");
+@include meta.load-css("./components/ThemeToggle.scss");
 
 /* Стили элементов */
 

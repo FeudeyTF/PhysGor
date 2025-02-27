@@ -1,0 +1,254 @@
+.theme-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.theme-toggle-button:hover {
+  background-color: var(--primary-color);
+  color: var(--button-text);
+}
+
+.theme-toggle-button {
+  transform: rotate(0deg);
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle-button:active {
+  transform: rotate(360deg);
+}
+
+.physics-theme-toggle {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+  
+  &.light-mode {
+    background-color: #e1f5fe;
+    
+    .toggle-nucleus {
+      background: var(--primary-color);
+    }
+    
+    .toggle-electron {
+      background-color: var(--secondary-color);
+    }
+  }
+  
+  &.dark-mode {
+    background-color: #263238;
+    
+    .toggle-nucleus {
+      background: #000;
+      box-shadow: 0 0 15px 2px rgba(var(--secondary-color), 0.5);
+    }
+    
+    .toggle-electron {
+      opacity: 0.7;
+      background-color: #6a1b9a;
+    }
+    
+    .toggle-orbit {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.toggle-orbit {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.toggle-nucleus {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+.toggle-electron {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.e1 {
+  animation: orbit1 4s linear infinite;
+}
+
+.e2 {
+  animation: orbit2 6s linear infinite;
+}
+
+.e3 {
+  animation: orbit3 8s linear infinite;
+}
+
+.toggle-event-horizon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.toggle-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.animating {
+  &.light-mode {
+    .toggle-nucleus {
+      transform: scale(1.2);
+      box-shadow: 0 0 20px 5px rgba(58, 123, 213, 0.6);
+    }
+    
+    .toggle-electron {
+      animation-duration: 1s !important;
+    }
+  }
+  
+  &.dark-mode {
+    .toggle-nucleus {
+      transform: scale(0.8);
+    }
+    
+    .toggle-event-horizon {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    
+    .toggle-electron {
+      animation-duration: 2s !important;
+      transform: scale(0.5);
+    }
+  }
+}
+
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(14px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(14px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(12px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(12px) rotate(-480deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(240deg) translateX(16px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(16px) rotate(-600deg); }
+}
+
+.dark-mode .toggle-particles::before,
+.dark-mode .toggle-particles::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.animating.dark-mode .toggle-particles::before {
+  animation: particle1 1s ease-out;
+  left: 50%;
+  top: 50%;
+}
+
+.animating.dark-mode .toggle-particles::after {
+  animation: particle2 1s ease-out;
+  left: 50%;
+  top: 50%;
+}
+
+@keyframes particle1 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-20px, -15px); opacity: 0; }
+}
+
+@keyframes particle2 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(15px, 20px); opacity: 0; }
+}
+
+.animating.light-mode .toggle-particles::before,
+.animating.light-mode .toggle-particles::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 4px;
+  opacity: 0;
+}
+
+.animating.light-mode .toggle-particles::before {
+  animation: photon1 0.8s ease-out;
+  left: 50%;
+  top: 50%;
+}
+
+.animating.light-mode .toggle-particles::after {
+  animation: photon2 0.8s ease-out;
+  left: 50%;
+  top: 50%;
+}
+
+@keyframes photon1 {
+  0% { transform: translate(0, 0) scale(0); opacity: 1; }
+  100% { transform: translate(-25px, -5px) scale(1); opacity: 0; }
+}
+
+@keyframes photon2 {
+  0% { transform: translate(0, 0) scale(0); opacity: 1; }
+  100% { transform: translate(25px, 5px) scale(1); opacity: 0; }
+}
