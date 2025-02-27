@@ -3,9 +3,8 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { TrainingPage } from "./pages/TrainingPage";
-import "./styles/main.scss";
 
-export function App () {
+export function App() {
   return (
     <Router>
       <div className="app">
@@ -20,4 +19,4 @@ export function App () {
       </div>
     </Router>
   );
-};
+}
