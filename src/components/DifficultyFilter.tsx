@@ -18,7 +18,7 @@ export function DifficultyFilter({
       case Difficulty.Easy: return "linear-gradient(135deg, #4CAF50, #8BC34A)";
       case  Difficulty.Medium: return "linear-gradient(135deg, #FF9800, #FFEB3B)";
       case  Difficulty.Hard: return "linear-gradient(135deg, #F44336, #FF5722)";
-      default: return "linear-gradient(135deg, #9E9E9E, #757575)";
+      default: return "#9E9E9E";
     }
   };
 
