@@ -152,6 +152,9 @@ button {
 @include meta.load-css("./elements/Footer.scss");
 @include meta.load-css("./elements/Header.scss");
 
+/* Стили модальных окон */
+@include meta.load-css("./modals/Modal.scss");
+
 /* Стили страниц */
 
 @include meta.load-css("./pages/HomePage.scss");

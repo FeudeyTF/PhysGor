@@ -14,7 +14,9 @@ export function CategoryFilter(props: CategoryFilterProps) {
       <h3>Фильтрация по категории</h3>
       <div className="filter-buttons">
         <motion.button
-          className={`filter-btn ${selectedCategory === null ? "active" : ""}`}
+          className={`filter-button ${
+            selectedCategory === null ? "active" : ""
+          }`}
           onClick={() => onSelectCategory(null)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -25,7 +27,7 @@ export function CategoryFilter(props: CategoryFilterProps) {
         {categories.map((category) => (
           <motion.button
             key={category}
-            className={`filter-btn ${
+            className={`filter-button ${
               selectedCategory === category ? "active" : ""
             }`}
             onClick={() => onSelectCategory(category)}

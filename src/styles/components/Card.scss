@@ -145,6 +145,44 @@
       margin-bottom: var(--spacing-xs);
     }
   }
+
+  .card-actions {
+    position: absolute;
+    top: 75px;
+    right: 10px;
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .delete-button, .edit-button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .delete-button:hover {
+    background-color: var(--danger-color);
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .edit-button:hover {
+    background-color: var(--primary-color);
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 @media (max-width: 768px) {

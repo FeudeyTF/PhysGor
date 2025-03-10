@@ -4,22 +4,27 @@ import { TrainingCard } from "../components/TrainingCard";
 import { CategoryFilter } from "../components/CategoryFilter";
 import { DifficultyFilter } from "../components/DifficultyFilter";
 import { ClassFilter, SchoolClass } from "../components/ClassFilter";
-import { physicsLaws, categories } from "../data/Laws";
+import { physicsLaws, useLaws } from "../data/Laws";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { Difficulty } from "../types/Difficulty";
 
-const difficulties: Difficulty[] = [Difficulty.Easy, Difficulty.Medium, Difficulty.Hard, Difficulty.VeryHard];
+const difficulties: Difficulty[] = [
+  Difficulty.Easy,
+  Difficulty.Medium,
+  Difficulty.Hard,
+  Difficulty.VeryHard,
+];
 const schoolClasses: SchoolClass[] = [7, 8, 9, 10, 11];
 
 export function TrainingPage() {
+  const { categories } = useLaws();
   const [trainingLaws, setTrainingLaws] = useState<PhysicsLaw[]>([]);
   const [selectedCategory, setSelectedCategory] =
     useState<PhysicsCategory | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
-  const [selectedClass, setSelectedClass] =
-    useState<SchoolClass | null>(null);
+  const [selectedClass, setSelectedClass] = useState<SchoolClass | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsCompleted, setCardsCompleted] = useState(0);
   const [isTrainingActive, setIsTrainingActive] = useState(false);
@@ -28,25 +33,21 @@ export function TrainingPage() {
 
   useEffect(() => {
     let filtered = [...physicsLaws];
-    
+
     if (selectedCategory) {
-      filtered = filtered.filter(
-        (law) => law.category === selectedCategory
-      );
+      filtered = filtered.filter((law) => law.category === selectedCategory);
     }
-    
+
     if (selectedDifficulty) {
       filtered = filtered.filter(
         (law) => law.difficulty === selectedDifficulty
       );
     }
-    
+
     if (selectedClass) {
-      filtered = filtered.filter(
-        (law) => law.class === selectedClass
-      );
+      filtered = filtered.filter((law) => law.class === selectedClass);
     }
-    
+
     setTrainingLaws(shuffle(filtered));
     setCurrentIndex(0);
     setCardsCompleted(0);
@@ -117,14 +118,14 @@ export function TrainingPage() {
   };
 
   const filtersVariants = {
-    hidden: { opacity: 0, height: 0, overflow: 'hidden' },
-    visible: { 
-      opacity: 1, 
-      height: 'auto',
+    hidden: { opacity: 0, height: 0, overflow: "hidden" },
+    visible: {
+      opacity: 1,
+      height: "auto",
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   return (
@@ -136,9 +137,7 @@ export function TrainingPage() {
         transition={{ duration: 0.8 }}
       >
         <h1>Тренировка</h1>
-        <p>
-          Проверь свои знания по физике с помощью нашего тренажёра!
-        </p>
+        <p>Проверь свои знания по физике с помощью нашего тренажёра!</p>
       </motion.div>
 
       {!isTrainingActive ? (
@@ -150,23 +149,24 @@ export function TrainingPage() {
         >
           <h2>Начнём же тренировку!</h2>
           <p>
-            Выберите категорию и начните проверять свои знания законов и определений физики.
+            Выберите категорию и начните проверять свои знания законов и
+            определений физики.
           </p>
 
           <div className="filter-controls">
-            <motion.button 
-              className={`filter-toggle-btn ${filtersVisible ? 'active' : ''}`}
+            <motion.button
+              className={`toggle-button ${filtersVisible ? "active" : ""}`}
               onClick={toggleFilters}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {filtersVisible ? 'Скрыть фильтры' : 'Показать фильтры'}
+              {filtersVisible ? "Скрыть фильтры" : "Показать фильтры"}
             </motion.button>
           </div>
 
           <AnimatePresence>
             {filtersVisible && (
-              <motion.div 
+              <motion.div
                 className="filters-column"
                 initial="hidden"
                 animate="visible"
@@ -178,7 +178,7 @@ export function TrainingPage() {
                   selectedCategory={selectedCategory}
                   onSelectCategory={handleCategorySelect}
                 />
-                <DifficultyFilter 
+                <DifficultyFilter
                   difficulties={difficulties}
                   selectedDifficulty={selectedDifficulty}
                   onSelectDifficulty={handleDifficultySelect}
