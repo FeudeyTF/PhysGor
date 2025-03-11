@@ -7,6 +7,7 @@
   --secondary-color: #00d2ff;
   --accent-color: #6b48ff;
   --background-color: #f8faff;
+  --background-light: #f9f9f9;
   --card-background: #ffffff;
   --text-primary: #333333;
   --text-secondary: #666666;
@@ -14,6 +15,10 @@
   --success-color: #4caf50;
   --warning-color: #ff9800;
   --danger-color: #f44336;
+  --correct-color: #4bb543;
+  --incorrect-color: #ff4c4c;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
   
   --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   --accent-gradient: linear-gradient(135deg, #6b48ff, #9d50bb);

@@ -6,31 +6,23 @@ import { EditLawForm } from "../modals/EditLawFModal";
 import { CategoryFilter } from "../components/CategoryFilter";
 import { SearchBar } from "../components/SearchBar";
 import { DifficultyFilter } from "../components/DifficultyFilter";
-import { ClassFilter, SchoolClass } from "../components/ClassFilter";
+import { ClassFilter } from "../components/ClassFilter";
 import { useLaws } from "../data/Laws";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { Difficulty } from "../types/Difficulty";
 import { FaFilter, FaPlus } from "react-icons/fa";
-
-const difficulties: Difficulty[] = [
-  Difficulty.Easy,
-  Difficulty.Medium,
-  Difficulty.Hard,
-  Difficulty.VeryHard,
-];
-const schoolClasses: SchoolClass[] = [7, 8, 9, 10, 11];
+import { difficulties, schoolClasses } from "../constants";
 
 export function HomePage() {
   const { laws, loading, error, categories, deleteLaw, createLaw, updateLaw } =
     useLaws();
-
   const [filteredLaws, setFilteredLaws] = useState<PhysicsLaw[]>([]);
   const [selectedCategory, setSelectedCategory] =
     useState<PhysicsCategory | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
-  const [selectedClass, setSelectedClass] = useState<SchoolClass | null>(null);
+  const [selectedClass, setSelectedClass] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState<{
@@ -47,7 +39,9 @@ export function HomePage() {
   }, [loading, laws]);
 
   useEffect(() => {
-    if (loading || laws.length === 0) return;
+    if (loading || laws.length === 0) {
+      return;
+    }
 
     let filtered = [...laws];
 
@@ -93,7 +87,7 @@ export function HomePage() {
     setSelectedDifficulty(difficulty);
   };
 
-  const handleClassSelect = (schoolClass: SchoolClass | null) => {
+  const handleClassSelect = (schoolClass: number | null) => {
     setSelectedClass(schoolClass);
   };
 

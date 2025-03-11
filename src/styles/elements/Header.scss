@@ -3,11 +3,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(var(--card-background), 0.95);
-  backdrop-filter: blur(10px);
+  background-color: var(--background-color);
   z-index: 1000;
   transition: var(--transition-normal);
-  box-shadow: 0 2px 10px var(--shadow-color);
   
   &.scrolled {
     box-shadow: 0 4px 20px var(--shadow-color);

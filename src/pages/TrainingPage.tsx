@@ -3,19 +3,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TrainingCard } from "../components/TrainingCard";
 import { CategoryFilter } from "../components/CategoryFilter";
 import { DifficultyFilter } from "../components/DifficultyFilter";
-import { ClassFilter, SchoolClass } from "../components/ClassFilter";
+import { ClassFilter } from "../components/ClassFilter";
 import { physicsLaws, useLaws } from "../data/Laws";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { Difficulty } from "../types/Difficulty";
+import { TrainingMode, TrainingModeOption } from "../types/TrainingMode";
+import { MultipleChoiceCard } from "../components/MultipleChoiceCard";
+import { MatchingCard } from "../components/MatchingCard";
+import { FormulaWritingCard } from "../components/FormulaWritingCard";
+import { difficulties, schoolClasses } from "../constants";
 
-const difficulties: Difficulty[] = [
-  Difficulty.Easy,
-  Difficulty.Medium,
-  Difficulty.Hard,
-  Difficulty.VeryHard,
+const trainingModes: TrainingModeOption[] = [
+  {
+    id: TrainingMode.Flashcard,
+    label: "Флэш-карточки",
+    description: "Проверьте свои знания с помощью карточек",
+  },
+  {
+    id: TrainingMode.MultipleChoice,
+    label: "Тест",
+    description: "Выберите правильный ответ из предложенных вариантов",
+  },
+  {
+    id: TrainingMode.Matching,
+    label: "Соответствия",
+    description: "Сопоставьте формулы с названиями законов",
+  },
+  {
+    id: TrainingMode.FormulaWriting,
+    label: "Запись формул",
+    description: "Запишите формулу по памяти и проверьте её правильность",
+  },
 ];
-const schoolClasses: SchoolClass[] = [7, 8, 9, 10, 11];
 
 export function TrainingPage() {
   const { categories } = useLaws();
@@ -24,12 +44,15 @@ export function TrainingPage() {
     useState<PhysicsCategory | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
-  const [selectedClass, setSelectedClass] = useState<SchoolClass | null>(null);
+  const [selectedClass, setSelectedClass] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsCompleted, setCardsCompleted] = useState(0);
   const [isTrainingActive, setIsTrainingActive] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [filtersVisible, setFiltersVisible] = useState(false);
+  const [trainingMode, setTrainingMode] = useState<TrainingMode>(
+    TrainingMode.Flashcard
+  );
 
   useEffect(() => {
     let filtered = [...physicsLaws];
@@ -48,11 +71,17 @@ export function TrainingPage() {
       filtered = filtered.filter((law) => law.class === selectedClass);
     }
 
+    if (trainingMode === TrainingMode.FormulaWriting) {
+      filtered = filtered.filter(
+        (law) => law.formula && law.formula.trim() !== ""
+      );
+    }
+
     setTrainingLaws(shuffle(filtered));
     setCurrentIndex(0);
     setCardsCompleted(0);
     setCorrectAnswers(0);
-  }, [selectedCategory, selectedDifficulty, selectedClass]);
+  }, [selectedCategory, selectedDifficulty, selectedClass, trainingMode]);
 
   const shuffle = (array: PhysicsLaw[]): PhysicsLaw[] => {
     const newArray = [...array];
@@ -73,7 +102,7 @@ export function TrainingPage() {
     setIsTrainingActive(false);
   };
 
-  const handleClassSelect = (schoolClass: SchoolClass | null) => {
+  const handleClassSelect = (schoolClass: number | null) => {
     setSelectedClass(schoolClass);
     setIsTrainingActive(false);
   };
@@ -128,6 +157,62 @@ export function TrainingPage() {
     },
   };
 
+  const handleModeSelect = (mode: TrainingMode) => {
+    setTrainingMode(mode);
+    setIsTrainingActive(false);
+  };
+
+  const renderTrainingContent = () => {
+    if (trainingLaws.length === 0) {
+      return (
+        <div className="no-laws-message">
+          Нет законов, соответствующих выбранным фильтрам
+        </div>
+      );
+    }
+
+    switch (trainingMode) {
+      case TrainingMode.Flashcard:
+        return <TrainingCard law={trainingLaws[currentIndex]} />;
+
+      case TrainingMode.MultipleChoice:
+        return (
+          <MultipleChoiceCard
+            law={trainingLaws[currentIndex]}
+            allLaws={trainingLaws}
+            onAnswer={(isCorrect: boolean) => handleNextCard(isCorrect)}
+          />
+        );
+
+      case TrainingMode.Matching:
+        return (
+          <MatchingCard
+            laws={
+              trainingLaws.slice(currentIndex, currentIndex + 4).length < 4
+                ? trainingLaws.slice(0, 4)
+                : trainingLaws.slice(currentIndex, currentIndex + 4)
+            }
+            onComplete={(score) => {
+              setCorrectAnswers(correctAnswers + score);
+              setCardsCompleted(cardsCompleted + 4);
+              setCurrentIndex((currentIndex + 4) % trainingLaws.length);
+            }}
+          />
+        );
+
+      case TrainingMode.FormulaWriting:
+        return (
+          <FormulaWritingCard
+            law={trainingLaws[currentIndex]}
+            onAnswer={(isCorrect: boolean) => handleNextCard(isCorrect)}
+          />
+        );
+
+      default:
+        return <TrainingCard law={trainingLaws[currentIndex]} />;
+    }
+  };
+
   return (
     <div className="training-page">
       <motion.div
@@ -149,9 +234,29 @@ export function TrainingPage() {
         >
           <h2>Начнём же тренировку!</h2>
           <p>
-            Выберите категорию и начните проверять свои знания законов и
-            определений физики.
+            Выберите категорию и режим тренировки, затем начните проверять свои
+            знания.
           </p>
+
+          <div className="training-modes">
+            <h3>Выберите режим тренировки</h3>
+            <div className="mode-buttons">
+              {trainingModes.map((mode) => (
+                <motion.button
+                  key={mode.id}
+                  className={`mode-button ${
+                    trainingMode === mode.id ? "active" : ""
+                  }`}
+                  onClick={() => handleModeSelect(mode.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="mode-title">{mode.label}</div>
+                  <div className="mode-description">{mode.description}</div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
 
           <div className="filter-controls">
             <motion.button
@@ -239,50 +344,65 @@ export function TrainingPage() {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentIndex}
+              key={currentIndex + trainingMode}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
               className="training-card-wrapper"
             >
-              {trainingLaws.length > 0 && (
-                <TrainingCard law={trainingLaws[currentIndex]} />
-              )}
+              {renderTrainingContent()}
             </motion.div>
           </AnimatePresence>
 
-          <div className="controls">
-            <motion.button
-              className="next-button"
-              onClick={() => handleNextCard(true)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Знаю
-            </motion.button>
+          {trainingMode !== TrainingMode.Matching &&
+            trainingMode !== TrainingMode.MultipleChoice && (
+              <div className="controls">
+                <motion.button
+                  className="next-button"
+                  onClick={() => handleNextCard(true)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Знаю
+                </motion.button>
 
-            <motion.button
-              className="next-button wrong-button"
-              onClick={() => handleNextCard(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                background: "linear-gradient(135deg, #ff7170, #ff9b8c)",
-              }}
-            >
-              Не знаю
-            </motion.button>
+                <motion.button
+                  className="next-button wrong-button"
+                  onClick={() => handleNextCard(false)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    background: "linear-gradient(135deg, #ff7170, #ff9b8c)",
+                  }}
+                >
+                  Не знаю
+                </motion.button>
 
-            <motion.button
-              className="reset-button"
-              onClick={resetTraining}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Начать заново
-            </motion.button>
-          </div>
+                <motion.button
+                  className="reset-button"
+                  onClick={resetTraining}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Начать заново
+                </motion.button>
+              </div>
+            )}
+
+          {(trainingMode === TrainingMode.Matching ||
+            trainingMode === TrainingMode.MultipleChoice) && (
+            <div className="controls">
+              <motion.button
+                className="reset-button"
+                onClick={resetTraining}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Начать заново
+              </motion.button>
+            </div>
+          )}
         </motion.div>
       )}
     </div>
