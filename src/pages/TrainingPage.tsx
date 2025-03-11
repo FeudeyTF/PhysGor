@@ -17,7 +17,7 @@ import { difficulties, schoolClasses } from "../constants";
 const trainingModes: TrainingModeOption[] = [
   {
     id: TrainingMode.Flashcard,
-    label: "Флэш-карточки",
+    label: "Классика",
     description: "Проверьте свои знания с помощью карточек",
   },
   {
