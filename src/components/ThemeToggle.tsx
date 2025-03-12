@@ -1,22 +1,28 @@
-import { useTheme } from '../context/ThemeContext';
-import { useEffect, useState } from 'react';
+import { useTheme } from "../context/ThemeContext";
+import { useState } from "react";
 
 export function ThemeToggle() {
   const { darkMode, toggleDarkMode } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
-  
+
   const handleToggle = () => {
     setIsAnimating(true);
     toggleDarkMode();
-    
+
     setTimeout(() => setIsAnimating(false), 1000);
   };
 
   return (
-    <button 
-      className={`physics-theme-toggle ${darkMode ? 'dark-mode' : 'light-mode'} ${isAnimating ? 'animating' : ''}`}
-      onClick={handleToggle} 
-      aria-label={darkMode ? "Switch to light mode (atom state)" : "Switch to dark mode (black hole state)"}
+    <button
+      className={`physics-theme-toggle ${
+        darkMode ? "dark-mode" : "light-mode"
+      } ${isAnimating ? "animating" : ""}`}
+      onClick={handleToggle}
+      aria-label={
+        darkMode
+          ? "Switch to light mode (atom state)"
+          : "Switch to dark mode (black hole state)"
+      }
       title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       <div className="toggle-orbit">
@@ -29,6 +35,6 @@ export function ThemeToggle() {
       </div>
     </button>
   );
-};
+}
 
 export default ThemeToggle;

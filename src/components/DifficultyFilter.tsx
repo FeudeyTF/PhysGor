@@ -12,13 +12,16 @@ export function DifficultyFilter({
   selectedDifficulty,
   onSelectDifficulty,
 }: DifficultyFilterProps) {
-  
   const getDifficultyColor = (difficulty: Difficulty) => {
     switch (difficulty) {
-      case Difficulty.Easy: return "linear-gradient(135deg, #4CAF50, #8BC34A)";
-      case  Difficulty.Medium: return "linear-gradient(135deg, #FF9800, #FFEB3B)";
-      case  Difficulty.Hard: return "linear-gradient(135deg, #F44336, #FF5722)";
-      default: return "#9E9E9E";
+      case Difficulty.Easy:
+        return "linear-gradient(135deg, #4CAF50, #8BC34A)";
+      case Difficulty.Medium:
+        return "linear-gradient(135deg, #FF9800, #FFEB3B)";
+      case Difficulty.Hard:
+        return "linear-gradient(135deg, #F44336, #FF5722)";
+      default:
+        return "#9E9E9E";
     }
   };
 
@@ -27,7 +30,9 @@ export function DifficultyFilter({
       <h3>Сложность:</h3>
       <div className="filter-options">
         <motion.button
-          className={`filter-option ${selectedDifficulty === null ? "active" : ""}`}
+          className={`filter-option ${
+            selectedDifficulty === null ? "active" : ""
+          }`}
           onClick={() => onSelectDifficulty(null)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -37,9 +42,14 @@ export function DifficultyFilter({
         {difficulties.map((difficulty) => (
           <motion.button
             key={difficulty}
-            className={`filter-option ${selectedDifficulty === difficulty ? "active" : ""}`}
+            className={`filter-option ${
+              selectedDifficulty === difficulty ? "active" : ""
+            }`}
             style={{
-              background: selectedDifficulty === difficulty ? getDifficultyColor(difficulty) : undefined,
+              background:
+                selectedDifficulty === difficulty
+                  ? getDifficultyColor(difficulty)
+                  : undefined,
             }}
             onClick={() => onSelectDifficulty(difficulty)}
             whileHover={{ scale: 1.05 }}
