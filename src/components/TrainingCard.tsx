@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PhysicsLaw } from "../types/PhysicsLaw";
+import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
 
 type TrainingCardProps = {
   law: PhysicsLaw;
@@ -17,7 +18,7 @@ export function TrainingCard(props: TrainingCardProps) {
     <div className="training-card-container" onClick={handleFlip}>
       <div className={`training-card ${isFlipped ? "flipped" : ""}`}>
         <div className="training-card-front">
-          <div className="training-card-category">{law.category}</div>
+          <div className="training-card-category">{TranslatePhysicsCategory(law.category)}</div>
           <h2 className="training-card-title">{law.name}</h2>
           <div className="flip-hint">
             <span>Нажмите, чтобы перевернуть...</span>
@@ -26,7 +27,7 @@ export function TrainingCard(props: TrainingCardProps) {
 
         <div className="training-card-back">
           <div className="back-content">
-            <div className="training-card-category">{law.category}</div>
+            <div className="training-card-category">{TranslatePhysicsCategory(law.category)}</div>
             <h3 className="training-card-name">{law.name}</h3>
 
             <div className="training-card-description">

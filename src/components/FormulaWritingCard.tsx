@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
+import { PhysicsCategory, TranslatePhysicsCategory } from "../types/PhysicsCategory";
 
 type FormulaWritingCardProps = {
   law: PhysicsLaw;
@@ -67,7 +68,7 @@ export function FormulaWritingCard(props: FormulaWritingCardProps) {
   return (
     <div className="formula-writing-card">
       <div className="law-info">
-        <div className="category-badge">{law.category}</div>
+        <div className="category-badge">{TranslatePhysicsCategory(law.category)}</div>
         <h2 className="law-name">{law.name}</h2>
         <p className="law-description">{law.description}</p>
       </div>

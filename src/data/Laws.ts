@@ -5,20 +5,16 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 
 export const physicsLaws: PhysicsLaw[] = [];
 
-const API_URL = "http://localhost:3001/api";
+const API_URL = "http://188.134.95.224:3001/api";
 
 function stringToCategory(category: string): PhysicsCategory {
   switch (category) {
-    case "Механика":
     case "Mechanics":
       return PhysicsCategory.Mechanics;
-    case "Термодинамика":
     case "Thermodynamics":
       return PhysicsCategory.Thermodynamics;
-    case "Электромагнетизм":
     case "Electromagnetism":
       return PhysicsCategory.Electromagnetism;
-    case "Оптика":
     case "Optics":
       return PhysicsCategory.Optics;
     default:

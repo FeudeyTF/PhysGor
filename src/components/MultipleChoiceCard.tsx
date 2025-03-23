@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
+import { PhysicsCategory, TranslatePhysicsCategory } from "../types/PhysicsCategory";
 
 enum QuestionType {
   Formula,
@@ -140,7 +141,7 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
   return (
     <div className="multiple-choice-card">
       <div className="question-container">
-        <div className="category-badge">{law.category}</div>
+        <div className="category-badge">{TranslatePhysicsCategory(law.category)}</div>
         <h2 className="question-text">{getQuestionText()}</h2>
       </div>
 

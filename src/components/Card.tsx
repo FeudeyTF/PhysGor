@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { DifficultyToColor } from "../types/Difficulty";
 import { FaBook, FaTrash, FaEdit } from "react-icons/fa";
+import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
 
 type CardProps = {
   law: PhysicsLaw;
@@ -27,7 +28,7 @@ export function Card(props: CardProps) {
       onEdit(law);
     }
   };
-
+  
   return (
     <motion.div
       className="card-container"
@@ -85,7 +86,7 @@ export function Card(props: CardProps) {
           )}
         </div>
 
-        <div className="card-category">{law.category}</div>
+        <div className="card-category">{TranslatePhysicsCategory(law.category)}</div>
         <h2 className="card-title">{law.name}</h2>
 
         <div className="card-content">
