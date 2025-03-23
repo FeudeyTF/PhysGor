@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaBook, FaBrain, FaBars, FaTimes } from "react-icons/fa";
 import { PhysGorLogo } from "./PhysGorLogo";
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from "./ThemeToggle";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
