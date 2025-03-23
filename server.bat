@@ -1,1 +1,1 @@
-serve -s build -l 8080
+npm run server

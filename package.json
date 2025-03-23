@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server/api.js"
+    "server": "concurrently \"serve -s build -l 8080\" \"node server/api.js\""
   },
   "eslintConfig": {
     "extends": [
