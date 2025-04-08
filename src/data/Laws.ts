@@ -2,10 +2,27 @@ import { useState, useEffect } from "react";
 import { Difficulty } from "../types/Difficulty";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
+import { API_URL } from "../constants";
 
 export const physicsLaws: PhysicsLaw[] = [];
 
-const API_URL = "http://localhost:3001/api";
+
+const getAuthToken = (): string | null => {
+  return localStorage.getItem('auth_token');
+};
+
+const createAuthHeaders = (): HeadersInit => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json'
+  };
+  
+  const token = getAuthToken();
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  return headers;
+};
 
 function stringToCategory(category: string): PhysicsCategory {
   switch (category) {
@@ -115,6 +132,7 @@ export function useLaws() {
     try {
       const response = await fetch(`${API_URL}/laws/${id}`, {
         method: "DELETE",
+        headers: createAuthHeaders()
       });
 
       if (!response.ok) {
@@ -148,9 +166,7 @@ export function useLaws() {
 
       const response = await fetch(`${API_URL}/laws`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: createAuthHeaders(),
         body: JSON.stringify(lawToSave),
       });
 
@@ -197,9 +213,7 @@ export function useLaws() {
 
       const response = await fetch(`${API_URL}/laws/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: createAuthHeaders(),
         body: JSON.stringify(lawToSave),
       });
 

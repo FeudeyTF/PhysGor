@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Difficulty } from "../types/Difficulty";
 
-interface DifficultyFilterProps {
+type DifficultyFilterProps = {
   difficulties: Difficulty[];
   selectedDifficulty: Difficulty | null;
   onSelectDifficulty: (difficulty: Difficulty | null) => void;

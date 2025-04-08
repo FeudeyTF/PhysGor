@@ -8,3 +8,5 @@ export const difficulties: Difficulty[] = [
 ];
 
 export const schoolClasses: number[] = [7, 8, 9, 10, 11];
+
+export const API_URL = "http://localhost:3001/api";

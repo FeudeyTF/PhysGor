@@ -13,10 +13,12 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 import { Difficulty } from "../types/Difficulty";
 import { FaFilter, FaPlus } from "react-icons/fa";
 import { difficulties, schoolClasses } from "../constants";
+import { useAuth } from "../context/AuthContext";
 
 export function HomePage() {
   const { laws, loading, error, categories, deleteLaw, createLaw, updateLaw } =
     useLaws();
+  const { isAuthenticated } = useAuth();
   const [filteredLaws, setFilteredLaws] = useState<PhysicsLaw[]>([]);
   const [selectedCategory, setSelectedCategory] =
     useState<PhysicsCategory | null>(null);
@@ -264,16 +266,18 @@ export function HomePage() {
                 <FaFilter />
               </motion.button>
 
-              <motion.button
-                className="toggle-button"
-                style={{ backgroundColor: "#00ff7b" }}
-                onClick={() => setIsAddLawFormVisible(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                title="Добавить новый закон"
-              >
-                <FaPlus />
-              </motion.button>
+              {isAuthenticated && (
+                <motion.button
+                  className="toggle-button"
+                  style={{ backgroundColor: "#00ff7b" }}
+                  onClick={() => setIsAddLawFormVisible(true)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Добавить новый закон"
+                >
+                  <FaPlus />
+                </motion.button>
+              )}
             </div>
 
             <AnimatePresence>
@@ -316,8 +320,8 @@ export function HomePage() {
                 <Card
                   key={law.id}
                   law={law}
-                  onDelete={handleDeleteLaw}
-                  onEdit={handleEditLaw}
+                  onDelete={isAuthenticated ? handleDeleteLaw : undefined}
+                  onEdit={isAuthenticated ? handleEditLaw : undefined}
                 />
               ))
             ) : (

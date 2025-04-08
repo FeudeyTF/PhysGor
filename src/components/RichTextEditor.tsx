@@ -1,21 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/components/RichTextEditor.scss";
 
-interface RichTextEditorProps {
+type RichTextEditorProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
   rows?: number;
-}
+};
 
-export default function RichTextEditor({
-  value,
-  onChange,
-  placeholder = "",
-  className = "",
-  rows = 4
-}: RichTextEditorProps) {
+export function RichTextEditor(props: RichTextEditorProps) {
+  const { value, onChange, placeholder = "", className = "", rows = 4 } = props;
   const editorRef = useRef<HTMLDivElement>(null);
   const [isEditorFocused, setIsEditorFocused] = useState(false);
 
@@ -33,8 +28,9 @@ export default function RichTextEditor({
 
   const formatText = (command: string, value: string = "") => {
     const selection = window.getSelection();
-    const range = selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-    
+    const range =
+      selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
     editorRef.current?.focus();
 
     if (range && selection) {
@@ -43,15 +39,15 @@ export default function RichTextEditor({
     }
 
     document.execCommand(command, false, value);
-    
+
     handleEditorChange();
-    
+
     editorRef.current?.focus();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      document.execCommand('insertLineBreak', false, '');
+    if (e.key === "Enter" && !e.shiftKey) {
+      document.execCommand("insertLineBreak", false, "");
       e.preventDefault();
     }
   };
@@ -59,8 +55,8 @@ export default function RichTextEditor({
   return (
     <div className={`rich-text-editor ${className}`}>
       <div className="rich-text-toolbar">
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("bold");
@@ -71,8 +67,8 @@ export default function RichTextEditor({
         >
           <strong>Ж</strong>
         </button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("italic");
@@ -83,8 +79,8 @@ export default function RichTextEditor({
         >
           <em>К</em>
         </button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("underline");
@@ -95,8 +91,8 @@ export default function RichTextEditor({
         >
           <u>Ч</u>
         </button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("strikeThrough");
@@ -108,8 +104,8 @@ export default function RichTextEditor({
           <s>З</s>
         </button>
         <span className="toolbar-divider">|</span>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("insertOrderedList");
@@ -120,8 +116,8 @@ export default function RichTextEditor({
         >
           1.
         </button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             formatText("insertUnorderedList");

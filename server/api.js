@@ -7,7 +7,54 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const AUTH_KEY = ''; 
 const LAWS_FILE_PATH = path.join(__dirname, '../public/data/laws.json');
+
+const requireAuth = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ 
+      success: false, 
+      message: 'Authentication required' 
+    });
+  }
+  
+  const token = authHeader.split(' ')[1];
+  
+  if (token !== AUTH_KEY) {
+    return res.status(403).json({ 
+      success: false, 
+      message: 'Invalid authentication key' 
+    });
+  }
+  
+  next();
+};
+
+app.post('/api/auth/login', (req, res) => {
+  const { key } = req.body;
+  
+  if (!key || key !== AUTH_KEY) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid authentication key'
+    });
+  }
+  
+  res.json({
+    success: true,
+    message: 'Authentication successful',
+    token: AUTH_KEY
+  });
+});
+
+app.get('/api/auth/verify', requireAuth, (req, res) => {
+  res.json({
+    success: true,
+    message: 'Token is valid'
+  });
+});
 
 app.get('/api/laws', async (req, res) => {
   try {
@@ -20,7 +67,7 @@ app.get('/api/laws', async (req, res) => {
   }
 });
 
-app.post('/api/laws', async (req, res) => {
+app.post('/api/laws', requireAuth, async (req, res) => {
   try {
     const newLaw = req.body;
     
@@ -52,7 +99,7 @@ app.post('/api/laws', async (req, res) => {
   }
 });
 
-app.delete('/api/laws/:id', async (req, res) => {
+app.delete('/api/laws/:id', requireAuth, async (req, res) => {
   try {
     const lawId = req.params.id;
     
@@ -74,7 +121,7 @@ app.delete('/api/laws/:id', async (req, res) => {
   }
 });
 
-app.put('/api/laws/:id', async (req, res) => {
+app.put('/api/laws/:id', requireAuth, async (req, res) => {
   try {
     const lawId = req.params.id;
     const updatedLaw = req.body;

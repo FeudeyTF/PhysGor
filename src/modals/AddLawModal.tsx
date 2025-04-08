@@ -4,7 +4,7 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { Difficulty } from "../types/Difficulty";
 import { FaTimes } from "react-icons/fa";
-import RichTextEditor from "../components/RichTextEditor";
+import { RichTextEditor } from "../components/RichTextEditor";
 
 type AddLawFormProps = {
   onSubmit: (
