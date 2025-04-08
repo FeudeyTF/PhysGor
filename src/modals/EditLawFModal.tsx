@@ -4,6 +4,7 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { Difficulty } from "../types/Difficulty";
 import { FaTimes } from "react-icons/fa";
+import RichTextEditor from "../components/RichTextEditor";
 
 type EditLawFormProps = {
   law: PhysicsLaw;
@@ -55,6 +56,17 @@ export function EditLawForm(props: EditLawFormProps) {
 
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleRichTextChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      description: value,
+    }));
+
+    if (errors.description) {
+      setErrors((prev) => ({ ...prev, description: "" }));
     }
   };
 
@@ -147,11 +159,9 @@ export function EditLawForm(props: EditLawFormProps) {
 
           <div className="form-group">
             <label htmlFor="description">Описание*:</label>
-            <textarea
-              id="description"
-              name="description"
+            <RichTextEditor
               value={formData.description}
-              onChange={handleChange}
+              onChange={handleRichTextChange}
               className={errors.description ? "error" : ""}
               placeholder="Описание закона..."
               rows={4}

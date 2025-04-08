@@ -91,7 +91,7 @@ export function Card(props: CardProps) {
 
         <div className="card-content">
           <div className="card-description">
-            <p>{law.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: law.description }} />
           </div>
 
           {law.formula && (

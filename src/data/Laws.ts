@@ -5,7 +5,7 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 
 export const physicsLaws: PhysicsLaw[] = [];
 
-const API_URL = "http://188.134.95.224:3001/api";
+const API_URL = "http://localhost:3001/api";
 
 function stringToCategory(category: string): PhysicsCategory {
   switch (category) {
