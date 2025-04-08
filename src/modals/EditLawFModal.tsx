@@ -4,6 +4,7 @@ import { PhysicsCategory } from "../types/PhysicsCategory";
 import { Difficulty } from "../types/Difficulty";
 import { RichTextEditor } from "../components/RichTextEditor";
 import { ModalWindow } from "./Modal";
+import { FormulaParser } from "../components/FormulaParser";
 
 type EditLawFormProps = {
   law: PhysicsLaw;
@@ -161,6 +162,7 @@ export function EditLawForm(props: EditLawFormProps) {
           onChange={handleChange}
           placeholder="Например: F = ma"
         />
+        {formData.formula && <FormulaParser formula={formData.formula} />}
       </ModalWindow.Group>
       <ModalWindow.Row>
         <ModalWindow.Group title="Категория*">

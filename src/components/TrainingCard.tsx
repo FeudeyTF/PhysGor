@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { FormulaParser } from "./FormulaParser";
 
 type TrainingCardProps = {
   law: PhysicsLaw;
@@ -37,7 +38,7 @@ export function TrainingCard(props: TrainingCardProps) {
             {law.formula && (
               <div className="training-card-formula">
                 <span>Формула:</span>
-                <div className="formula-text">{law.formula}</div>
+                <FormulaParser formula={law.formula} />
               </div>
             )}
 

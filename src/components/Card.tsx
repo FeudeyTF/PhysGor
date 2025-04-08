@@ -3,6 +3,7 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 import { DifficultyToColor } from "../types/Difficulty";
 import { FaBook, FaTrash, FaEdit } from "react-icons/fa";
 import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { FormulaParser } from "./FormulaParser";
 
 type CardProps = {
   law: PhysicsLaw;
@@ -28,7 +29,7 @@ export function Card(props: CardProps) {
       onEdit(law);
     }
   };
-  
+
   return (
     <motion.div
       className="card-container"
@@ -97,7 +98,7 @@ export function Card(props: CardProps) {
           {law.formula && (
             <div className="card-formula">
               <span>Формула:</span>
-              <div className="formula-text">{law.formula}</div>
+              <FormulaParser formula={law.formula} />
             </div>
           )}
 

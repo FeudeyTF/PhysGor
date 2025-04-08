@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { TrainingPage } from "./pages/TrainingPage";
+import { FormulaParsingCard } from "./components/FormulaParsingCard";
 
 export function App() {
   return (
@@ -17,6 +18,7 @@ export function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/training" element={<TrainingPage />} />
+                <Route path="/formula-editor" element={<FormulaParsingCard />} />
               </Routes>
             </main>
             <Footer />
@@ -25,4 +27,4 @@ export function App() {
       </AuthProvider>
     </ThemeProvider>
   );
-};
+}

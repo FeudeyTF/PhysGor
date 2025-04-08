@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBook, FaBrain, FaBars, FaTimes, FaLock, FaUnlock } from "react-icons/fa";
+import { FaBook, FaBrain, FaBars, FaTimes, FaLock, FaUnlock, FaSquareRootAlt } from "react-icons/fa";
 import { PhysGorLogo } from "./PhysGorLogo";
 import ThemeToggle from "./ThemeToggle";
 import { useAuth } from "../context/AuthContext";
@@ -62,7 +62,15 @@ export function Header() {
           >
             <FaBrain /> Тренировка
           </Link>
+          {isAuthenticated && <Link
+            to="/formula-editor"
+            className={location.pathname === "/formula-editor" ? "active" : ""}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <FaSquareRootAlt /> Редактор формул
+          </Link>}
         </motion.nav>
+
         <div className="header-right">
           {isAuthenticated ? (
             <motion.button

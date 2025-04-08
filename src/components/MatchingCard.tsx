@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
+import { FormulaParser } from "./FormulaParser";
 
 type MatchItem = {
   id: string;
@@ -81,7 +82,6 @@ export function MatchingCard(props: MatchingCardProps) {
       setFormulas(
         formulas.map((f) => (f.id === formulaId ? { ...f, matched: true } : f))
       );
-
       setNames(
         names.map((n) => (n.id === nameId ? { ...n, matched: true } : n))
       );
@@ -132,7 +132,7 @@ export function MatchingCard(props: MatchingCardProps) {
                 whileHover={!formula.matched ? { scale: 1.05 } : {}}
                 whileTap={!formula.matched ? { scale: 0.95 } : {}}
               >
-                {formula.content}
+                <FormulaParser formula={formula.content} />
               </motion.button>
             ))}
           </div>
