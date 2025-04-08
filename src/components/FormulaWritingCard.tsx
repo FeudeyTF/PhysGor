@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
-import { PhysicsCategory, TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
 
 type FormulaWritingCardProps = {
   law: PhysicsLaw;

@@ -1,4 +1,4 @@
-.add-law-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   overflow-y: auto;
 }
 
-.add-law-form {
+.modal-form {
   width: 100%;
   max-width: 700px;
   background-color: var(--card-background);

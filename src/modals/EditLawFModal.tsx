@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { Difficulty } from "../types/Difficulty";
-import { FaTimes } from "react-icons/fa";
 import { RichTextEditor } from "../components/RichTextEditor";
+import { ModalWindow } from "./Modal";
 
 type EditLawFormProps = {
   law: PhysicsLaw;
@@ -122,164 +121,110 @@ export function EditLawForm(props: EditLawFormProps) {
   };
 
   return (
-    <div className="add-law-overlay">
-      <motion.div
-        className="add-law-form"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-      >
-        <div className="form-header">
-          <h2>Редактировать закон физики</h2>
-          <button
-            className="close-button"
-            onClick={onCancel}
-            title="Закрыть форму"
+    <ModalWindow
+      title="Редактировать закон"
+      onClose={onCancel}
+      onSubmit={handleSubmit}
+      error={errors.submit}
+      submitButton={
+        <button type="submit" className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? "Сохранение..." : "Сохранить изменения"}
+        </button>
+      }
+    >
+      <ModalWindow.Group title="Название закона*" error={errors.name}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={errors.name ? "error" : ""}
+          placeholder="Например: Закон Ома для участка цепи"
+        />
+      </ModalWindow.Group>
+      <ModalWindow.Group title="Описание*" error={errors.description}>
+        <RichTextEditor
+          value={formData.description}
+          onChange={handleRichTextChange}
+          className={errors.description ? "error" : ""}
+          placeholder="Описание закона..."
+          rows={4}
+        />
+      </ModalWindow.Group>
+      <ModalWindow.Group title="Формула (необязательно)" error={errors.formula}>
+        <input
+          type="text"
+          id="formula"
+          name="formula"
+          value={formData.formula || ""}
+          onChange={handleChange}
+          placeholder="Например: F = ma"
+        />
+      </ModalWindow.Group>
+      <ModalWindow.Row>
+        <ModalWindow.Group title="Категория*">
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
           >
-            <FaTimes />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Название закона*:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={errors.name ? "error" : ""}
-              placeholder="Например: Закон Ома для участка цепи"
-            />
-            {errors.name && (
-              <span className="error-message">{errors.name}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="description">Описание*:</label>
-            <RichTextEditor
-              value={formData.description}
-              onChange={handleRichTextChange}
-              className={errors.description ? "error" : ""}
-              placeholder="Описание закона..."
-              rows={4}
-            />
-            {errors.description && (
-              <span className="error-message">{errors.description}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="formula">Формула (необязательно):</label>
-            <input
-              type="text"
-              id="formula"
-              name="formula"
-              value={formData.formula || ""}
-              onChange={handleChange}
-              placeholder="Например: F = ma"
-            />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="category">Категория*:</label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-              >
-                {Object.values(PhysicsCategory).map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="difficulty">Сложность*:</label>
-              <select
-                id="difficulty"
-                name="difficulty"
-                value={formData.difficulty}
-                onChange={handleChange}
-              >
-                {Object.values(Difficulty).map((difficulty) => (
-                  <option key={difficulty} value={difficulty}>
-                    {difficulty}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="class">Класс*:</label>
-              <input
-                type="number"
-                id="class"
-                name="class"
-                min="1"
-                max="11"
-                value={formData.class}
-                onChange={handleChange}
-                className={errors.class ? "error" : ""}
-              />
-              {errors.class && (
-                <span className="error-message">{errors.class}</span>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="year">Год открытия:</label>
-              <input
-                type="number"
-                id="year"
-                name="year"
-                value={formData.year || ""}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="discoveredBy">Автор закона:</label>
-            <input
-              type="text"
-              id="discoveredBy"
-              name="discoveredBy"
-              value={formData.discoveredBy || ""}
-              onChange={handleChange}
-              placeholder="Имя учёного, открывшего этот закон"
-            />
-          </div>
-
-          {errors.submit && <div className="form-error">{errors.submit}</div>}
-
-          <div className="form-actions">
-            <button
-              type="button"
-              className="cancel-button"
-              onClick={onCancel}
-              disabled={isSubmitting}
-            >
-              Отмена
-            </button>
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Сохранение..." : "Сохранить изменения"}
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </div>
+            {Object.values(PhysicsCategory).map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </ModalWindow.Group>
+        <ModalWindow.Group title="Сложность*">
+          <select
+            id="difficulty"
+            name="difficulty"
+            value={formData.difficulty}
+            onChange={handleChange}
+          >
+            {Object.values(Difficulty).map((difficulty) => (
+              <option key={difficulty} value={difficulty}>
+                {difficulty}
+              </option>
+            ))}
+          </select>
+        </ModalWindow.Group>
+      </ModalWindow.Row>
+      <ModalWindow.Row>
+        <ModalWindow.Group title="Класс*" error={errors.class}>
+          <input
+            type="number"
+            id="class"
+            name="class"
+            min="1"
+            max="11"
+            value={formData.class}
+            onChange={handleChange}
+            className={errors.class ? "error" : ""}
+          />
+        </ModalWindow.Group>
+        <ModalWindow.Group title="Год открытия">
+          <input
+            type="number"
+            id="year"
+            name="year"
+            value={formData.year || ""}
+            onChange={handleChange}
+          />
+        </ModalWindow.Group>
+      </ModalWindow.Row>
+      <ModalWindow.Group title="Автор закона">
+        <input
+          type="text"
+          id="discoveredBy"
+          name="discoveredBy"
+          value={formData.discoveredBy || ""}
+          onChange={handleChange}
+          placeholder="Имя учёного, открывшего этот закон"
+        />
+      </ModalWindow.Group>
+    </ModalWindow>
   );
 }
