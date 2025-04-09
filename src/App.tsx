@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { TrainingPage } from "./pages/TrainingPage";
 import { FormulaParsingCard } from "./components/FormulaParsingCard";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
                   path="/formula-editor"
                   element={<FormulaParsingCard />}
                 />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
             <Footer />

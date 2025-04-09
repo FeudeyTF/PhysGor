@@ -1,0 +1,169 @@
+@import '../base.scss';
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  min-height: 75vh;
+}
+
+.not-found-title {
+  font-size: 8rem;
+  font-weight: 900;
+  margin: 0;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color-transparent);
+  animation: pulse 3s infinite alternate;
+}
+
+.not-found-subtitle {
+  font-size: 1.2rem;
+  margin: 1.5rem 0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.physics-joke {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.joke-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  
+  strong {
+    color: var(--accent-color);
+  }
+}
+
+.physics-illustration {
+  position: relative;
+  height: 120px;
+  margin: 2rem auto;
+  width: 80%;
+}
+
+.potential-barrier {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 90px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    var(--text-color) 30%, 
+    var(--text-color) 70%, 
+    transparent 100%);
+  opacity: 0.5;
+}
+
+.particle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-color);
+  top: 50%;
+  animation: quantum-tunneling 4s infinite;
+}
+
+.probability-wave {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: var(--accent-color-transparent);
+  transform: translateY(-50%);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--accent-color-transparent) 30%,
+      transparent 50%,
+      var(--accent-color-transparent) 70%,
+      transparent 100%
+    );
+    opacity: 0.2;
+    animation: wave-oscillate 3s infinite;
+  }
+}
+
+.home-button {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes quantum-tunneling {
+  0% {
+    left: 10%;
+    opacity: 1;
+  }
+  45% {
+    left: 45%;
+    opacity: 0.8;
+  }
+  50% {
+    left: 50%;
+    opacity: 0.1;
+  }
+  55% {
+    left: 55%;
+    opacity: 0.3;
+  }
+  100% {
+    left: 90%;
+    opacity: 1;
+  }
+}
+
+@keyframes wave-oscillate {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 5px var(--accent-color-transparent);
+  }
+  100% {
+    text-shadow: 0 0 20px var(--accent-color-transparent), 
+                0 0 30px var(--accent-color-transparent);
+  }
+}
