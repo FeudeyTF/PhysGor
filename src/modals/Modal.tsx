@@ -1,31 +1,44 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { ReactNode, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 type ModalWindowProps = {
   onClose: () => void;
   title: string;
-  children?: React.ReactNode;
-  submitButton?: React.ReactNode;
+  children?: ReactNode;
+  submitButton?: ReactNode;
   error?: string;
   onSubmit?: (event: React.FormEvent) => void;
 };
 
 type ModalWindowGroupProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   title: string;
   error?: string;
 };
 
 type ModalWindowRowProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 export function ModalWindow(props: ModalWindowProps) {
   const { onClose, title, children, onSubmit, error, submitButton } = props;
 
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <motion.div
         className="modal-form"
         initial={{ opacity: 0, scale: 0.8 }}
