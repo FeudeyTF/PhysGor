@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const AUTH_KEY = ''; 
+const AUTH_KEY = '123'; 
 const LAWS_FILE_PATH = path.join(__dirname, '../public/data/laws.json');
 
 const requireAuth = (req, res, next) => {
