@@ -5,7 +5,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { TrainingPage } from "./pages/TrainingPage";
-import { FormulaParsingCard } from "./components/FormulaParsingCard";
+import { FormulaEditorPage } from "./pages/FormulaEditorPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
@@ -21,7 +21,7 @@ export function App() {
                 <Route path="/training" element={<TrainingPage />} />
                 <Route
                   path="/formula-editor"
-                  element={<FormulaParsingCard />}
+                  element={<FormulaEditorPage />}
                 />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

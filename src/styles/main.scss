@@ -168,3 +168,5 @@ button {
 
 @include meta.load-css("./pages/HomePage.scss");
 @include meta.load-css("./pages/TrainingPage.scss");
+@include meta.load-css("./pages/NotFoundPage.scss");
+@include meta.load-css("./pages/FormulaEditorPage.scss");

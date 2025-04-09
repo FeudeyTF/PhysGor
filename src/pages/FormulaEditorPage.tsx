@@ -1,18 +1,19 @@
 import { ChangeEvent, useState } from "react";
 import { motion } from "framer-motion";
-import { FormulaParser } from "./FormulaParser";
-import "../styles/components/FormulaParsingCard.scss";
+import { FormulaParser } from "../components/FormulaParser";
+import { useLaws } from "../data/Laws";
 
-export function FormulaParsingCard() {
+export function FormulaEditorPage() {
   const [inputValue, setInputValue] = useState<string>("");
+  const { laws, loading, error } = useLaws();
 
   const examples = [
     "E = mc^2",
     "F = G(m_1\\cdotm_2/r^2)",
-    "a = (\\Delta v/\\Delta t)",
+    "a = (\\Deltav/\\Deltat)",
     "v = v_0 + at",
     "F = ma",
-    "\\Delta E = h\\nu",
+    "\\DeltaE = h\\nu",
   ];
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +22,10 @@ export function FormulaParsingCard() {
 
   const handleExampleClick = (example: string) => {
     setInputValue(example);
+  };
+
+  const handleFormulaClick = (formula: string) => {
+    setInputValue(formula);
   };
 
   return (
@@ -93,6 +98,38 @@ export function FormulaParsingCard() {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      <div className="all-formulas-section">
+        <h3>Все выражения из базы законов:</h3>
+        {loading ? (
+          <p>Загрузка формул...</p>
+        ) : error ? (
+          <p>Ошибка загрузки формул: {error}</p>
+        ) : (
+          <div className="formulas-grid">
+            {laws
+              .filter(law => law.formula && law.formula.trim() !== "")
+              .map((law, index) => (
+                <motion.div
+                  key={index}
+                  className="formula-item"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleFormulaClick(law.formula || "")}
+                >
+                  <div className="formula-name">{law.name}</div>
+                  <div className="formula-raw">{law.formula}</div>
+                  <div className="formula-rendered">
+                    <FormulaParser formula={law.formula || ""} />
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+        )}
+        {!loading && !error && laws.filter(law => law.formula && law.formula.trim() !== "").length === 0 && (
+          <p>Нет сохраненных формул в базе законов.</p>
+        )}
       </div>
     </div>
   );
