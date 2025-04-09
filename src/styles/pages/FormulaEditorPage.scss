@@ -51,6 +51,7 @@
 
   .input-section {
     margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
 
     .formula-input {
       width: 100%;
@@ -188,6 +189,92 @@
       }
     }
   }
+
+  .symbols-reference-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .symbols-reference {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .symbol-category {
+      margin-bottom: 1.5rem;
+
+      h4 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-secondary);
+        font-size: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3rem;
+      }
+
+      .symbols-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.75rem;
+
+        .symbol-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0.75rem;
+          background-color: var(--bg-primary);
+          border-radius: var(--border-radius-sm);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: 1px solid var(--border-color);
+
+          &:hover {
+            background-color: var(--bg-hover);
+            box-shadow: var(--shadow-sm);
+          }
+
+          .symbol {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--primary-color);
+          }
+
+          .symbol-code {
+            font-family: monospace;
+            font-size: 0.8rem;
+            background-color: var(--bg-code);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            margin-bottom: 0.25rem;
+            color: var(--text-code);
+          }
+
+          .symbol-name {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }
 
 .dark-theme {
@@ -275,6 +362,58 @@
           
           .formula-rendered {
             border-color: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+
+    .symbols-reference-button {
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .symbols-reference {
+      background-color: rgba(30, 30, 30, 0.8);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      
+      h3 {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+      }
+      
+      .symbol-category {
+        h4 {
+          border-color: rgba(255, 255, 255, 0.1);
+          color: var(--text-secondary);
+        }
+        
+        .symbols-grid {
+          .symbol-item {
+            background-color: rgba(40, 40, 40, 0.8);
+            border-color: rgba(60, 60, 60, 0.8);
+            
+            &:hover {
+              background-color: rgba(50, 50, 50, 0.9);
+              border-color: rgba(var(--primary-rgb), 0.4);
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2);
+            }
+            
+            .symbol {
+              color: var(--primary-color);
+              text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+            }
+            
+            .symbol-code {
+              background-color: rgba(0, 0, 0, 0.3);
+              color: var(--text-secondary);
+              border: 1px solid rgba(var(--primary-rgb), 0.2);
+            }
+            
+            .symbol-name {
+              color: var(--text-light);
+            }
           }
         }
       }

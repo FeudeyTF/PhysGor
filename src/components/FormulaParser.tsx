@@ -17,7 +17,7 @@ export function FormulaParser(props: FormulaParserProps) {
   return (
     <div className={`formula-parser ${className}`}>
       <div
-        className="formula-content"
+        className={`formula-content ${className}`}
         dangerouslySetInnerHTML={{ __html: parsedFormula }}
       />
     </div>
