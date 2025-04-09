@@ -5,7 +5,7 @@ export enum PhysicsCategory {
   Optics = "Optics",
 }
 
-export function TranslatePhysicsCategory(category: PhysicsCategory) {
+export function translatePhysicsCategory(category: PhysicsCategory) {
   switch (category) {
     default:
     case PhysicsCategory.Mechanics:

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { FaLock } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { ModalWindow } from "./Modal";
@@ -13,7 +13,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!key.trim()) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
-import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
 enum QuestionType {
@@ -142,7 +142,9 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
   return (
     <div className="multiple-choice-card">
       <div className="question-container">
-        <div className="category-badge">{TranslatePhysicsCategory(law.category)}</div>
+        <div className="category-badge">
+          {translatePhysicsCategory(law.category)}
+        </div>
         <h2 className="question-text">{getQuestionText()}</h2>
       </div>
 
@@ -160,7 +162,11 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
             onClick={() => handleOptionSelect(option)}
             disabled={isAnswered}
           >
-            {questionType === QuestionType.Formula ? <FormulaParser formula={option} /> : option}
+            {questionType === QuestionType.Formula ? (
+              <FormulaParser formula={option} />
+            ) : (
+              option
+            )}
           </motion.button>
         ))}
       </div>

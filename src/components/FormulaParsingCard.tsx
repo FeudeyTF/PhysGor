@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FormulaParser } from './FormulaParser';
-import '../styles/components/FormulaParsingCard.scss';
+import { ChangeEvent, useState } from "react";
+import { motion } from "framer-motion";
+import { FormulaParser } from "./FormulaParser";
+import "../styles/components/FormulaParsingCard.scss";
 
 export function FormulaParsingCard() {
-  const [inputValue, setInputValue] = useState<string>('');
-  
+  const [inputValue, setInputValue] = useState<string>("");
+
   const examples = [
-    'E = mc^2',
-    'F = G(m_1\\cdotm_2/r^2)',
-    'a = (\\Delta v/\\Delta t)',
-    'v = v_0 + at',
-    'F = ma',
-    '\\Delta E = h\\nu'
+    "E = mc^2",
+    "F = G(m_1\\cdotm_2/r^2)",
+    "a = (\\Delta v/\\Delta t)",
+    "v = v_0 + at",
+    "F = ma",
+    "\\Delta E = h\\nu",
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -29,15 +29,26 @@ export function FormulaParsingCard() {
       <p className="instructions">
         Введите математическую формулу, используя специальные обозначения:
       </p>
-      
+
       <div className="syntax-guide">
         <h3>Руководство по синтаксису:</h3>
         <ul>
-          <li><code>^n</code> - для возведения в степень (например, <code>x^2</code> → x²)</li>
-          <li><code>_n</code> - для индексов (например, <code>v_1</code> → v₁)</li>
-          <li><code>(a/b)</code> - для дробей</li>
-          <li><code>\alpha, \beta, \gamma, ...</code> - для греческих букв</li>
-          <li><code>\times, \div, \pm, ...</code> - для математических символов</li>
+          <li>
+            <code>^n</code> - для возведения в степень (например,{" "}
+            <code>x^2</code> → x²)
+          </li>
+          <li>
+            <code>_n</code> - для индексов (например, <code>v_1</code> → v₁)
+          </li>
+          <li>
+            <code>(a/b)</code> - для дробей
+          </li>
+          <li>
+            <code>\alpha, \beta, \gamma, ...</code> - для греческих букв
+          </li>
+          <li>
+            <code>\times, \div, \pm, ...</code> - для математических символов
+          </li>
         </ul>
       </div>
 
@@ -57,7 +68,9 @@ export function FormulaParsingCard() {
           {inputValue ? (
             <FormulaParser formula={inputValue} />
           ) : (
-            <span className="empty-preview">Формула будет отображаться здесь...</span>
+            <span className="empty-preview">
+              Формула будет отображаться здесь...
+            </span>
           )}
         </div>
       </div>

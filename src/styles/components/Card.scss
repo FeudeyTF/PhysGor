@@ -1,7 +1,7 @@
 .card-container {
   width: 100%;
   height: 100%;
-  
+
   .card {
     position: relative;
     width: 100%;
@@ -14,12 +14,12 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
+
     &:hover {
       transform: translateY(-4px);
       box-shadow: var(--hover-shadow);
     }
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -31,7 +31,7 @@
       z-index: 0;
     }
   }
-  
+
   .year-badge {
     position: absolute;
     top: 12px;
@@ -44,7 +44,7 @@
     font-weight: 500;
     z-index: 2;
   }
-  
+
   .difficulty-badge {
     position: absolute;
     top: 12px;
@@ -56,7 +56,7 @@
     z-index: 2;
     color: white;
   }
-  
+
   .class-badge {
     position: absolute;
     bottom: 10px;
@@ -72,13 +72,13 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    
+
     span {
       position: relative;
       top: 1px;
     }
   }
-  
+
   .card-category {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -89,7 +89,7 @@
     position: relative;
     z-index: 1;
   }
-  
+
   .card-title {
     position: relative;
     font-size: 1.5rem;
@@ -100,7 +100,7 @@
     font-weight: 600;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  
+
   .card-content {
     margin-top: 20px;
     flex: 1;
@@ -110,14 +110,14 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .card-description {
     margin-bottom: var(--spacing-md);
     color: var(--text-secondary);
     line-height: 1.6;
     flex: 1;
   }
-  
+
   .card-formula {
     margin-bottom: var(--spacing-md);
     padding: var(--spacing-md);
@@ -125,14 +125,14 @@
     border-radius: var(--border-radius-md);
     border-left: 3px solid var(--primary-color);
     box-shadow: 0 2px 8px rgba(67, 97, 238, 0.05);
-    
+
     span {
       display: block;
       font-weight: 500;
       margin-bottom: var(--spacing-xs);
       color: var(--text-primary);
     }
-    
+
     .formula-text {
       font-family: 'Space Grotesk', monospace;
       font-size: 1.1rem;
@@ -141,13 +141,13 @@
       color: var(--primary-color);
     }
   }
-  
+
   .card-meta {
     font-size: 0.9rem;
     color: var(--text-light);
     border-top: 1px solid var(--border-color);
     padding-top: var(--spacing-sm);
-    
+
     p {
       margin-bottom: var(--spacing-xs);
     }
@@ -161,8 +161,9 @@
     display: flex;
     gap: 8px;
   }
-  
-  .delete-button, .edit-button {
+
+  .delete-button,
+  .edit-button {
     width: 36px;
     height: 36px;
     display: flex;
@@ -178,13 +179,13 @@
     opacity: 0.7;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .delete-button:hover {
     background-color: var(--danger-color);
     opacity: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   .edit-button:hover {
     background-color: var(--primary-color);
     opacity: 1;

@@ -19,23 +19,23 @@
   --incorrect-color: #e63946;
   --border-color: #d8e2f3;
   --shadow-color: rgba(67, 97, 238, 0.1);
-  
+
   --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   --accent-gradient: linear-gradient(135deg, #6b48ff, #9d50bb);
-  
+
   --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   --hover-shadow: 0 14px 45px rgba(0, 0, 0, 0.1);
-  
+
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2.5rem;
-  
+
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
-  
+
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
@@ -47,7 +47,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--background-color);
   color: var(--text-primary);
@@ -56,7 +57,12 @@ html, body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   margin-bottom: var(--spacing-md);
 }
@@ -78,7 +84,7 @@ a {
   text-decoration: none;
   color: var(--primary-color);
   transition: var(--transition-fast);
-  
+
   &:hover {
     color: var(--secondary-color);
   }
@@ -119,6 +125,7 @@ button {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -128,11 +135,11 @@ button {
   h1 {
     font-size: 2rem;
   }
-  
+
   h2 {
     font-size: 1.5rem;
   }
-  
+
   .main-content {
     padding: var(--spacing-lg) var(--spacing-sm);
   }

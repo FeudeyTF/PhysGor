@@ -5,29 +5,29 @@
   padding: 0.25rem 0.5rem;
   margin: 0.25rem 0;
   border-radius: var(--border-radius-sm);
-  
+
   .formula-content {
     font-size: 1.1rem;
     line-height: 1.4;
     color: var(--text-primary);
-    
+
     .formula-fraction {
       display: inline-flex;
       flex-direction: column;
       vertical-align: middle;
       text-align: center;
       margin: 0 0.2rem;
-      
+
       .formula-numerator {
         border-bottom: 1px solid var(--text-primary);
         padding: 0 0.2rem;
       }
-      
+
       .formula-denominator {
         padding: 0 0.2rem;
       }
     }
-    
+
     .formula-subscript {
       display: inline-block;
       font-size: 0.7em;
@@ -37,7 +37,7 @@
       margin-left: 0.05em;
       color: var(--text-primary);
     }
-    
+
     .formula-superscript {
       display: inline-block;
       font-size: 0.7em;
@@ -53,40 +53,44 @@
 .dark-theme {
   .formula-parser {
     background-color: transparent;
-    
+
     .formula-content {
       color: var(--text-primary);
-      
-      .formula-operator, .formula-symbol {
+
+      .formula-operator,
+      .formula-symbol {
         color: var(--primary-color);
         text-shadow: 0 0 3px rgba(var(--primary-rgb), 0.2);
       }
-      
+
       .formula-fraction {
         .formula-numerator {
           border-bottom: 1px solid rgba(var(--primary-rgb), 0.5);
         }
       }
-      
-      .formula-subscript, .formula-superscript {
+
+      .formula-subscript,
+      .formula-superscript {
         color: var(--secondary-color);
         text-shadow: 0 0 2px rgba(var(--primary-rgb), 0.15);
       }
     }
-    
-    .multiple-choice-card &, .formula-writing-card &, .matching-card & {
+
+    .multiple-choice-card &,
+    .formula-writing-card &,
+    .matching-card & {
       .formula-content {
         color: var(--primary-color);
         font-weight: 500;
       }
     }
-    
+
     .correct & {
       .formula-content {
         color: var(--success-color);
       }
     }
-    
+
     .incorrect & {
       .formula-content {
         color: var(--danger-color);

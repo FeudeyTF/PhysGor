@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { ReactNode, useEffect } from "react";
+import React, { FormEvent, ReactNode, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 type ModalWindowProps = {
@@ -8,17 +8,7 @@ type ModalWindowProps = {
   children?: ReactNode;
   submitButton?: ReactNode;
   error?: string;
-  onSubmit?: (event: React.FormEvent) => void;
-};
-
-type ModalWindowGroupProps = {
-  children?: ReactNode;
-  title: string;
-  error?: string;
-};
-
-type ModalWindowRowProps = {
-  children?: ReactNode;
+  onSubmit?: (event: FormEvent) => void;
 };
 
 export function ModalWindow(props: ModalWindowProps) {
@@ -70,10 +60,20 @@ export function ModalWindow(props: ModalWindowProps) {
   );
 }
 
+type ModalWindowRowProps = {
+  children?: ReactNode;
+};
+
 function ModalWindowRow(props: ModalWindowRowProps) {
   const { children } = props;
   return <div className="form-row">{children}</div>;
 }
+
+type ModalWindowGroupProps = {
+  children?: ReactNode;
+  title: string;
+  error?: string;
+};
 
 function ModalWindowGroup(props: ModalWindowGroupProps) {
   const { children, title, error } = props;

@@ -5,7 +5,7 @@ export enum Difficulty {
   VeryHard = "Очень сложно"
 }
 
-export function DifficultyToColor(difficulty: Difficulty): string {
+export function difficultyToColor(difficulty: Difficulty): string {
   switch (difficulty) {
     case Difficulty.Easy:
       return '#4caf50';

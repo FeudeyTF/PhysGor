@@ -14,7 +14,7 @@ const requireAuth = (req, res, next) => {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
       success: false,
-      message: 'Authentication required'
+      message: 'Необходима аутентификация!'
     });
   }
 
@@ -23,7 +23,7 @@ const requireAuth = (req, res, next) => {
   if (token !== config.authKey) {
     return res.status(403).json({
       success: false,
-      message: 'Invalid authentication key'
+      message: 'Неправильный ключ входа!'
     });
   }
 
@@ -36,13 +36,13 @@ app.post('/api/auth/login', (req, res) => {
   if (!key || key !== config.authKey) {
     return res.status(401).json({
       success: false,
-      message: 'Invalid authentication key'
+      message: 'Неправильный ключ входа!'
     });
   }
 
   res.json({
     success: true,
-    message: 'Authentication successful',
+    message: 'Успешная аутентификация!',
     token: config.authKey
   });
 });
@@ -50,7 +50,7 @@ app.post('/api/auth/login', (req, res) => {
 app.get('/api/auth/verify', requireAuth, (req, res) => {
   res.json({
     success: true,
-    message: 'Token is valid'
+    message: 'Ключ входа правильный'
   });
 });
 
@@ -60,8 +60,8 @@ app.get('/api/laws', async (req, res) => {
     const laws = JSON.parse(data);
     res.json(laws);
   } catch (error) {
-    console.error('Error reading laws file:', error);
-    res.status(500).send('Error fetching laws');
+    console.error('Произошла ошибка при сборе законов из файла:', error);
+    res.status(500).send('Произошла ошибка при сборе законов из файла!');
   }
 });
 
@@ -72,7 +72,7 @@ app.post('/api/laws', requireAuth, async (req, res) => {
     if (!newLaw.name || !newLaw.description || !newLaw.category) {
       return res.status(400).json({
         success: false,
-        message: 'Name, description, and category are required'
+        message: 'Имя, описание, и категория обязательны!'
       });
     }
 
@@ -92,8 +92,8 @@ app.post('/api/laws', requireAuth, async (req, res) => {
 
     res.status(201).json({ success: true, law: newLaw });
   } catch (error) {
-    console.error('Error creating law:', error);
-    res.status(500).json({ success: false, message: 'Error creating law' });
+    console.error('Произошла ошибка при создании закона:', error);
+    res.status(500).json({ success: false, message: 'Произошла ошибка при создании закона!' });
   }
 });
 
@@ -107,15 +107,15 @@ app.delete('/api/laws/:id', requireAuth, async (req, res) => {
     const updatedLaws = laws.filter(law => law.id !== lawId);
 
     if (laws.length === updatedLaws.length) {
-      return res.status(404).send('Law not found');
+      return res.status(404).send('Закон не найден!');
     }
 
     await fs.writeFile(config.lawsFilePath, JSON.stringify(updatedLaws, null, 2));
 
-    res.json({ success: true, message: 'Law deleted successfully' });
+    res.json({ success: true, message: 'Закон успешно удалён' });
   } catch (error) {
-    console.error('Error deleting law:', error);
-    res.status(500).send('Error deleting law');
+    console.error('Произошла ошибка при удалении закона:', error);
+    res.status(500).send('Произошла ошибка при удалении закона!');
   }
 });
 
@@ -124,12 +124,12 @@ app.put('/api/laws/:id', requireAuth, async (req, res) => {
     const lawId = req.params.id;
     const updatedLaw = req.body;
 
-    console.log(`Updating law ${lawId} with data:`, updatedLaw);
+    console.log(`Обновляю закон с ID: ${lawId} на:`, updatedLaw);
 
     if (!updatedLaw.name || !updatedLaw.description || !updatedLaw.category) {
       return res.status(400).json({
         success: false,
-        message: 'Name, description, and category are required'
+        message: 'Имя, описание, и категория обязательны!'
       });
     }
 
@@ -139,20 +139,20 @@ app.put('/api/laws/:id', requireAuth, async (req, res) => {
     const lawIndex = laws.findIndex(law => law.id === lawId);
 
     if (lawIndex === -1) {
-      return res.status(404).json({ success: false, message: 'Law not found' });
+      return res.status(404).json({ success: false, message: 'Закон не найден!' });
     }
 
     updatedLaw.id = lawId;
     laws[lawIndex] = updatedLaw;
 
-    console.log("Laws after update:", laws);
+    console.log("Закон после обновления:", updatedLaw);
 
     await fs.writeFile(config.lawsFilePath, JSON.stringify(laws, null, 2));
 
     res.json({ success: true, law: updatedLaw });
   } catch (error) {
-    console.error('Error updating law:', error);
-    res.status(500).json({ success: false, message: 'Error updating law' });
+    console.error('Произошла ошибка при обновлении закона:', error);
+    res.status(500).json({ success: false, message: 'Произошла ошибка при обновлении закона' });
   }
 });
 

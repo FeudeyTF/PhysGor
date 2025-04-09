@@ -12,7 +12,7 @@
   align-items: center;
   padding: var(--spacing-md);
   overflow-y: auto;
-  
+
   .dark-theme & {
     background-color: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(6px);
@@ -32,28 +32,28 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  
+
   .dark-theme & {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-color);
   }
-  
+
   .form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-lg);
     flex-shrink: 0;
-    
+
     h2 {
       color: var(--primary-color);
       margin: 0;
       position: relative;
-      
+
       .dark-theme & {
         text-shadow: 0 0 10px rgba(86, 114, 255, 0.3);
       }
-      
+
       &::after {
         content: '';
         position: absolute;
@@ -63,13 +63,13 @@
         height: 3px;
         background-color: var(--primary-color);
         border-radius: 2px;
-        
+
         .dark-theme & {
           box-shadow: 0 0 8px rgba(86, 114, 255, 0.5);
         }
       }
     }
-    
+
     .close-button {
       background: none;
       border: none;
@@ -82,13 +82,13 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
-      
+
       &:hover {
         background-color: rgba(230, 57, 70, 0.1);
         color: var(--danger-color);
         transform: rotate(90deg);
       }
-      
+
       .dark-theme & {
         &:hover {
           background-color: rgba(255, 90, 101, 0.15);
@@ -97,44 +97,46 @@
       }
     }
   }
-  
+
   form {
     display: flex;
     flex-direction: column;
     flex: 1;
     overflow-y: auto;
     padding-right: var(--spacing-sm);
-    
+
     &::-webkit-scrollbar {
       width: 8px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background: rgba(0, 0, 0, 0.05);
       border-radius: 4px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, 0.2);
       border-radius: 4px;
-      
+
       .dark-theme & {
         background: rgba(255, 255, 255, 0.2);
       }
     }
   }
-  
+
   .form-group {
     margin-bottom: var(--spacing-md);
-    
+
     label {
       display: block;
       margin-bottom: var(--spacing-sm);
       color: var(--text-primary);
       font-weight: 500;
     }
-    
-    input, textarea, select {
+
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: var(--spacing-sm) var(--spacing-md);
       border: 1px solid var(--border-color);
@@ -143,38 +145,38 @@
       color: var(--text-primary);
       font-family: inherit;
       transition: all 0.2s ease;
-      
+
       .dark-theme & {
         background-color: var(--input-bg);
         border-color: var(--border-color);
         color: var(--text-primary);
       }
-      
+
       &:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
-        
+
         .dark-theme & {
           box-shadow: 0 0 0 3px rgba(86, 114, 255, 0.25);
         }
       }
-      
+
       &.error {
         border-color: var(--danger-color);
         background-color: rgba(230, 57, 70, 0.03);
-        
+
         .dark-theme & {
           background-color: rgba(255, 90, 101, 0.08);
         }
       }
     }
-    
+
     textarea {
       resize: vertical;
       min-height: 100px;
     }
-    
+
     .error-message {
       display: block;
       color: var(--danger-color);
@@ -182,17 +184,17 @@
       margin-top: var(--spacing-xs);
     }
   }
-  
+
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
-    
+
     .form-group {
       margin-bottom: var(--spacing-sm);
     }
   }
-  
+
   .form-error {
     padding: var(--spacing-md);
     background-color: rgba(230, 57, 70, 0.08);
@@ -200,55 +202,55 @@
     color: var(--danger-color);
     margin-bottom: var(--spacing-md);
     border-left: 3px solid var(--danger-color);
-    
+
     .dark-theme & {
       background-color: rgba(255, 90, 101, 0.1);
       border-left: 3px solid var(--danger-color);
     }
   }
-  
+
   .form-actions {
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
     flex-shrink: 0;
-    
+
     button {
       padding: var(--spacing-sm) var(--spacing-xl);
       border-radius: var(--border-radius-md);
       font-weight: 500;
       transition: all 0.2s ease;
       cursor: pointer;
-      
+
       &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
       }
     }
-    
+
     .cancel-button {
       background-color: white;
       border: 1px solid var(--border-color);
       color: var(--text-secondary);
-      
+
       .dark-theme & {
         background-color: var(--background-light);
         border-color: var(--border-color);
         color: var(--text-secondary);
       }
-      
+
       &:hover:not(:disabled) {
         background-color: var(--background-light);
         color: var(--text-primary);
-        
+
         .dark-theme & {
           background-color: #333;
           color: var(--text-primary);
         }
       }
     }
-    
+
     .submit-button {
       background: var(--primary-color);
       border: none;
@@ -256,11 +258,11 @@
       box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
       position: relative;
       overflow: hidden;
-      
+
       .dark-theme & {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(86, 114, 255, 0.5);
       }
-      
+
       &::after {
         content: '';
         position: absolute;
@@ -268,24 +270,24 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+        background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
         opacity: 0;
         transition: opacity 0.2s ease;
       }
-      
+
       &:hover:not(:disabled) {
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(67, 97, 238, 0.25);
-        
+
         .dark-theme & {
           box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(86, 114, 255, 0.5), 0 0 20px rgba(86, 114, 255, 0.3);
         }
-        
+
         &::after {
           opacity: 1;
         }
       }
-      
+
       &:active:not(:disabled) {
         transform: translateY(0);
       }
@@ -298,15 +300,15 @@
     padding: var(--spacing-md);
     max-height: 90vh;
     margin: var(--spacing-sm);
-    
+
     .form-row {
       grid-template-columns: 1fr;
       gap: var(--spacing-sm);
     }
-    
+
     .form-actions {
       flex-direction: column-reverse;
-      
+
       button {
         width: 100%;
       }

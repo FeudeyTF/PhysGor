@@ -111,7 +111,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+        background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
         opacity: 0;
         transition: opacity 0.3s ease;
       }
@@ -119,7 +119,7 @@
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
-        
+
         &::after {
           opacity: 1;
         }
@@ -171,7 +171,7 @@
             border-color: var(--primary-color);
             background-color: rgba(67, 97, 238, 0.08);
             position: relative;
-            
+
             &::after {
               content: '';
               position: absolute;
@@ -279,7 +279,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
             opacity: 0;
             transition: opacity 0.3s ease;
           }
@@ -287,7 +287,7 @@
           &:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
-            
+
             &::after {
               opacity: 1;
             }
@@ -478,40 +478,40 @@
 .dark-theme {
   .multiple-choice-card {
     background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-    
+
     .question-container {
       .category-badge {
         background: linear-gradient(135deg, var(--accent-color), #8f45e6);
         box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
       }
-      
+
       .question-text {
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       }
     }
-    
+
     .options-container {
       .option-button {
         background-color: rgba(30, 30, 30, 0.6);
         border-color: var(--border-color);
-        
+
         &:hover {
           background-color: var(--card-hover-bg);
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         &.selected {
           background-color: rgba(var(--primary-rgb), 0.15);
           border-color: var(--primary-color);
           box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
         }
-        
+
         &.correct {
           background-color: rgba(76, 195, 138, 0.15);
           border-color: var(--success-color);
           box-shadow: 0 0 0 1px var(--success-color), 0 0 10px rgba(76, 195, 138, 0.2);
         }
-        
+
         &.incorrect {
           background-color: rgba(255, 90, 101, 0.15);
           border-color: var(--danger-color);
@@ -519,13 +519,13 @@
         }
       }
     }
-    
+
     .feedback-message {
       &.correct {
         background-color: rgba(76, 195, 138, 0.15);
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       }
-      
+
       &.incorrect {
         background-color: rgba(255, 90, 101, 0.15);
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -645,40 +645,40 @@
 .dark-theme {
   .matching-card {
     background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-    
+
     .matching-instructions {
       h2 {
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       }
     }
-    
+
     .matching-container {
       .matching-column {
         h3 {
           color: var(--text-secondary);
         }
-        
+
         .matching-items {
           .matching-item {
             background-color: rgba(30, 30, 30, 0.6);
             border-color: var(--border-color);
-            
+
             &:hover {
               background-color: var(--card-hover-bg);
               box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             }
-            
+
             &.formula {
               color: var(--primary-color);
               text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
             }
-            
+
             &.selected {
               background-color: rgba(var(--primary-rgb), 0.15);
               border-color: var(--primary-color);
               box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
             }
-            
+
             &.matched {
               background-color: rgba(76, 195, 138, 0.15);
               border-color: var(--success-color);
@@ -688,7 +688,7 @@
         }
       }
     }
-    
+
     .error-message {
       background-color: rgba(255, 90, 101, 0.15);
       border-left-color: var(--danger-color);
@@ -789,7 +789,7 @@
           background-color: var(--background-light);
           color: var(--text-secondary);
           border: 1px solid var(--border-color);
-          
+
           &:hover {
             background-color: var(--background-color);
             color: var(--text-primary);
@@ -800,7 +800,7 @@
           background: var(--primary-color);
           color: white;
           box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.2);
-          
+
           &:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
@@ -856,61 +856,61 @@
 .dark-theme {
   .formula-writing-card {
     background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-    
+
     .law-info {
       .category-badge {
         background: linear-gradient(135deg, var(--accent-color), #8f45e6);
         box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
       }
-      
+
       .law-name {
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       }
     }
-    
+
     .formula-input-container {
       label {
         color: var(--text-secondary);
       }
-      
+
       .formula-input {
         background-color: var(--input-bg);
         border-color: var(--border-color);
         color: var(--text-primary);
-        
+
         &:focus {
           box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.25);
         }
-        
+
         &.correct {
           background-color: rgba(76, 195, 138, 0.15);
           border-color: var(--success-color);
           box-shadow: 0 0 0 1px var(--success-color), 0 0 8px rgba(76, 195, 138, 0.2);
         }
-        
+
         &.incorrect {
           background-color: rgba(255, 90, 101, 0.15);
           border-color: var(--danger-color);
           box-shadow: 0 0 0 1px var(--danger-color), 0 0 8px rgba(255, 90, 101, 0.2);
         }
       }
-      
+
       .formula-buttons {
         button {
           &.hint-button {
             background-color: rgba(30, 30, 30, 0.6);
             color: var(--text-secondary);
             border-color: var(--border-color);
-            
+
             &:hover {
               background-color: var(--card-hover-bg);
               color: var(--text-primary);
             }
           }
-          
+
           &.check-button {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
-            
+
             &:hover {
               transform: translateY(-2px);
               box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
@@ -919,28 +919,28 @@
         }
       }
     }
-    
+
     .formula-hint {
       background-color: rgba(30, 30, 30, 0.6);
       border-left-color: var(--primary-color);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      
+
       span {
         color: var(--primary-color);
       }
     }
-    
+
     .feedback-message {
       &.correct {
         background-color: rgba(76, 195, 138, 0.15);
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       }
-      
+
       &.incorrect {
         background-color: rgba(255, 90, 101, 0.15);
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       }
-      
+
       .correct-formula {
         color: var(--success-color);
         text-shadow: 0 0 5px rgba(76, 195, 138, 0.3);
@@ -953,6 +953,7 @@
   .multiple-choice-card {
     .options-container {
       max-height: 250px;
+
       .option-button {
         padding: var(--spacing-md);
         font-size: 0.95rem;
@@ -970,44 +971,44 @@
     .progress-bar {
       background-color: rgba(86, 114, 255, 0.1);
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-      
+
       .progress-fill {
         background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
         box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
       }
     }
-    
+
     .stats {
       .stat {
         background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         border: 1px solid var(--border-color);
-        
+
         .stat-label {
           color: var(--text-light);
         }
-        
+
         .stat-value {
           color: var(--primary-color);
           text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
         }
       }
     }
-    
+
     .controls {
       button {
         &.next-button {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
-          
+
           &:hover {
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
           }
         }
-        
+
         &.reset-button {
           background-color: rgba(30, 30, 30, 0.6);
           border-color: var(--border-color);
-          
+
           &:hover {
             background-color: var(--card-hover-bg);
             color: var(--text-primary);
@@ -1016,36 +1017,36 @@
         }
       }
     }
-    
+
     .training-setup {
       background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-      
+
       .filter-controls {
         .toggle-button {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.3);
-          
+
           &:hover {
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
           }
         }
       }
-      
+
       .training-modes {
         .mode-buttons {
           .mode-button {
             background-color: rgba(30, 30, 30, 0.6);
             border-color: var(--border-color);
-            
+
             &:hover {
               background-color: var(--card-hover-bg);
               border-color: rgba(var(--primary-rgb), 0.3);
               box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             }
-            
+
             &.active {
               background-color: rgba(var(--primary-rgb), 0.15);
               border-color: var(--primary-color);
-              
+
               &::after {
                 box-shadow: 0 0 5px rgba(var(--accent-color), 0.5);
               }
@@ -1053,16 +1054,16 @@
           }
         }
       }
-      
+
       .start-button {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
-        
+
         &:hover {
           box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
         }
       }
     }
-    
+
     .no-laws-message {
       background-color: rgba(30, 30, 30, 0.5);
       border: 1px dashed var(--border-color);

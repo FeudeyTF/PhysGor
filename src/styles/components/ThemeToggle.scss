@@ -42,54 +42,54 @@
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  
+
   &:hover {
     transform: scale(1.1);
   }
-  
+
   &:focus {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
   }
-  
+
   &.light-mode {
     background: linear-gradient(135deg, #e1f5fe, #bbdefb);
-    
+
     .toggle-nucleus {
       background: var(--primary-color);
       box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
-    
+
     .toggle-electron {
       background-color: var(--secondary-color);
       box-shadow: 0 0 5px rgba(var(--primary-rgb), 0.2);
     }
   }
-  
+
   &.dark-mode {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
-    
+
     .toggle-nucleus {
       background: #000;
       box-shadow: 0 0 15px 2px rgba(181, 122, 255, 0.5);
     }
-    
+
     .toggle-electron {
       opacity: 0.7;
       background-color: #b57aff;
       box-shadow: 0 0 8px rgba(181, 122, 255, 0.4);
     }
-    
+
     .toggle-orbit {
       border-color: rgba(255, 255, 255, 0.2);
     }
   }
-  
+
   .dark-theme & {
     &.light-mode {
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
-    
+
     &.dark-mode {
       box-shadow: 0 0 15px rgba(86, 114, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.4);
     }
@@ -142,7 +142,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
   opacity: 0;
   transform: scale(0);
   transition: all 0.5s ease;
@@ -162,22 +162,22 @@
       transform: scale(1.2);
       box-shadow: 0 0 20px 5px rgba(58, 123, 213, 0.6);
     }
-    
+
     .toggle-electron {
       animation-duration: 1s !important;
     }
   }
-  
+
   &.dark-mode {
     .toggle-nucleus {
       transform: scale(0.8);
     }
-    
+
     .toggle-event-horizon {
       opacity: 0.9;
       transform: scale(1.2);
     }
-    
+
     .toggle-electron {
       animation-duration: 2s !important;
       transform: scale(0.5);
@@ -187,18 +187,33 @@
 }
 
 @keyframes orbit1 {
-  from { transform: rotate(0deg) translateX(14px) rotate(0deg); }
-  to { transform: rotate(360deg) translateX(14px) rotate(-360deg); }
+  from {
+    transform: rotate(0deg) translateX(14px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(14px) rotate(-360deg);
+  }
 }
 
 @keyframes orbit2 {
-  from { transform: rotate(120deg) translateX(12px) rotate(-120deg); }
-  to { transform: rotate(480deg) translateX(12px) rotate(-480deg); }
+  from {
+    transform: rotate(120deg) translateX(12px) rotate(-120deg);
+  }
+
+  to {
+    transform: rotate(480deg) translateX(12px) rotate(-480deg);
+  }
 }
 
 @keyframes orbit3 {
-  from { transform: rotate(240deg) translateX(16px) rotate(-240deg); }
-  to { transform: rotate(600deg) translateX(16px) rotate(-600deg); }
+  from {
+    transform: rotate(240deg) translateX(16px) rotate(-240deg);
+  }
+
+  to {
+    transform: rotate(600deg) translateX(16px) rotate(-600deg);
+  }
 }
 
 .dark-mode .toggle-particles::before,
@@ -226,13 +241,35 @@
 }
 
 @keyframes particle1 {
-  0% { transform: translate(0, 0); opacity: 1; width: 2px; height: 2px; }
-  100% { transform: translate(-20px, -15px); opacity: 0; width: 1px; height: 1px; }
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+    width: 2px;
+    height: 2px;
+  }
+
+  100% {
+    transform: translate(-20px, -15px);
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
 }
 
 @keyframes particle2 {
-  0% { transform: translate(0, 0); opacity: 1; width: 2px; height: 2px; }
-  100% { transform: translate(15px, 20px); opacity: 0; width: 1px; height: 1px; }
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+    width: 2px;
+    height: 2px;
+  }
+
+  100% {
+    transform: translate(15px, 20px);
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
 }
 
 .animating.light-mode .toggle-particles::before,
@@ -260,13 +297,27 @@
 }
 
 @keyframes photon1 {
-  0% { transform: translate(0, 0) scale(0); opacity: 1; }
-  100% { transform: translate(-25px, -5px) scale(1); opacity: 0; }
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-25px, -5px) scale(1);
+    opacity: 0;
+  }
 }
 
 @keyframes photon2 {
-  0% { transform: translate(0, 0) scale(0); opacity: 1; }
-  100% { transform: translate(25px, 5px) scale(1); opacity: 0; }
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(25px, 5px) scale(1);
+    opacity: 0;
+  }
 }
 
 .dark-theme .animating.dark-mode .toggle-particles::before,
@@ -275,15 +326,17 @@
 }
 
 .dark-theme .animating.dark-mode .toggle-particles {
-  &::before, &::after {
+
+  &::before,
+  &::after {
     content: '';
     box-shadow: 0 0 8px #b57aff;
   }
-  
+
   &::before {
     animation: particle1 1.2s ease-out;
   }
-  
+
   &::after {
     animation: particle2 1.2s ease-out;
   }

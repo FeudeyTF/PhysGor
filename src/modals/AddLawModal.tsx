@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { Difficulty } from "../types/Difficulty";
@@ -29,9 +29,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
 
@@ -84,7 +82,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!validate()) return;

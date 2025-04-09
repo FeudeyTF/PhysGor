@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
-import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
 type FormulaWritingCardProps = {
@@ -16,7 +16,7 @@ export function FormulaWritingCard(props: FormulaWritingCardProps) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
 
@@ -70,7 +70,7 @@ export function FormulaWritingCard(props: FormulaWritingCardProps) {
     <div className="formula-writing-card">
       <div className="law-info">
         <div className="category-badge">
-          {TranslatePhysicsCategory(law.category)}
+          {translatePhysicsCategory(law.category)}
         </div>
         <h2 className="law-name">{law.name}</h2>
         <p className="law-description">{law.description}</p>
@@ -120,7 +120,9 @@ export function FormulaWritingCard(props: FormulaWritingCardProps) {
       )}
 
       {isSubmitted && (
-        <div className={`feedback-message ${isCorrect ? "correct" : "incorrect"}`}>
+        <div
+          className={`feedback-message ${isCorrect ? "correct" : "incorrect"}`}
+        >
           {isCorrect ? "Правильно!" : "Неправильно!"}
           <div className="correct-formula">
             Правильная формула: <FormulaParser formula={law.formula || ""} />

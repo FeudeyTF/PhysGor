@@ -6,21 +6,20 @@ import { API_URL } from "../constants";
 
 export const physicsLaws: PhysicsLaw[] = [];
 
-
 const getAuthToken = (): string | null => {
-  return localStorage.getItem('auth_token');
+  return localStorage.getItem("auth_token");
 };
 
 const createAuthHeaders = (): HeadersInit => {
   const headers: HeadersInit = {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   };
-  
+
   const token = getAuthToken();
   if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
+    headers["Authorization"] = `Bearer ${token}`;
   }
-  
+
   return headers;
 };
 
@@ -132,7 +131,7 @@ export function useLaws() {
     try {
       const response = await fetch(`${API_URL}/laws/${id}`, {
         method: "DELETE",
-        headers: createAuthHeaders()
+        headers: createAuthHeaders(),
       });
 
       if (!response.ok) {

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
-import { DifficultyToColor } from "../types/Difficulty";
+import { difficultyToColor } from "../types/Difficulty";
 import { FaBook, FaTrash, FaEdit } from "react-icons/fa";
-import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
 type CardProps = {
@@ -42,7 +42,7 @@ export function Card(props: CardProps) {
         {law.difficulty && (
           <div
             className="difficulty-badge"
-            style={{ backgroundColor: DifficultyToColor(law.difficulty) }}
+            style={{ backgroundColor: difficultyToColor(law.difficulty) }}
           >
             {law.difficulty}
           </div>
@@ -87,7 +87,9 @@ export function Card(props: CardProps) {
           )}
         </div>
 
-        <div className="card-category">{TranslatePhysicsCategory(law.category)}</div>
+        <div className="card-category">
+          {translatePhysicsCategory(law.category)}
+        </div>
         <h2 className="card-title">{law.name}</h2>
 
         <div className="card-content">
