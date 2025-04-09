@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
-import { PhysicsCategory, TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { TranslatePhysicsCategory } from "../types/PhysicsCategory";
+import { FormulaParser } from "./FormulaParser";
 
 enum QuestionType {
   Formula,
@@ -159,7 +160,7 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
             onClick={() => handleOptionSelect(option)}
             disabled={isAnswered}
           >
-            {option}
+            {questionType === QuestionType.Formula ? <FormulaParser formula={option} /> : option}
           </motion.button>
         ))}
       </div>
