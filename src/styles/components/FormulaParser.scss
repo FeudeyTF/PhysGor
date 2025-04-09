@@ -25,6 +25,24 @@
         padding: 0 0.2rem;
       }
     }
+    
+    .formula-subscript {
+      display: inline-block;
+      font-size: 0.7em;
+      vertical-align: sub;
+      position: relative;
+      bottom: -0.2em;
+      margin-left: 0.05em;
+    }
+    
+    .formula-superscript {
+      display: inline-block;
+      font-size: 0.7em;
+      vertical-align: super;
+      position: relative;
+      top: 0;
+      margin-left: 0.05em;
+    }
   }
 }
 

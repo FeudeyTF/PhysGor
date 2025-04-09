@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '../styles/components/FormulaParser.scss';
 
 interface FormulaParserProps {
@@ -9,28 +9,31 @@ interface FormulaParserProps {
 export function FormulaParser({ formula, className = '' }: FormulaParserProps) {
   const [parsedFormula, setParsedFormula] = useState<string>('');
 
-  useEffect(() => {
-    setParsedFormula(parseFormula(formula));
-  }, [formula]);
+  const processNestedExpressions = useCallback((input: string): string => {
+    let result = input;
+    let lastResult = '';
+    
+    while (result !== lastResult) {
+      lastResult = result;
+      
+      result = result.replace(/\(([^()]+)\/([^()]+)\)/g, 
+        '<span class="formula-fraction"><span class="formula-numerator">$1</span><span class="formula-denominator">$2</span></span>');
+      
+      result = result.replace(/([a-zA-Z0-9_\\]+)\/([a-zA-Z0-9_\\]+)(?![a-zA-Z0-9_\\])/g, 
+        '<span class="formula-fraction"><span class="formula-numerator">$1</span><span class="formula-denominator">$2</span></span>');
+    }
+    
+    return result;
+  }, []);
 
-  // Основная функция парсера
-  const parseFormula = (input: string): string => {
-    if (!input) return '';
-
-    // Replace common mathematical notations
-    let result = input
-      // Подстрочные символы (x_1 -> x₁)
-      .replace(/_([0-9])/g, (_, digit) => {
-        const subscripts = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
-        return subscripts[parseInt(digit)];
-      })
-      // Надстрочные символы (x^2 -> x²)
-      .replace(/\^([0-9])/g, (_, digit) => {
-        const superscripts = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
-        return superscripts[parseInt(digit)];
-      })
-      // Деление (a/b)
-      .replace(/\(([^()]+)\/([^()]+)\)/g, '<span class="formula-fraction"><span class="formula-numerator">$1</span><span class="formula-denominator">$2</span></span>')
+  const applyTransformations = useCallback((input: string): string => {
+    return input
+      // Подстрочные символы (x_a, x_1, и т.д.)
+      .replace(/([a-zA-Z0-9])_([a-zA-Z0-9]+)/g, '$1<span class="formula-subscript">$2</span>')
+      
+      // Надстрочные символы (x^a, x^2, и т.д..)
+      .replace(/([a-zA-Z0-9])\^([a-zA-Z0-9]+)/g, '$1<span class="formula-superscript">$2</span>')
+      
       // Греческие буквы
       .replace(/\\alpha/g, 'α')
       .replace(/\\beta/g, 'β')
@@ -98,9 +101,22 @@ export function FormulaParser({ formula, className = '' }: FormulaParserProps) {
       .replace(/\\int/g, '∫')
       .replace(/\\sum/g, '∑')
       .replace(/\\prod/g, '∏');
+  }, []);
+
+  // Основная функция парсера
+  const parseFormula = useCallback((input: string): string => {
+    if (!input) return '';
+
+    let result = processNestedExpressions(input);
+
+    result = applyTransformations(result);
 
     return result;
-  };
+  }, [processNestedExpressions, applyTransformations]);
+
+  useEffect(() => {
+    setParsedFormula(parseFormula(formula));
+  }, [formula, parseFormula]);
 
   return (
     <div className={`formula-parser ${className}`}>

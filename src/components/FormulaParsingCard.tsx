@@ -8,7 +8,7 @@ export function FormulaParsingCard() {
   
   const examples = [
     'E = mc^2',
-    'F = G(m_1m_2/r^2)',
+    'F = G(m_1\\cdotm_2/r^2)',
     'a = (\\Delta v/\\Delta t)',
     'v = v_0 + at',
     'F = ma',
@@ -36,8 +36,8 @@ export function FormulaParsingCard() {
           <li><code>^n</code> - для возведения в степень (например, <code>x^2</code> → x²)</li>
           <li><code>_n</code> - для индексов (например, <code>v_1</code> → v₁)</li>
           <li><code>(a/b)</code> - для дробей</li>
-          <li><code>\\alpha, \\beta, \\gamma, ...</code> - для греческих букв</li>
-          <li><code>\\times, \\div, \\pm, ...</code> - для математических символов</li>
+          <li><code>\alpha, \beta, \gamma, ...</code> - для греческих букв</li>
+          <li><code>\times, \div, \pm, ...</code> - для математических символов</li>
         </ul>
       </div>
 
