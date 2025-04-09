@@ -53,32 +53,45 @@
   }
   
   &.light-mode {
-    background-color: #e1f5fe;
+    background: linear-gradient(135deg, #e1f5fe, #bbdefb);
     
     .toggle-nucleus {
       background: var(--primary-color);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
     
     .toggle-electron {
       background-color: var(--secondary-color);
+      box-shadow: 0 0 5px rgba(var(--primary-rgb), 0.2);
     }
   }
   
   &.dark-mode {
-    background-color: #263238;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     
     .toggle-nucleus {
       background: #000;
-      box-shadow: 0 0 15px 2px rgba(var(--secondary-color), 0.5);
+      box-shadow: 0 0 15px 2px rgba(181, 122, 255, 0.5);
     }
     
     .toggle-electron {
       opacity: 0.7;
-      background-color: #6a1b9a;
+      background-color: #b57aff;
+      box-shadow: 0 0 8px rgba(181, 122, 255, 0.4);
     }
     
     .toggle-orbit {
       border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  .dark-theme & {
+    &.light-mode {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    &.dark-mode {
+      box-shadow: 0 0 15px rgba(86, 114, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.4);
     }
   }
 }
@@ -129,7 +142,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 70%);
   opacity: 0;
   transform: scale(0);
   transition: all 0.5s ease;
@@ -161,13 +174,14 @@
     }
     
     .toggle-event-horizon {
-      opacity: 0.8;
-      transform: scale(1);
+      opacity: 0.9;
+      transform: scale(1.2);
     }
     
     .toggle-electron {
       animation-duration: 2s !important;
       transform: scale(0.5);
+      opacity: 0.3;
     }
   }
 }
@@ -196,6 +210,7 @@
   background: #fff;
   border-radius: 50%;
   opacity: 0;
+  box-shadow: 0 0 4px #fff;
 }
 
 .animating.dark-mode .toggle-particles::before {
@@ -211,13 +226,13 @@
 }
 
 @keyframes particle1 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(-20px, -15px); opacity: 0; }
+  0% { transform: translate(0, 0); opacity: 1; width: 2px; height: 2px; }
+  100% { transform: translate(-20px, -15px); opacity: 0; width: 1px; height: 1px; }
 }
 
 @keyframes particle2 {
-  0% { transform: translate(0, 0); opacity: 1; }
-  100% { transform: translate(15px, 20px); opacity: 0; }
+  0% { transform: translate(0, 0); opacity: 1; width: 2px; height: 2px; }
+  100% { transform: translate(15px, 20px); opacity: 0; width: 1px; height: 1px; }
 }
 
 .animating.light-mode .toggle-particles::before,
@@ -229,6 +244,7 @@
   background: var(--primary-color);
   border-radius: 4px;
   opacity: 0;
+  box-shadow: 0 0 6px var(--primary-color);
 }
 
 .animating.light-mode .toggle-particles::before {
@@ -251,4 +267,24 @@
 @keyframes photon2 {
   0% { transform: translate(0, 0) scale(0); opacity: 1; }
   100% { transform: translate(25px, 5px) scale(1); opacity: 0; }
+}
+
+.dark-theme .animating.dark-mode .toggle-particles::before,
+.dark-theme .animating.dark-mode .toggle-particles::after {
+  box-shadow: 0 0 8px rgba(181, 122, 255, 0.8);
+}
+
+.dark-theme .animating.dark-mode .toggle-particles {
+  &::before, &::after {
+    content: '';
+    box-shadow: 0 0 8px #b57aff;
+  }
+  
+  &::before {
+    animation: particle1 1.2s ease-out;
+  }
+  
+  &::after {
+    animation: particle2 1.2s ease-out;
+  }
 }

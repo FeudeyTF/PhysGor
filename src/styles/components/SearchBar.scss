@@ -14,8 +14,8 @@
     padding: 10px 15px;
     padding-right: 40px;
     border-radius: var(--border-radius-md);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: white;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-background);
     font-size: 0.95rem;
     transition: var(--transition-normal);
     color: var(--text-primary);
@@ -24,7 +24,7 @@
     &:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.15);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
     }
     
     &::placeholder {
@@ -39,6 +39,30 @@
     transform: translateY(-50%);
     color: var(--text-light);
     pointer-events: none;
+  }
+}
+
+.dark-theme {
+  .search-bar {
+    input {
+      background-color: var(--input-bg);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      
+      &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      
+      &::placeholder {
+        color: var(--text-light);
+      }
+    }
+    
+    .search-icon {
+      color: var(--text-light);
+    }
   }
 }
 

@@ -18,10 +18,11 @@
   }
 
   .syntax-guide {
-    background-color: var(--background-secondary);
+    background-color: var(--background-light);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--border-color);
 
     h3 {
       margin-bottom: var(--spacing-md);
@@ -38,10 +39,10 @@
         color: var(--text-secondary);
 
         code {
-          background-color: var(--code-background);
+          background-color: rgba(var(--primary-rgb), 0.1);
           padding: 0.2rem 0.4rem;
           border-radius: var(--border-radius-sm);
-          font-family: monospace;
+          font-family: 'Space Grotesk', monospace;
           color: var(--primary-color);
         }
       }
@@ -57,12 +58,15 @@
       border: 2px solid var(--border-color);
       border-radius: var(--border-radius-md);
       font-size: 1.1rem;
-      font-family: 'Times New Roman', Times, serif;
-      transition: border-color 0.3s ease;
+      font-family: 'Space Grotesk', monospace;
+      transition: all var(--transition-normal);
+      background-color: var(--card-background);
+      color: var(--text-primary);
 
       &:focus {
         outline: none;
         border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
       }
 
       &::placeholder {
@@ -87,7 +91,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--background-secondary);
+      background-color: var(--background-light);
 
       .empty-preview {
         color: var(--text-light);
@@ -108,18 +112,20 @@
       gap: var(--spacing-md);
 
       .example-item {
-        background-color: var(--background-secondary);
+        background-color: var(--background-light);
         border-radius: var(--border-radius-md);
         padding: var(--spacing-md);
         cursor: pointer;
-        transition: transform 0.2s ease;
+        transition: all var(--transition-normal);
+        border: 1px solid var(--border-color);
 
         &:hover {
-          background-color: var(--background-hover);
+          transform: translateY(-3px);
+          box-shadow: var(--hover-shadow);
         }
 
         .example-raw {
-          font-family: monospace;
+          font-family: 'Space Grotesk', monospace;
           font-size: 0.9rem;
           color: var(--text-secondary);
           margin-bottom: var(--spacing-sm);
@@ -136,19 +142,61 @@
 
 .dark-theme {
   .formula-parsing-card {
+    background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
+    
+    h2 {
+      text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+    }
+    
     .syntax-guide {
-      background-color: var(--background-secondary-dark);
+      background-color: rgba(30, 30, 30, 0.8);
+      border-color: var(--border-color);
+      
+      li code {
+        background-color: rgba(var(--primary-rgb), 0.15);
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+      }
     }
-
-    .formula-preview {
-      background-color: var(--background-secondary-dark);
+    
+    .input-section {
+      .formula-input {
+        background-color: var(--input-bg);
+        border-color: var(--border-color);
+        
+        &:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25);
+        }
+      }
     }
-
-    .example-item {
-      background-color: var(--background-secondary-dark);
-
-      &:hover {
-        background-color: var(--background-hover-dark);
+    
+    .preview-section {
+      .formula-preview {
+        background-color: rgba(30, 30, 30, 0.6);
+        border-color: var(--border-color);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    .examples-grid {
+      .example-item {
+        background-color: rgba(30, 30, 30, 0.6);
+        border-color: var(--border-color);
+        
+        &:hover {
+          background-color: var(--card-hover-bg);
+          border-color: rgba(var(--primary-rgb), 0.3);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-rgb), 0.2);
+        }
+        
+        .example-raw {
+          color: var(--text-secondary);
+        }
+        
+        .example-rendered {
+          border-color: rgba(255, 255, 255, 0.1);
+        }
       }
     }
   }

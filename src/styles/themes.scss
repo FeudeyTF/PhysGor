@@ -1,35 +1,63 @@
 body.dark-theme {
-  --primary-color: #4361ee;
-  --secondary-color: #4895ef;
-  --accent-color: #a56ef4;
+  --primary-color: #5672ff;
+  --primary-rgb: 86, 114, 255;
+  --secondary-color: #4fa3ff;
+  --accent-color: #b57aff;
+  
   --background-color: #121212;
-  --card-background: #1e1e1e;
-  --text-primary: #e9ecef;
-  --text-secondary: #b7beca;
-  --text-light: #8d99ae;
-  --success-color: #43aa8b;
-  --warning-color: #f9c74f;
-  --danger-color: #e63946;
-  --correct-color: #43aa8b;
-  --incorrect-color: #e63946;
+  --background-light: #1e1e1e;
+  --card-background: #242424;
+  
+  --text-primary: #f8f9fa;
+  --text-secondary: #d0d7de;
+  --text-light: #a0a8b7;
+  
+  --success-color: #4cc38a;
+  --warning-color: #f9cd60;
+  --danger-color: #ff5a65;
+  --correct-color: #4cc38a;
+  --incorrect-color: #ff5a65;
   
   --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  --accent-gradient: linear-gradient(135deg, #a56ef4, #7f38ec);
+  --accent-gradient: linear-gradient(135deg, #b57aff, #8f45e6);
   
-  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  --hover-shadow: 0 14px 45px rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+  --hover-shadow: 0 14px 36px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.9);
   
-  --border-color: #444444;
-  --shadow-color: rgba(67, 97, 238, 0.2);
+  --border-color: #383838;
+  --shadow-color: rgba(86, 114, 255, 0.25);
+  
   --button-bg: var(--primary-color);
   --button-text: #121212;
-  --header-bg: #1e1e1e;
-  --footer-bg: #1e1e1e;
-
-  --background-light: #292929;
-  --card-background: #2a2a2a;
-  --border-color: #444444;
-  --shadow-color: rgba(255, 255, 255, 0.05);
+  --header-bg: #181818;
+  --footer-bg: #181818;
+  
+  --card-hover-bg: #2c2c2c;
+  --input-bg: #1a1a1a;
+  --code-bg: #2d2d2d;
+  --tooltip-bg: rgba(42, 42, 42, 0.95);
+  --highlight-color: rgba(86, 114, 255, 0.15);
+  --scrollbar-thumb: #444;
+  --scrollbar-track: #222;
+  
+  & ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  & ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 5px;
+  }
+  
+  & ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 5px;
+    
+    &:hover {
+      background: #555;
+    }
+  }
 }
 
 body {
