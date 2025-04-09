@@ -33,7 +33,7 @@ export function Footer() {
             <h4>Связаться</h4>
             <div className="social-icons">
               <a
-                href="https://github.com/FeudeyTF"
+                href="https://github.com/FeudeyTF/PhysGor"
                 target="_blank"
                 rel="noopener noreferrer"
               >
