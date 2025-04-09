@@ -3,22 +3,22 @@
 @import '../styles/themes.scss';
 
 :root {
-  --primary-color: #3a7bd5;
-  --secondary-color: #00d2ff;
-  --accent-color: #6b48ff;
+  --primary-color: #4361ee;
+  --secondary-color: #3a86ff;
+  --accent-color: #7209b7;
   --background-color: #f8faff;
-  --background-light: #f9f9f9;
+  --background-light: #f0f4fc;
   --card-background: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-light: #999999;
-  --success-color: #4caf50;
-  --warning-color: #ff9800;
-  --danger-color: #f44336;
-  --correct-color: #4bb543;
-  --incorrect-color: #ff4c4c;
-  --border-color: #e0e0e0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-primary: #2b2d42;
+  --text-secondary: #555b6e;
+  --text-light: #8d99ae;
+  --success-color: #38b000;
+  --warning-color: #f48c06;
+  --danger-color: #e63946;
+  --correct-color: #38b000;
+  --incorrect-color: #e63946;
+  --border-color: #d8e2f3;
+  --shadow-color: rgba(67, 97, 238, 0.1);
   
   --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   --accent-gradient: linear-gradient(135deg, #6b48ff, #9d50bb);
@@ -63,10 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2.5rem;
-  background: var(--primary-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: var(--primary-color);
 }
 
 h2 {

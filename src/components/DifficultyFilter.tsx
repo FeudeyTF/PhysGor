@@ -15,11 +15,11 @@ export function DifficultyFilter({
   const getDifficultyColor = (difficulty: Difficulty) => {
     switch (difficulty) {
       case Difficulty.Easy:
-        return "linear-gradient(135deg, #4CAF50, #8BC34A)";
+        return " #4CAF50";
       case Difficulty.Medium:
-        return "linear-gradient(135deg, #FF9800, #FFEB3B)";
+        return " #FF9800";
       case Difficulty.Hard:
-        return "linear-gradient(135deg, #F44336, #FF5722)";
+        return "#135deg";
       default:
         return "#9E9E9E";
     }

@@ -373,7 +373,7 @@ export function TrainingPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   style={{
-                    background: "linear-gradient(135deg, #ff7170, #ff9b8c)",
+                    background: "#ff7170",
                   }}
                 >
                   Не знаю

@@ -42,7 +42,8 @@
       
       .training-card-back {
         transform: rotateY(180deg);
-        background-color: white;
+        background-color: var(--card-background);
+        border: 1px solid var(--border-color);
         overflow: hidden;
         
         .back-content {
@@ -97,9 +98,10 @@
     .training-card-formula {
       margin-bottom: var(--spacing-lg);
       padding: var(--spacing-md);
-      background-color: #f5faff;
+      background-color: rgba(67, 97, 238, 0.08);
       border-radius: var(--border-radius-md);
       border-left: 4px solid var(--primary-color);
+      box-shadow: 0 2px 8px rgba(67, 97, 238, 0.05);
       
       span {
         display: block;

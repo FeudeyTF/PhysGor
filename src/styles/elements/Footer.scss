@@ -18,10 +18,7 @@
       font-size: 1.8rem;
       font-weight: bold;
       margin-right: var(--spacing-sm);
-      background: var(--primary-gradient);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      color: var(--primary-color);
     }
     
     .logo-text {
