@@ -324,8 +324,28 @@
 
 @media (max-width: 768px) {
   .training-page {
+    padding-bottom: var(--spacing-md);
+
+    .page-header {
+      margin-bottom: var(--spacing-lg);
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1rem;
+        padding: 0 var(--spacing-md);
+      }
+    }
+
     .training-setup {
-      padding: var(--spacing-lg);
+      padding: var(--spacing-md);
+      margin: 0 var(--spacing-md);
+
+      h2 {
+        font-size: 1.5rem;
+      }
 
       .filters-grid {
         grid-template-columns: 1fr;
@@ -335,9 +355,22 @@
       .filters-column {
         gap: var(--spacing-md);
       }
+
+      .training-modes {
+        .mode-buttons {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .start-button {
+        width: 100%;
+        font-size: 1rem;
+      }
     }
 
     .training-area {
+      padding: 0 var(--spacing-md);
+
       .stats {
         flex-direction: column;
         gap: var(--spacing-md);
@@ -348,29 +381,159 @@
       }
 
       .training-card-wrapper {
-        height: 350px;
+        height: auto;
+        min-height: 400px;
       }
 
       .controls {
         flex-direction: column;
+
+        button {
+          width: 100%;
+        }
       }
     }
   }
 
-  .matching-card .matching-container {
-    grid-template-columns: 1fr;
+  .matching-card {
+    padding: var(--spacing-md);
+
+    .matching-instructions {
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .matching-container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+
+      .matching-column {
+        .matching-items {
+          .matching-item {
+            min-height: 60px;
+            font-size: 0.95rem;
+            padding: var(--spacing-sm);
+          }
+        }
+      }
+    }
   }
 
   .formula-writing-card {
+    padding: var(--spacing-md);
+
     .law-info {
+      margin-bottom: var(--spacing-lg);
+
       .law-name {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+      }
+
+      .law-description {
+        font-size: 0.95rem;
       }
     }
 
-    .formula-input-container .formula-buttons {
-      flex-direction: column;
+    .formula-input-container {
+      .formula-input {
+        font-size: 1rem;
+      }
+
+      .formula-buttons {
+        flex-direction: column;
+
+        button {
+          margin-bottom: var(--spacing-sm);
+        }
+      }
     }
+
+    .formula-hint {
+      font-size: 0.9rem;
+      padding: var(--spacing-sm);
+    }
+
+    .feedback-message {
+      font-size: 0.95rem;
+
+      .correct-formula {
+        font-size: 0.9rem;
+        word-break: break-all;
+      }
+    }
+  }
+
+  .multiple-choice-card {
+    padding: var(--spacing-md);
+
+    .question-container {
+      margin-bottom: var(--spacing-md);
+
+      .category-badge {
+        font-size: 0.8rem;
+      }
+
+      .question-text {
+        font-size: 1.2rem;
+      }
+    }
+
+    .options-container {
+      max-height: 350px;
+
+      .option-button {
+        padding: var(--spacing-sm);
+        font-size: 0.9rem;
+      }
+    }
+
+    .feedback-message {
+      padding: var(--spacing-sm);
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .training-page {
+    .training-setup {
+      padding: var(--spacing-sm);
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .training-area {
+      .training-card-wrapper {
+        min-height: 450px;
+      }
+    }
+  }
+
+  .matching-card .matching-instructions h2,
+  .formula-writing-card .law-info .law-name,
+  .multiple-choice-card .question-container .question-text {
+    font-size: 1.1rem;
+  }
+
+  .formula-writing-card .formula-input {
+    font-size: 0.9rem !important;
+  }
+
+  .formula-writing-card .formula-hint,
+  .multiple-choice-card .options-container .option-button,
+  .matching-card .matching-container .matching-column .matching-items .matching-item {
+    font-size: 0.85rem;
   }
 }
 
