@@ -61,7 +61,7 @@ export function TrainingCard(props: TrainingCardProps) {
             )}
 
             <div className="training-card-meta">
-              {law.discoveredBy && <p>Закон открыл: {law.discoveredBy}</p>}
+              {law.discoveredBy && <p>Закон открыл: {law.discoveredBy || "Не указано"}</p>}
               {law.year && <p>Год открытия: {law.year}</p>}
             </div>
           </div>

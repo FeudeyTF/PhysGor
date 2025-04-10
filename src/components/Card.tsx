@@ -118,7 +118,7 @@ export function Card(props: CardProps) {
           )}
 
           <div className="card-meta">
-            {law.discoveredBy && <p>Закон открыл: {law.discoveredBy}</p>}
+            <p>Закон открыл: {law.discoveredBy || "Не указано"}</p>
           </div>
         </div>
       </div>
