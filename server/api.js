@@ -72,8 +72,21 @@ app.post('/api/laws', requireAuth, async (req, res) => {
     if (!newLaw.name || !newLaw.description || !newLaw.category) {
       return res.status(400).json({
         success: false,
-        message: 'Имя, описание, и категория обязательны!'
+        message: 'Имя, описание и категория обязательны!'
       });
+    }
+
+    if (newLaw.notes && newLaw.notes.length > 0) {
+      const hasInvalidNote = newLaw.notes.some(
+        note => !note.title || !note.text
+      );
+      
+      if (hasInvalidNote) {
+        return res.status(400).json({
+          success: false,
+          message: 'Все примечания должны иметь название и текст!'
+        });
+      }
     }
 
     const data = await fs.readFile(config.lawsFilePath);
@@ -129,8 +142,21 @@ app.put('/api/laws/:id', requireAuth, async (req, res) => {
     if (!updatedLaw.name || !updatedLaw.description || !updatedLaw.category) {
       return res.status(400).json({
         success: false,
-        message: 'Имя, описание, и категория обязательны!'
+        message: 'Имя, описание и категория обязательны!'
       });
+    }
+
+    if (updatedLaw.notes && updatedLaw.notes.length > 0) {
+      const hasInvalidNote = updatedLaw.notes.some(
+        note => !note.title || !note.text
+      );
+      
+      if (hasInvalidNote) {
+        return res.status(400).json({
+          success: false,
+          message: 'Все примечания должны иметь название и текст!'
+        });
+      }
     }
 
     const data = await fs.readFile(config.lawsFilePath);

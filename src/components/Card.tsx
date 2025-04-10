@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { difficultyToColor } from "../types/Difficulty";
-import { FaBook, FaTrash, FaEdit } from "react-icons/fa";
+import { FaBook, FaTrash, FaEdit, FaTags } from "react-icons/fa";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
@@ -95,6 +95,19 @@ export function Card(props: CardProps) {
         <div className="card-content">
           <div className="card-description">
             <div dangerouslySetInnerHTML={{ __html: law.description }} />
+            
+            {law.notes && law.notes.length > 0 && (
+              <div className="noted-texts">
+                {law.notes.map((note, index) => (
+                  <div key={index} className="noted-text">
+                    <div className="noted-text-header">
+                      <FaTags /> <span>{note.title}</span>
+                    </div>
+                    <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {law.formula && (

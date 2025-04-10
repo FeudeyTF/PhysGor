@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
+import { FaTags } from "react-icons/fa";
 
 type TrainingCardProps = {
   law: PhysicsLaw;
@@ -37,6 +38,19 @@ export function TrainingCard(props: TrainingCardProps) {
 
             <div className="training-card-description">
               <p>{law.description}</p>
+              
+              {law.notes && law.notes.length > 0 && (
+                <div className="noted-texts">
+                  {law.notes.map((note, index) => (
+                    <div key={index} className="noted-text">
+                      <div className="noted-text-header">
+                        <FaTags /> <span>{note.title}</span>
+                      </div>
+                      <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {law.formula && (

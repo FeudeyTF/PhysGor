@@ -5,6 +5,7 @@ import { Difficulty } from "../types/Difficulty";
 import { RichTextEditor } from "../components/RichTextEditor";
 import { ModalWindow } from "./Modal";
 import { FormulaParser } from "../components/FormulaParser";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
 type EditLawFormProps = {
   law: PhysicsLaw;
@@ -20,6 +21,7 @@ export function EditLawForm(props: EditLawFormProps) {
   const [formData, setFormData] = useState<Omit<PhysicsLaw, "id">>({
     name: law.name,
     description: law.description,
+    notes: law.notes || [],
     formula: law.formula || "",
     category: law.category,
     difficulty: law.difficulty,
@@ -30,6 +32,9 @@ export function EditLawForm(props: EditLawFormProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showNotes, setShowNotes] = useState(
+    Boolean(law.notes && law.notes.length > 0)
+  );
 
   const handleChange = (
     e: ChangeEvent<
@@ -41,10 +46,8 @@ export function EditLawForm(props: EditLawFormProps) {
     let parsedValue: any = value;
     if (name === "category") {
       parsedValue = value as PhysicsCategory;
-      console.log(`Setting category to: ${value}`);
     } else if (name === "difficulty") {
       parsedValue = value as Difficulty;
-      console.log(`Setting difficulty to: ${value}`);
     } else if (name === "class" || name === "year") {
       parsedValue = parseInt(value, 10);
     }
@@ -70,6 +73,48 @@ export function EditLawForm(props: EditLawFormProps) {
     }
   };
 
+  const handleNoteChange = (index: number, field: 'title' | 'text', value: string) => {
+    setFormData((prev) => {
+      const newNotes = [...(prev.notes || [])];
+      if (newNotes[index]) {
+        newNotes[index] = { ...newNotes[index], [field]: value };
+      }
+      return {
+        ...prev,
+        notes: newNotes,
+      };
+    });
+  };
+
+  const addNote = () => {
+    setFormData((prev) => ({
+      ...prev,
+      notes: [...(prev.notes || []), { title: "", text: "" }],
+    }));
+  };
+
+  const removeNote = (index: number) => {
+    setFormData((prev) => {
+      const newNotes = [...(prev.notes || [])];
+      newNotes.splice(index, 1);
+      return {
+        ...prev,
+        notes: newNotes,
+      };
+    });
+  };
+
+  const toggleNotes = () => {
+    setShowNotes(!showNotes);
+    
+    if (!showNotes && (!formData.notes || formData.notes.length === 0)) {
+      setFormData((prev) => ({
+        ...prev,
+        notes: [{ title: "", text: "" }],
+      }));
+    }
+  };
+
   const validate = () => {
     const newErrors: Record<string, string> = {};
 
@@ -79,6 +124,15 @@ export function EditLawForm(props: EditLawFormProps) {
 
     if (!formData.description.trim()) {
       newErrors.description = "Описание закона обязательно";
+    }
+
+    if (showNotes && formData.notes && formData.notes.length > 0) {
+      const invalidIndex = formData.notes.findIndex(
+        (item) => !item.title.trim() || !item.text.trim()
+      );
+      if (invalidIndex >= 0) {
+        newErrors.notes = "Все названия и тексты должны быть заполнены";
+      }
     }
 
     if (formData.class < 1 || formData.class > 11) {
@@ -98,11 +152,15 @@ export function EditLawForm(props: EditLawFormProps) {
 
     try {
       if (!law.id) {
-        throw new Error("Cannot update law without ID");
+        throw new Error("Нельзя обновить закон без ID");
       }
 
-      console.log("Submitting form with data:", formData);
-      const result = await onSubmit(law.id, formData);
+      const dataToSubmit = {
+        ...formData,
+        notes: showNotes ? formData.notes : [],
+      };
+
+      const result = await onSubmit(law.id, dataToSubmit);
       if (result.success) {
         onCancel();
       } else {
@@ -116,6 +174,7 @@ export function EditLawForm(props: EditLawFormProps) {
         ...prev,
         submit: "Произошла ошибка при отправке",
       }));
+      console.log(err);
     } finally {
       setIsSubmitting(false);
     }
@@ -144,6 +203,7 @@ export function EditLawForm(props: EditLawFormProps) {
           placeholder="Например: Закон Ома для участка цепи"
         />
       </ModalWindow.Group>
+
       <ModalWindow.Group title="Описание*" error={errors.description}>
         <RichTextEditor
           value={formData.description}
@@ -153,6 +213,62 @@ export function EditLawForm(props: EditLawFormProps) {
           rows={4}
         />
       </ModalWindow.Group>
+      
+      <div className="text-mode-toggle">
+        <label>
+          <div className="toggle-checkbox">
+            <input 
+              type="checkbox" 
+              checked={showNotes}
+              onChange={toggleNotes}
+            />
+            <span className="toggle-switch"></span>
+          </div>
+          <span className="toggle-text">
+            Добавить примечания
+          </span>
+        </label>
+      </div>
+
+      {showNotes && (
+        <ModalWindow.Group title="Примечания" error={errors.notes}>
+          {formData.notes && formData.notes.map((note, index) => (
+            <div key={index} className="noted-text-editor">
+              <div className="noted-text-header">
+                <div className="title-input-container">
+                  <input
+                    type="text"
+                    placeholder="Название"
+                    value={note.title}
+                    onChange={(e) => handleNoteChange(index, 'title', e.target.value)}
+                  />
+                </div>
+                <button 
+                  type="button" 
+                  className="remove-noted-text-button"
+                  onClick={() => removeNote(index)}
+                >
+                  <FaTrash />
+                </button>
+              </div>
+              <RichTextEditor
+                value={note.text}
+                onChange={(value) => handleNoteChange(index, 'text', value)}
+                placeholder="Текст примечания..."
+                rows={3}
+              />
+            </div>
+          ))}
+          <button 
+            type="button" 
+            className="add-noted-text-button"
+            onClick={addNote}
+          >
+            <FaPlus /> Добавить примечание
+          </button>
+        </ModalWindow.Group>
+      )}
+      
       <ModalWindow.Group title="Формула (необязательно)" error={errors.formula}>
         <input
           type="text"
