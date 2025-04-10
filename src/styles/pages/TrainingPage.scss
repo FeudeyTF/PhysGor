@@ -1,3 +1,5 @@
+@import '../base.scss';
+
 .training-page {
   padding-bottom: var(--spacing-xl);
 
@@ -74,11 +76,9 @@
       margin: var(--spacing-lg) 0;
       text-align: left;
 
-      .filter-container {
-        h3 {
-          font-size: 1rem;
-          color: var(--text-secondary);
-        }
+      .filter-container h3 {
+        font-size: 1rem;
+        color: var(--text-secondary);
       }
     }
 
@@ -322,226 +322,9 @@
   }
 }
 
-@media (max-width: 768px) {
-  .training-page {
-    padding-bottom: var(--spacing-md);
-
-    .page-header {
-      margin-bottom: var(--spacing-lg);
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      p {
-        font-size: 1rem;
-        padding: 0 var(--spacing-md);
-      }
-    }
-
-    .training-setup {
-      padding: var(--spacing-md);
-      margin: 0 var(--spacing-md);
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .filters-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-      }
-
-      .filters-column {
-        gap: var(--spacing-md);
-      }
-
-      .training-modes {
-        .mode-buttons {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .start-button {
-        width: 100%;
-        font-size: 1rem;
-      }
-    }
-
-    .training-area {
-      padding: 0 var(--spacing-md);
-
-      .stats {
-        flex-direction: column;
-        gap: var(--spacing-md);
-
-        .stat {
-          margin: 0;
-        }
-      }
-
-      .training-card-wrapper {
-        height: auto;
-        min-height: 400px;
-      }
-
-      .controls {
-        flex-direction: column;
-
-        button {
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  .matching-card {
-    padding: var(--spacing-md);
-
-    .matching-instructions {
-      h2 {
-        font-size: 1.3rem;
-      }
-
-      p {
-        font-size: 0.9rem;
-      }
-    }
-
-    .matching-container {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-md);
-
-      .matching-column {
-        .matching-items {
-          .matching-item {
-            min-height: 60px;
-            font-size: 0.95rem;
-            padding: var(--spacing-sm);
-          }
-        }
-      }
-    }
-  }
-
-  .formula-writing-card {
-    padding: var(--spacing-md);
-
-    .law-info {
-      margin-bottom: var(--spacing-lg);
-
-      .law-name {
-        font-size: 1.4rem;
-      }
-
-      .law-description {
-        font-size: 0.95rem;
-      }
-    }
-
-    .formula-input-container {
-      .formula-input {
-        font-size: 1rem;
-      }
-
-      .formula-buttons {
-        flex-direction: column;
-
-        button {
-          margin-bottom: var(--spacing-sm);
-        }
-      }
-    }
-
-    .formula-hint {
-      font-size: 0.9rem;
-      padding: var(--spacing-sm);
-    }
-
-    .feedback-message {
-      font-size: 0.95rem;
-
-      .correct-formula {
-        font-size: 0.9rem;
-        word-break: break-all;
-      }
-    }
-  }
-
-  .multiple-choice-card {
-    padding: var(--spacing-md);
-
-    .question-container {
-      margin-bottom: var(--spacing-md);
-
-      .category-badge {
-        font-size: 0.8rem;
-      }
-
-      .question-text {
-        font-size: 1.2rem;
-      }
-    }
-
-    .options-container {
-      max-height: 350px;
-
-      .option-button {
-        padding: var(--spacing-sm);
-        font-size: 0.9rem;
-      }
-    }
-
-    .feedback-message {
-      padding: var(--spacing-sm);
-      font-size: 0.9rem;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .training-page {
-    .training-setup {
-      padding: var(--spacing-sm);
-
-      h2 {
-        font-size: 1.3rem;
-      }
-
-      p {
-        font-size: 0.9rem;
-      }
-    }
-
-    .training-area {
-      .training-card-wrapper {
-        min-height: 450px;
-      }
-    }
-  }
-
-  .matching-card .matching-instructions h2,
-  .formula-writing-card .law-info .law-name,
-  .multiple-choice-card .question-container .question-text {
-    font-size: 1.1rem;
-  }
-
-  .formula-writing-card .formula-input {
-    font-size: 0.9rem !important;
-  }
-
-  .formula-writing-card .formula-hint,
-  .multiple-choice-card .options-container .option-button,
-  .matching-card .matching-container .matching-column .matching-items .matching-item {
-    font-size: 0.85rem;
-  }
-}
-
 .multiple-choice-card {
   height: 100%;
-  background-color: var(--card-background);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--card-shadow);
+  @include card-base;
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
@@ -638,70 +421,9 @@
   }
 }
 
-.dark-theme {
-  .multiple-choice-card {
-    background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-
-    .question-container {
-      .category-badge {
-        background: linear-gradient(135deg, var(--accent-color), #8f45e6);
-        box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
-      }
-
-      .question-text {
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    .options-container {
-      .option-button {
-        background-color: rgba(30, 30, 30, 0.6);
-        border-color: var(--border-color);
-
-        &:hover {
-          background-color: var(--card-hover-bg);
-          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        }
-
-        &.selected {
-          background-color: rgba(var(--primary-rgb), 0.15);
-          border-color: var(--primary-color);
-          box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
-        }
-
-        &.correct {
-          background-color: rgba(76, 195, 138, 0.15);
-          border-color: var(--success-color);
-          box-shadow: 0 0 0 1px var(--success-color), 0 0 10px rgba(76, 195, 138, 0.2);
-        }
-
-        &.incorrect {
-          background-color: rgba(255, 90, 101, 0.15);
-          border-color: var(--danger-color);
-          box-shadow: 0 0 0 1px var(--danger-color), 0 0 10px rgba(255, 90, 101, 0.2);
-        }
-      }
-    }
-
-    .feedback-message {
-      &.correct {
-        background-color: rgba(76, 195, 138, 0.15);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      &.incorrect {
-        background-color: rgba(255, 90, 101, 0.15);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-    }
-  }
-}
-
 .matching-card {
   height: 100%;
-  background-color: var(--card-background);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--card-shadow);
+  @include card-base;
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
@@ -805,65 +527,9 @@
   }
 }
 
-.dark-theme {
-  .matching-card {
-    background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-
-    .matching-instructions {
-      h2 {
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    .matching-container {
-      .matching-column {
-        h3 {
-          color: var(--text-secondary);
-        }
-
-        .matching-items {
-          .matching-item {
-            background-color: rgba(30, 30, 30, 0.6);
-            border-color: var(--border-color);
-
-            &:hover {
-              background-color: var(--card-hover-bg);
-              box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            }
-
-            &.formula {
-              color: var(--primary-color);
-              text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
-            }
-
-            &.selected {
-              background-color: rgba(var(--primary-rgb), 0.15);
-              border-color: var(--primary-color);
-              box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
-            }
-
-            &.matched {
-              background-color: rgba(76, 195, 138, 0.15);
-              border-color: var(--success-color);
-              box-shadow: 0 0 0 1px var(--success-color), 0 0 5px rgba(76, 195, 138, 0.2);
-            }
-          }
-        }
-      }
-    }
-
-    .error-message {
-      background-color: rgba(255, 90, 101, 0.15);
-      border-left-color: var(--danger-color);
-    }
-  }
-}
-
 .formula-writing-card {
   height: 100%;
-  background-color: var(--card-background);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--card-shadow);
+  @include card-base;
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
@@ -1017,119 +683,7 @@
 }
 
 .dark-theme {
-  .formula-writing-card {
-    background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
 
-    .law-info {
-      .category-badge {
-        background: linear-gradient(135deg, var(--accent-color), #8f45e6);
-        box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
-      }
-
-      .law-name {
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    .formula-input-container {
-      label {
-        color: var(--text-secondary);
-      }
-
-      .formula-input {
-        background-color: var(--input-bg);
-        border-color: var(--border-color);
-        color: var(--text-primary);
-
-        &:focus {
-          box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.25);
-        }
-
-        &.correct {
-          background-color: rgba(76, 195, 138, 0.15);
-          border-color: var(--success-color);
-          box-shadow: 0 0 0 1px var(--success-color), 0 0 8px rgba(76, 195, 138, 0.2);
-        }
-
-        &.incorrect {
-          background-color: rgba(255, 90, 101, 0.15);
-          border-color: var(--danger-color);
-          box-shadow: 0 0 0 1px var(--danger-color), 0 0 8px rgba(255, 90, 101, 0.2);
-        }
-      }
-
-      .formula-buttons {
-        button {
-          &.hint-button {
-            background-color: rgba(30, 30, 30, 0.6);
-            color: var(--text-secondary);
-            border-color: var(--border-color);
-
-            &:hover {
-              background-color: var(--card-hover-bg);
-              color: var(--text-primary);
-            }
-          }
-
-          &.check-button {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
-
-            &:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
-            }
-          }
-        }
-      }
-    }
-
-    .formula-hint {
-      background-color: rgba(30, 30, 30, 0.6);
-      border-left-color: var(--primary-color);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-      span {
-        color: var(--primary-color);
-      }
-    }
-
-    .feedback-message {
-      &.correct {
-        background-color: rgba(76, 195, 138, 0.15);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      &.incorrect {
-        background-color: rgba(255, 90, 101, 0.15);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .correct-formula {
-        color: var(--success-color);
-        text-shadow: 0 0 5px rgba(76, 195, 138, 0.3);
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .multiple-choice-card {
-    .options-container {
-      max-height: 250px;
-
-      .option-button {
-        padding: var(--spacing-md);
-        font-size: 0.95rem;
-      }
-    }
-
-    .question-container .question-text {
-      font-size: 1.3rem;
-    }
-  }
-}
-
-.dark-theme {
   .training-page {
     .progress-bar {
       background-color: rgba(86, 114, 255, 0.1);
@@ -1141,42 +695,32 @@
       }
     }
 
-    .stats {
-      .stat {
-        background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        border: 1px solid var(--border-color);
+    .stats .stat {
+      background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
 
-        .stat-label {
-          color: var(--text-light);
-        }
-
-        .stat-value {
-          color: var(--primary-color);
-          text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
-        }
+      .stat-value {
+        text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
       }
     }
 
-    .controls {
-      button {
-        &.next-button {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
+    .controls button {
+      &.next-button {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
 
-          &:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
-          }
+        &:hover {
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
         }
+      }
 
-        &.reset-button {
-          background-color: rgba(30, 30, 30, 0.6);
-          border-color: var(--border-color);
+      &.reset-button {
+        background-color: rgba(30, 30, 30, 0.6);
+        border-color: var(--border-color);
 
-          &:hover {
-            background-color: var(--card-hover-bg);
-            color: var(--text-primary);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-          }
+        &:hover {
+          background-color: var(--card-hover-bg);
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
         }
       }
     }
@@ -1184,36 +728,30 @@
     .training-setup {
       background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
 
-      .filter-controls {
-        .toggle-button {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.3);
+      .filter-controls .toggle-button {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.3);
 
-          &:hover {
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
-          }
+        &:hover {
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
         }
       }
 
-      .training-modes {
-        .mode-buttons {
-          .mode-button {
-            background-color: rgba(30, 30, 30, 0.6);
-            border-color: var(--border-color);
+      .training-modes .mode-buttons .mode-button {
+        background-color: rgba(30, 30, 30, 0.6);
+        border-color: var(--border-color);
 
-            &:hover {
-              background-color: var(--card-hover-bg);
-              border-color: rgba(var(--primary-rgb), 0.3);
-              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            }
+        &:hover {
+          background-color: var(--card-hover-bg);
+          border-color: rgba(var(--primary-rgb), 0.3);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
 
-            &.active {
-              background-color: rgba(var(--primary-rgb), 0.15);
-              border-color: var(--primary-color);
+        &.active {
+          background-color: rgba(var(--primary-rgb), 0.15);
+          border-color: var(--primary-color);
 
-              &::after {
-                box-shadow: 0 0 5px rgba(var(--accent-color), 0.5);
-              }
-            }
+          &::after {
+            box-shadow: 0 0 5px rgba(var(--accent-color), 0.5);
           }
         }
       }
@@ -1232,5 +770,378 @@
       border: 1px dashed var(--border-color);
       border-radius: var(--border-radius-lg);
     }
+  }
+
+  .multiple-choice-card,
+  .matching-card,
+  .formula-writing-card {
+    background: linear-gradient(180deg, var(--card-background) 0%, rgba(42, 42, 42, 0.8) 100%);
+  }
+
+  .multiple-choice-card {
+    .question-container {
+      .category-badge {
+        background: linear-gradient(135deg, var(--accent-color), #8f45e6);
+        box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
+      }
+
+      .question-text {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .options-container .option-button {
+      background-color: rgba(30, 30, 30, 0.6);
+      border-color: var(--border-color);
+
+      &:hover {
+        background-color: var(--card-hover-bg);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+
+      &.selected {
+        background-color: rgba(var(--primary-rgb), 0.15);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
+      }
+
+      &.correct {
+        background-color: rgba(76, 195, 138, 0.15);
+        border-color: var(--success-color);
+        box-shadow: 0 0 0 1px var(--success-color), 0 0 10px rgba(76, 195, 138, 0.2);
+      }
+
+      &.incorrect {
+        background-color: rgba(255, 90, 101, 0.15);
+        border-color: var(--danger-color);
+        box-shadow: 0 0 0 1px var(--danger-color), 0 0 10px rgba(255, 90, 101, 0.2);
+      }
+    }
+
+    .feedback-message {
+
+      &.correct,
+      &.incorrect {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      &.correct {
+        background-color: rgba(76, 195, 138, 0.15);
+      }
+
+      &.incorrect {
+        background-color: rgba(255, 90, 101, 0.15);
+      }
+    }
+  }
+
+  .matching-card {
+    .matching-instructions h2 {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .matching-container .matching-column .matching-items .matching-item {
+      background-color: rgba(30, 30, 30, 0.6);
+      border-color: var(--border-color);
+
+      &:hover {
+        background-color: var(--card-hover-bg);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+
+      &.formula {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+      }
+
+      &.selected {
+        background-color: rgba(var(--primary-rgb), 0.15);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 1px var(--primary-color), 0 0 10px rgba(var(--primary-rgb), 0.2);
+      }
+
+      &.matched {
+        background-color: rgba(76, 195, 138, 0.15);
+        border-color: var(--success-color);
+        box-shadow: 0 0 0 1px var(--success-color), 0 0 5px rgba(76, 195, 138, 0.2);
+      }
+    }
+
+    .error-message {
+      background-color: rgba(255, 90, 101, 0.15);
+    }
+  }
+
+  .formula-writing-card {
+    .law-info {
+      .category-badge {
+        background: linear-gradient(135deg, var(--accent-color), #8f45e6);
+        box-shadow: 0 2px 8px rgba(181, 122, 255, 0.3);
+      }
+
+      .law-name {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .formula-input-container {
+      .formula-input {
+        background-color: var(--input-bg);
+        border-color: var(--border-color);
+
+        &:focus {
+          box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.25);
+        }
+
+        &.correct {
+          background-color: rgba(76, 195, 138, 0.15);
+          border-color: var(--success-color);
+          box-shadow: 0 0 0 1px var(--success-color), 0 0 8px rgba(76, 195, 138, 0.2);
+        }
+
+        &.incorrect {
+          background-color: rgba(255, 90, 101, 0.15);
+          border-color: var(--danger-color);
+          box-shadow: 0 0 0 1px var(--danger-color), 0 0 8px rgba(255, 90, 101, 0.2);
+        }
+      }
+
+      .formula-buttons button {
+        &.hint-button {
+          background-color: rgba(30, 30, 30, 0.6);
+        }
+
+        &.check-button {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.5);
+
+          &:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.5), 0 0 20px rgba(var(--primary-rgb), 0.3);
+          }
+        }
+      }
+    }
+
+    .formula-hint {
+      background-color: rgba(30, 30, 30, 0.6);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+      span {
+        color: var(--primary-color);
+      }
+    }
+
+    .feedback-message {
+
+      &.correct,
+      &.incorrect {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      &.correct {
+        background-color: rgba(76, 195, 138, 0.15);
+      }
+
+      &.incorrect {
+        background-color: rgba(255, 90, 101, 0.15);
+      }
+
+      .correct-formula {
+        color: var(--success-color);
+        text-shadow: 0 0 5px rgba(76, 195, 138, 0.3);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+
+  .training-page {
+    padding-bottom: var(--spacing-md);
+
+    .page-header {
+      margin-bottom: var(--spacing-lg);
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1rem;
+        padding: 0 var(--spacing-md);
+      }
+    }
+
+    .training-setup {
+      padding: var(--spacing-md);
+      margin: 0 var(--spacing-md);
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .filters-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+
+      .filters-column {
+        gap: var(--spacing-md);
+      }
+
+      .training-modes .mode-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .start-button {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+
+    .training-area {
+      padding: 0 var(--spacing-md);
+
+      .stats {
+        flex-direction: column;
+        gap: var(--spacing-md);
+
+        .stat {
+          margin: 0;
+        }
+      }
+
+      .training-card-wrapper {
+        height: auto;
+        min-height: 400px;
+      }
+
+      .controls {
+        flex-direction: column;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .multiple-choice-card {
+    .options-container {
+      max-height: 250px;
+
+      .option-button {
+        padding: var(--spacing-md);
+        font-size: 0.95rem;
+      }
+    }
+
+    .question-container .question-text {
+      font-size: 1.3rem;
+    }
+  }
+
+  .matching-card {
+    padding: var(--spacing-md);
+
+    .matching-instructions {
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .matching-container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+
+      .matching-column .matching-items .matching-item {
+        min-height: 60px;
+        font-size: 0.95rem;
+        padding: var(--spacing-sm);
+      }
+    }
+  }
+
+  .formula-writing-card {
+    padding: var(--spacing-md);
+
+    .law-info {
+      margin-bottom: var(--spacing-lg);
+
+      .law-name {
+        font-size: 1.4rem;
+      }
+
+      .law-description {
+        font-size: 0.95rem;
+      }
+    }
+
+    .formula-input-container {
+      .formula-input {
+        font-size: 1rem;
+      }
+
+      .formula-buttons {
+        flex-direction: column;
+
+        button {
+          margin-bottom: var(--spacing-sm);
+        }
+      }
+    }
+
+    .formula-hint {
+      font-size: 0.9rem;
+      padding: var(--spacing-sm);
+    }
+
+    .feedback-message {
+      font-size: 0.95rem;
+
+      .correct-formula {
+        font-size: 0.9rem;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .training-page {
+    .training-setup {
+      padding: var(--spacing-sm);
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .training-area .training-card-wrapper {
+      min-height: 450px;
+    }
+  }
+
+  .matching-card .matching-instructions h2,
+  .formula-writing-card .law-info .law-name,
+  .multiple-choice-card .question-container .question-text {
+    font-size: 1.1rem;
+  }
+
+  .formula-writing-card .formula-input {
+    font-size: 0.9rem !important;
+  }
+
+  .formula-writing-card .formula-hint,
+  .multiple-choice-card .options-container .option-button,
+  .matching-card .matching-container .matching-column .matching-items .matching-item {
+    font-size: 0.85rem;
   }
 }

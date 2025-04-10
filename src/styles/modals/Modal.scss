@@ -1,3 +1,5 @@
+@import '../base.scss';
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -92,7 +94,6 @@
       .dark-theme & {
         &:hover {
           background-color: rgba(255, 90, 101, 0.15);
-          color: var(--danger-color);
         }
       }
     }
@@ -149,7 +150,6 @@
       .dark-theme & {
         background-color: var(--input-bg);
         border-color: var(--border-color);
-        color: var(--text-primary);
       }
 
       &:focus {
@@ -204,27 +204,27 @@
       display: inline-block;
       width: 40px;
       height: 20px;
-      
+
       input {
         opacity: 0;
         width: 0;
         height: 0;
         margin: 0;
-        
-        &:checked + .toggle-switch {
+
+        &:checked+.toggle-switch {
           background-color: var(--primary-color);
-          
+
           &:before {
             transform: translateX(20px);
             background-color: white;
           }
         }
-        
-        &:focus + .toggle-switch {
+
+        &:focus+.toggle-switch {
           box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.25);
         }
       }
-      
+
       .toggle-switch {
         position: absolute;
         cursor: pointer;
@@ -235,7 +235,7 @@
         background-color: var(--border-color);
         transition: .3s all ease;
         border-radius: 34px;
-        
+
         &:before {
           position: absolute;
           content: "";
@@ -254,15 +254,10 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-xs);
-      
+
       .notes-icon {
         color: var(--primary-color);
       }
-    }
-
-    input[type="checkbox"] {
-      width: auto;
-      margin-right: var(--spacing-xs);
     }
   }
 
@@ -366,7 +361,6 @@
 
     .dark-theme & {
       background-color: rgba(255, 90, 101, 0.1);
-      border-left: 3px solid var(--danger-color);
     }
   }
 
@@ -398,7 +392,6 @@
       .dark-theme & {
         background-color: var(--background-light);
         border-color: var(--border-color);
-        color: var(--text-secondary);
       }
 
       &:hover:not(:disabled) {
@@ -407,7 +400,6 @@
 
         .dark-theme & {
           background-color: #333;
-          color: var(--text-primary);
         }
       }
     }

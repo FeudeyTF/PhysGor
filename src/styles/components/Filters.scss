@@ -1,3 +1,5 @@
+@import '../base.scss';
+
 .filter-container {
   h3 {
     font-size: 1rem;
@@ -50,10 +52,6 @@
     &:not(:last-child) {
       border-bottom: 1px solid var(--border-color);
     }
-
-    .filter-options {
-      max-width: 100%;
-    }
   }
 
   .difficulty-badge {
@@ -100,7 +98,6 @@
       }
     }
   }
-
 }
 
 .dark-theme {
@@ -112,8 +109,7 @@
     .filter-options .filter-option {
       background-color: var(--input-bg);
       border-color: var(--border-color);
-      color: var(--text-secondary);
-
+      
       &:hover {
         background-color: var(--card-hover-bg);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -132,11 +128,7 @@
     }
 
     .difficulty-badge {
-
-      &.easy,
-      &.medium,
-      &.hard,
-      &.very-hard {
+      &.easy, &.medium, &.hard, &.very-hard {
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
       }
     }
@@ -149,14 +141,12 @@
 }
 
 @media (max-width: 768px) {
-  .filter-container {
-    .filter-options {
-      overflow-x: auto;
-      padding-bottom: var(--spacing-sm);
-
-      .filter-option {
-        flex: 0 0 auto;
-      }
+  .filter-container .filter-options {
+    overflow-x: auto;
+    padding-bottom: var(--spacing-sm);
+    
+    .filter-option {
+      flex: 0 0 auto;
     }
   }
 }

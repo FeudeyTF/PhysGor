@@ -21,3 +21,71 @@
         background-color: rgba(0, 0, 0, 0.4);
     }
 }
+
+@mixin card-base {
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    background-color: var(--card-background);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@mixin card-hover {
+    transform: translateY(-4px);
+    box-shadow: var(--hover-shadow);
+}
+
+@mixin noted-text {
+    border-radius: var(--border-radius-md);
+    border-left: 3px solid var(--primary-color);
+    padding: var(--spacing-sm);
+    background-color: rgba(67, 97, 238, 0.03);
+
+    .noted-text-header {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        margin-bottom: var(--spacing-xs);
+        font-weight: 500;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+    }
+
+    .noted-text-content {
+        color: var(--text-secondary);
+    }
+}
+
+@mixin formula-container {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: rgba(67, 97, 238, 0.08);
+    border-radius: var(--border-radius-md);
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 2px 8px rgba(67, 97, 238, 0.05);
+
+    span {
+        display: block;
+        font-weight: 500;
+        margin-bottom: var(--spacing-xs);
+        color: var(--text-primary);
+    }
+
+    .formula-text {
+        font-family: 'Space Grotesk', monospace;
+        font-size: 1.1rem;
+        text-align: center;
+        padding: var(--spacing-sm) 0;
+        color: var(--primary-color);
+    }
+}
+
+@mixin badge-base {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 2;
+}

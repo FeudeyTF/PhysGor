@@ -1,3 +1,5 @@
+@import '../base.scss';
+
 .search-bar {
   position: relative;
   
@@ -42,36 +44,24 @@
   }
 }
 
-.dark-theme {
-  .search-bar {
-    input {
-      background-color: var(--input-bg);
-      border-color: var(--border-color);
-      color: var(--text-primary);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      
-      &:focus {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-      
-      &::placeholder {
-        color: var(--text-light);
-      }
-    }
+.dark-theme .search-bar {
+  input {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     
-    .search-icon {
-      color: var(--text-light);
+    &:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
     }
   }
 }
 
 @media (max-width: 768px) {
-  .search-bar {
-    input {
-      padding: 8px 12px;
-      padding-right: 35px;
-      font-size: 0.9rem;
-    }
+  .search-bar input {
+    padding: 8px 12px;
+    padding-right: 35px;
+    font-size: 0.9rem;
   }
 }
