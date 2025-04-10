@@ -38,10 +38,22 @@
 }
 
 @mixin noted-text {
-    border-radius: var(--border-radius-md);
-    border-left: 3px solid var(--primary-color);
-    padding: var(--spacing-sm);
+    position: relative;
+    margin-bottom: var(--spacing-sm);
     background-color: rgba(67, 97, 238, 0.03);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-sm);
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--primary-color);
+    }
 
     .noted-text-header {
         display: flex;
@@ -63,8 +75,19 @@
     padding: var(--spacing-md);
     background-color: rgba(67, 97, 238, 0.08);
     border-radius: var(--border-radius-md);
-    border-left: 3px solid var(--primary-color);
     box-shadow: 0 2px 8px rgba(67, 97, 238, 0.05);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--primary-color);
+    }
 
     span {
         display: block;

@@ -405,18 +405,34 @@
     border-radius: var(--border-radius-md);
     font-weight: 600;
     margin-top: auto;
-    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+    }
 
     &.correct {
-      background-color: rgba(var(--correct-color), 0.1);
+      background-color: rgba(var(--success-color), 0.1);
       color: var(--success-color);
-      border-left-color: var(--success-color);
+
+      &::before {
+        background-color: var(--success-color);
+      }
     }
 
     &.incorrect {
-      background-color: rgba(var(--incorrect-color), 0.1);
+      background-color: rgba(var(--danger-color), 0.1);
       color: var(--danger-color);
-      border-left-color: var(--danger-color);
+
+      &::before {
+        background-color: var(--danger-color);
+      }
     }
   }
 }
@@ -515,9 +531,20 @@
     color: var(--danger-color);
     font-weight: 500;
     margin-bottom: var(--spacing-md);
-    border-left: 3px solid var(--danger-color);
     background-color: rgba(var(--danger-color), 0.05);
     border-radius: var(--border-radius-sm);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: var(--danger-color);
+    }
   }
 
   .matching-progress {
@@ -645,7 +672,18 @@
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-lg);
     font-family: 'Space Grotesk', monospace;
-    border-left: 3px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: var(--primary-color);
+    }
 
     span {
       font-weight: 600;
@@ -660,18 +698,34 @@
     border-radius: var(--border-radius-md);
     font-weight: 600;
     margin-top: auto;
-    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+    }
 
     &.correct {
       background-color: rgba(var(--success-color), 0.1);
       color: var(--success-color);
-      border-left-color: var(--success-color);
+
+      &::before {
+        background-color: var(--success-color);
+      }
     }
 
     &.incorrect {
       background-color: rgba(var(--danger-color), 0.1);
       color: var(--danger-color);
-      border-left-color: var(--danger-color);
+
+      &::before {
+        background-color: var(--danger-color);
+      }
     }
 
     .correct-formula {
@@ -922,8 +976,23 @@
     }
 
     .formula-hint {
+      padding: var(--spacing-md);
       background-color: rgba(30, 30, 30, 0.6);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: var(--border-radius-md);
+      margin-bottom: var(--spacing-lg);
+      font-family: 'Space Grotesk', monospace;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--primary-color);
+      }
 
       span {
         color: var(--primary-color);

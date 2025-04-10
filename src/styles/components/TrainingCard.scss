@@ -117,7 +117,12 @@
   .training-card-formula {
     @include formula-container;
     margin-bottom: var(--spacing-lg);
-    border-left: 4px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      background-color: var(--primary-color);
+    }
 
     .dark-theme & {
       background-color: rgba(86, 114, 255, 0.1);
