@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { difficultyToColor } from "../types/Difficulty";
-import { FaBook, FaTrash, FaEdit, FaTags } from "react-icons/fa";
+import { FaBook, FaTrash, FaEdit, FaTags, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
@@ -13,6 +14,7 @@ type CardProps = {
 
 export function Card(props: CardProps) {
   const { law, onDelete, onEdit } = props;
+  const [showNotes, setShowNotes] = useState(false);
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -28,6 +30,11 @@ export function Card(props: CardProps) {
     if (onEdit) {
       onEdit(law);
     }
+  };
+
+  const toggleNotes = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowNotes(!showNotes);
   };
 
   return (
@@ -90,16 +97,36 @@ export function Card(props: CardProps) {
             <div dangerouslySetInnerHTML={{ __html: law.description }} />
             
             {law.notes && law.notes.length > 0 && (
-              <div className="noted-texts">
-                {law.notes.map((note, index) => (
-                  <div key={index} className="noted-text">
-                    <div className="noted-text-header">
-                      <FaTags /> <span>{note.title}</span>
-                    </div>
-                    <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
-                  </div>
-                ))}
-              </div>
+              <>
+                <motion.button 
+                  className="notes-toggle-button"
+                  onClick={toggleNotes}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  title={showNotes ? "Скрыть примечания" : "Показать примечания"}
+                >
+                  {showNotes ? <FaChevronUp /> : <FaChevronDown />}
+                  <span>{showNotes ? "Скрыть примечания" : "Показать примечания"} ({law.notes.length})</span>
+                </motion.button>
+                
+                {showNotes && (
+                  <motion.div 
+                    className="noted-texts"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {law.notes.map((note, index) => (
+                      <div key={index} className="noted-text">
+                        <div className="noted-text-header">
+                          <FaTags /> <span>{note.title}</span>
+                        </div>
+                        <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </>
             )}
           </div>
 

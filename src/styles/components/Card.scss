@@ -93,6 +93,33 @@
     line-height: 1.6;
     flex: 1;
 
+    .notes-toggle-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: var(--spacing-md);
+      padding: 8px 12px;
+      border: none;
+      background-color: var(--background-light);
+      color: var(--text-secondary);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: var(--background-light-hover);
+      }
+      
+      .dark-theme & {
+        background-color: rgba(255, 255, 255, 0.1);
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
+
     .noted-texts {
       margin-top: var(--spacing-md);
       display: flex;
