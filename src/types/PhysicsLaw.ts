@@ -16,4 +16,6 @@ export type PhysicsLaw = {
   category: PhysicsCategory;
   difficulty: Difficulty;
   class: number;
+  topic?: string;
+  subtopic?: string;
 };

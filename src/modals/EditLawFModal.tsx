@@ -27,6 +27,8 @@ export function EditLawForm(props: EditLawFormProps) {
     difficulty: law.difficulty,
     class: law.class,
     discoveredBy: law.discoveredBy || "",
+    topic: law.topic || "",
+    subtopic: law.subtopic || "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -61,14 +63,14 @@ export function EditLawForm(props: EditLawFormProps) {
     }
   };
 
-  const handleRichTextChange = (value: string) => {
+  const handleRichTextChange = (field: "description" | "text", value: string) => {
     setFormData((prev) => ({
       ...prev,
-      description: value,
+      [field]: value,
     }));
 
-    if (errors.description) {
-      setErrors((prev) => ({ ...prev, description: "" }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
@@ -206,7 +208,7 @@ export function EditLawForm(props: EditLawFormProps) {
       <ModalWindow.Group title="Описание*" error={errors.description}>
         <RichTextEditor
           value={formData.description}
-          onChange={handleRichTextChange}
+          onChange={(value) => handleRichTextChange("description", value)}
           className={errors.description ? "error" : ""}
           placeholder="Описание закона..."
           rows={4}
@@ -320,6 +322,28 @@ export function EditLawForm(props: EditLawFormProps) {
             value={formData.class}
             onChange={handleChange}
             className={errors.class ? "error" : ""}
+          />
+        </ModalWindow.Group>
+      </ModalWindow.Row>
+      <ModalWindow.Row>
+        <ModalWindow.Group title="Тема">
+          <input
+            type="text"
+            id="topic"
+            name="topic"
+            value={formData.topic}
+            onChange={handleChange}
+            placeholder="Например: Кинематика"
+          />
+        </ModalWindow.Group>
+        <ModalWindow.Group title="Подтема">
+          <input
+            type="text"
+            id="subtopic"
+            name="subtopic"
+            value={formData.subtopic}
+            onChange={handleChange}
+            placeholder="Например: Движение по окружности"
           />
         </ModalWindow.Group>
       </ModalWindow.Row>

@@ -7,6 +7,8 @@ import { CategoryFilter } from "../components/CategoryFilter";
 import { SearchBar } from "../components/SearchBar";
 import { DifficultyFilter } from "../components/DifficultyFilter";
 import { ClassFilter } from "../components/ClassFilter";
+import { TopicFilter } from "../components/TopicFilter";
+import { SubtopicFilter } from "../components/SubtopicFilter";
 import { useLaws } from "../data/Laws";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
@@ -25,6 +27,10 @@ export function HomePage() {
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string | null>(null);
+  const [topics, setTopics] = useState<string[]>([]);
+  const [subtopics, setSubtopics] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState<{
@@ -37,6 +43,16 @@ export function HomePage() {
   useEffect(() => {
     if (!loading && laws.length > 0) {
       setFilteredLaws(laws);
+
+      const uniqueTopics = Array.from(
+        new Set(laws.filter(law => law.topic).map(law => law.topic as string))
+      );
+      setTopics(uniqueTopics);
+
+      const uniqueSubtopics = Array.from(
+        new Set(laws.filter(law => law.subtopic).map(law => law.subtopic as string))
+      );
+      setSubtopics(uniqueSubtopics);
     }
   }, [loading, laws]);
 
@@ -61,6 +77,14 @@ export function HomePage() {
       filtered = filtered.filter((law) => law.class === selectedClass);
     }
 
+    if (selectedTopic) {
+      filtered = filtered.filter((law) => law.topic === selectedTopic);
+    }
+
+    if (selectedSubtopic) {
+      filtered = filtered.filter((law) => law.subtopic === selectedSubtopic);
+    }
+
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -76,6 +100,8 @@ export function HomePage() {
     selectedCategory,
     selectedDifficulty,
     selectedClass,
+    selectedTopic,
+    selectedSubtopic,
     searchQuery,
     laws,
     loading,
@@ -83,6 +109,8 @@ export function HomePage() {
 
   const handleCategorySelect = (category: PhysicsCategory | null) => {
     setSelectedCategory(category);
+    setSelectedTopic(null);
+    setSelectedSubtopic(null);
   };
 
   const handleDifficultySelect = (difficulty: Difficulty | null) => {
@@ -91,6 +119,15 @@ export function HomePage() {
 
   const handleClassSelect = (schoolClass: number | null) => {
     setSelectedClass(schoolClass);
+  };
+
+  const handleTopicSelect = (topic: string | null) => {
+    setSelectedTopic(topic);
+    setSelectedSubtopic(null);
+  };
+
+  const handleSubtopicSelect = (subtopic: string | null) => {
+    setSelectedSubtopic(subtopic);
   };
 
   const handleSearch = (query: string) => {
@@ -304,6 +341,20 @@ export function HomePage() {
                     selectedClass={selectedClass}
                     onSelectClass={handleClassSelect}
                   />
+                  {topics.length > 0 && (
+                    <TopicFilter
+                      topics={topics}
+                      selectedTopic={selectedTopic}
+                      onSelectTopic={handleTopicSelect}
+                    />
+                  )}
+                  {subtopics.length > 0 && (
+                    <SubtopicFilter
+                      subtopics={subtopics}
+                      selectedSubtopic={selectedSubtopic}
+                      onSelectSubtopic={handleSubtopicSelect}
+                    />
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>

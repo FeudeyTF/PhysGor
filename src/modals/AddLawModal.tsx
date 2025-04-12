@@ -24,6 +24,8 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
     difficulty: Difficulty.Medium,
     class: 7,
     discoveredBy: "",
+    topic: "",
+    subtopic: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -308,6 +310,28 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
             value={formData.class}
             onChange={handleChange}
             className={errors.class ? "error" : ""}
+          />
+        </ModalWindow.Group>
+      </ModalWindow.Row>
+      <ModalWindow.Row>
+        <ModalWindow.Group title="Тема">
+          <input
+            type="text"
+            id="topic"
+            name="topic"
+            value={formData.topic}
+            onChange={handleChange}
+            placeholder="Например: Кинематика"
+          />
+        </ModalWindow.Group>
+        <ModalWindow.Group title="Подтема">
+          <input
+            type="text"
+            id="subtopic"
+            name="subtopic"
+            value={formData.subtopic}
+            onChange={handleChange}
+            placeholder="Например: Движение по окружности"
           />
         </ModalWindow.Group>
       </ModalWindow.Row>
