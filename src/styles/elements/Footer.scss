@@ -4,6 +4,8 @@
   background-color: var(--card-background);
   padding: var(--spacing-xl) 0;
   border-top: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
 
   .footer-container {
     max-width: 1200px;

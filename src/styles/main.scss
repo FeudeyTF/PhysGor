@@ -99,6 +99,7 @@ button {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 .main-content {
@@ -108,6 +109,7 @@ button {
   margin: 0 auto;
   width: 100%;
   padding-top: 80px;
+  position: relative;
 }
 
 .container {
@@ -155,6 +157,7 @@ button {
 @include meta.load-css("./components/TrainingCard.scss");
 @include meta.load-css("./components/Filters.scss");
 @include meta.load-css("./components/ThemeToggle.scss");
+@include meta.load-css("./components/FloatingFormulas.scss");
 
 /* Стили элементов */
 
