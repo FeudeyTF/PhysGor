@@ -39,21 +39,6 @@ export function Card(props: CardProps) {
       whileHover={{ scale: 1.02 }}
     >
       <div className="card">
-        {law.difficulty && (
-          <div
-            className="difficulty-badge"
-            style={{ backgroundColor: difficultyToColor(law.difficulty) }}
-          >
-            {law.difficulty}
-          </div>
-        )}
-
-        {law.year && (
-          <div className="year-badge">
-            <span>{law.year}</span>
-          </div>
-        )}
-
         {law.class && (
           <div className="class-badge">
             <FaBook />
@@ -62,6 +47,14 @@ export function Card(props: CardProps) {
         )}
 
         <div className="card-actions">
+          {law.difficulty && (
+            <div
+              className="difficulty-badge"
+              style={{ backgroundColor: difficultyToColor(law.difficulty) }}
+            >
+              {law.difficulty}
+            </div>
+          )}
           {onDelete && law.id && (
             <motion.button
               className="delete-button"

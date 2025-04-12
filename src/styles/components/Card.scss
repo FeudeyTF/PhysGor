@@ -27,20 +27,10 @@
     }
   }
 
-  .year-badge, .difficulty-badge {
-    position: absolute;
-    top: 12px;
+  .difficulty-badge {
     @include badge-base;
     color: white;
-  }
-
-  .year-badge {
-    right: 12px;
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-
-  .difficulty-badge {
-    right: 80px;
+    text-align: center;
   }
 
   .class-badge {
@@ -131,11 +121,12 @@
   }
 
   .card-actions {
-    position: absolute;
-    top: 75px;
+    position: absolute;    
+    top: 12px;
     right: 10px;
     z-index: 3;
     display: flex;
+    align-items: center;
     gap: 8px;
 
     .delete-button,

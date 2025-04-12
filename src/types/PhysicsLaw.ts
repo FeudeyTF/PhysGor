@@ -12,7 +12,6 @@ export type PhysicsLaw = {
   description: string;
   notes?: Note[];
   formula?: string;
-  year?: number;
   discoveredBy?: string;
   category: PhysicsCategory;
   difficulty: Difficulty;

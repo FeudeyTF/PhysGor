@@ -23,7 +23,6 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
     category: PhysicsCategory.Mechanics,
     difficulty: Difficulty.Medium,
     class: 7,
-    year: new Date().getFullYear(),
     discoveredBy: "",
   });
 
@@ -41,7 +40,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
       parsedValue = value as PhysicsCategory;
     } else if (name === "difficulty") {
       parsedValue = value as Difficulty;
-    } else if (name === "class" || name === "year") {
+    } else if (name === "class") {
       parsedValue = parseInt(value, 10);
     }
 
@@ -309,15 +308,6 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
             value={formData.class}
             onChange={handleChange}
             className={errors.class ? "error" : ""}
-          />
-        </ModalWindow.Group>
-        <ModalWindow.Group title="Год открытия">
-          <input
-            type="number"
-            id="year"
-            name="year"
-            value={formData.year || ""}
-            onChange={handleChange}
           />
         </ModalWindow.Group>
       </ModalWindow.Row>
