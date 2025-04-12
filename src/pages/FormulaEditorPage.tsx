@@ -16,6 +16,7 @@ export function FormulaEditorPage() {
     "v = v_0 + at",
     "F = ma",
     "\\DeltaE = h\\nu",
+    "\\vec{F} = m\\vec{a}",
   ];
 
   const symbolReference = {
@@ -93,6 +94,8 @@ export function FormulaEditorPage() {
       { code: "x_1", description: "Нижний индекс" },
       { code: "(a/b)", description: "Дробь" },
       { code: "\\sqrt{x}", description: "Квадратный корень" },
+      { code: "\\vec{x}", description: "Вектор" },
+      { code: "\\vec F", description: "Вектор (короткая запись)" },
     ],
   };
 
@@ -141,6 +144,9 @@ export function FormulaEditorPage() {
           </li>
           <li>
             <code>\times, \div, \pm, ...</code> - для математических символов
+          </li>
+          <li>
+            <code>\vec{"{x}"}</code> или <code>\vecx</code> - для векторов со стрелкой
           </li>
         </ul>
         <motion.button
