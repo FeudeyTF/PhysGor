@@ -68,18 +68,36 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
         break;
       case QuestionType.Author:
         correctAnswer = law.discoveredBy || "";
-        possibleOptions = allLaws
-          .filter((l) => l.discoveredBy && l.id !== law.id)
-          .map((l) => l.discoveredBy || "");
+        possibleOptions = Array.from(
+          new Set(
+            allLaws
+              .filter((l) => l.discoveredBy && l.id !== law.id && l.discoveredBy !== correctAnswer)
+              .map((l) => l.discoveredBy || "")
+          )
+        );
         break;
     }
-    possibleOptions = Array.from(new Set(possibleOptions));
+
+    if (randomType !== QuestionType.Author) {
+      possibleOptions = Array.from(new Set(possibleOptions));
+    }
 
     const wrongOptions = possibleOptions
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
 
-    const allOptions = [...wrongOptions, correctAnswer];
+    let allOptions = [...wrongOptions, correctAnswer];
+    allOptions = Array.from(new Set(allOptions));
+
+    if (allOptions.length < 4 && possibleOptions.length >= 4) {
+      const additionalOptions = possibleOptions
+        .filter(opt => !allOptions.includes(opt))
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4 - allOptions.length);
+
+      allOptions.push(...additionalOptions);
+    }
+
     setOptions(allOptions.sort(() => 0.5 - Math.random()));
   }, [allLaws, law]);
 
