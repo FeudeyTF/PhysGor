@@ -306,7 +306,7 @@ export function HomePage() {
               {isAuthenticated && (
                 <motion.button
                   className="toggle-button"
-                  style={{ backgroundColor: "#00ff7b" }}
+                  style={{ backgroundColor: "#38b000" }}
                   onClick={() => setIsAddLawFormVisible(true)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
