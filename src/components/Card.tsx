@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { difficultyToColor } from "../types/Difficulty";
-import { FaBook, FaTrash, FaEdit, FaTags, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaBook, FaTrash, FaEdit, FaBookmark, FaStickyNote } from "react-icons/fa";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 
@@ -14,7 +14,7 @@ type CardProps = {
 
 export function Card(props: CardProps) {
   const { law, onDelete, onEdit } = props;
-  const [showNotes, setShowNotes] = useState(false);
+  const [activeNotes, setActiveNotes] = useState<boolean[]>([]);
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -32,9 +32,13 @@ export function Card(props: CardProps) {
     }
   };
 
-  const toggleNotes = (e: React.MouseEvent) => {
+  const toggleNote = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
-    setShowNotes(!showNotes);
+    setActiveNotes(prev => {
+      const newActiveNotes = [...prev];
+      newActiveNotes[index] = !newActiveNotes[index];
+      return newActiveNotes;
+    });
   };
 
   return (
@@ -97,36 +101,34 @@ export function Card(props: CardProps) {
             <div dangerouslySetInnerHTML={{ __html: law.description }} />
             
             {law.notes && law.notes.length > 0 && (
-              <>
-                <motion.button 
-                  className="notes-toggle-button"
-                  onClick={toggleNotes}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  title={showNotes ? "Скрыть примечания" : "Показать примечания"}
-                >
-                  {showNotes ? <FaChevronUp /> : <FaChevronDown />}
-                  <span>{showNotes ? "Скрыть примечания" : "Показать примечания"} ({law.notes.length})</span>
-                </motion.button>
-                
-                {showNotes && (
-                  <motion.div 
-                    className="noted-texts"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {law.notes.map((note, index) => (
-                      <div key={index} className="noted-text">
+              <div className="note-buttons-container">
+                {law.notes.map((note, index) => (
+                  <div key={index} className="note-item">
+                    <motion.button
+                      className={`note-button ${activeNotes[index] ? 'active' : ''}`}
+                      onClick={(e) => toggleNote(e, index)}
+                      title={note.title}
+                    >
+                      <FaStickyNote />
+                      <span>Примечание {index + 1}</span>
+                    </motion.button>
+                    
+                    {activeNotes[index] && (
+                      <motion.div
+                        className="note-content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="noted-text-header">
-                          <FaTags /> <span>{note.title}</span>
+                          <FaBookmark /> <span>{note.title}</span>
                         </div>
                         <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
-              </>
+                      </motion.div>
+                    )}
+                  </div>
+                ))}
+              </div>
             )}
           </div>
 

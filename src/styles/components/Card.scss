@@ -93,6 +93,75 @@
     line-height: 1.6;
     flex: 1;
 
+    .note-buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: var(--spacing-md);
+    }
+
+    .note-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .note-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background-color: var(--accent-color, #3f51b5);
+      color: white;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      
+      &.active {
+        background-color: var(--primary-color, #1976d2);
+      }
+
+      span {
+        position: relative;
+        top: 1px;
+      }
+    }
+
+    .note-content {
+      background-color: var(--background-lightest);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-xs);
+      border-left: 4px solid var(--primary-color, #1976d2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      
+      .dark-theme & {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .noted-text-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        color: var(--primary-color, #1976d2);
+        margin-bottom: var(--spacing-xs);
+        font-size: 1.05rem;
+      }
+
+      .noted-text-content {
+        color: var(--text-primary);
+      }
+    }
+
     .notes-toggle-button {
       display: flex;
       align-items: center;

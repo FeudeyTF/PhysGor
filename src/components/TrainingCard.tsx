@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
-import { FaTags, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaStickyNote, FaBookmark } from "react-icons/fa";
 
 type TrainingCardProps = {
   law: PhysicsLaw;
@@ -12,15 +12,41 @@ type TrainingCardProps = {
 export function TrainingCard(props: TrainingCardProps) {
   const { law } = props;
   const [isFlipped, setIsFlipped] = useState(false);
-  const [showNotes, setShowNotes] = useState(false);
+  const [activeNotes, setActiveNotes] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    if (law.notes && law.notes.length > 0) {
+      setActiveNotes(new Array(law.notes.length).fill(false));
+    } else {
+      setActiveNotes([]);
+    }
+  }, [law]);
+  
+  useEffect(() => {
+    if (isFlipped && law.notes && law.notes.length > 0) {
+      const timerId = setTimeout(() => {
+        setActiveNotes(prev => {
+          const newActiveNotes = [...prev];
+          newActiveNotes[0] = true;
+          return newActiveNotes;
+        });
+      }, 500);
+      
+      return () => clearTimeout(timerId);
+    }
+  }, [isFlipped, law.notes]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
-  const toggleNotes = (e: React.MouseEvent) => {
+  const toggleNote = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
-    setShowNotes(!showNotes);
+    setActiveNotes(prev => {
+      const newActiveNotes = [...prev];
+      newActiveNotes[index] = !newActiveNotes[index];
+      return newActiveNotes;
+    });
   };
 
   return (
@@ -47,36 +73,36 @@ export function TrainingCard(props: TrainingCardProps) {
               <p>{law.description}</p>
               
               {law.notes && law.notes.length > 0 && (
-                <>
-                  <motion.button 
-                    className="notes-toggle-button"
-                    onClick={toggleNotes}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    title={showNotes ? "Скрыть примечания" : "Показать примечания"}
-                  >
-                    {showNotes ? <FaChevronUp /> : <FaChevronDown />}
-                    <span>{showNotes ? "Скрыть примечания" : "Показать примечания"} ({law.notes.length})</span>
-                  </motion.button>
-                  
-                  {showNotes && (
-                    <motion.div 
-                      className="noted-texts"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {law.notes.map((note, index) => (
-                        <div key={index} className="noted-text">
+                <div className="note-buttons-container">
+                  {law.notes.map((note, index) => (
+                    <div key={index} className="note-item">
+                      <motion.button
+                        className={`note-button ${activeNotes[index] ? 'active' : ''}`}
+                        onClick={(e) => toggleNote(e, index)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        title={note.title}
+                      >
+                        <FaStickyNote />
+                        <span>Примечание {index + 1}</span>
+                      </motion.button>
+                      
+                      {activeNotes[index] && (
+                        <motion.div
+                          className="note-content"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          transition={{ duration: 0.3 }}
+                        >
                           <div className="noted-text-header">
-                            <FaTags /> <span>{note.title}</span>
+                            <FaBookmark /> <span>{note.title}</span>
                           </div>
                           <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </>
+                        </motion.div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
 
