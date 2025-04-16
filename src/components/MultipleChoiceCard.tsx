@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
+import { RichTextRenderer } from "./RichTextRenderer";
 
 enum QuestionType {
   Formula,
@@ -183,7 +184,7 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
             {questionType === QuestionType.Formula ? (
               <FormulaParser formula={option} />
             ) : (
-              option
+              <RichTextRenderer html={option} /> 
             )}
           </motion.button>
         ))}

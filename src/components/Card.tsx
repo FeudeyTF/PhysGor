@@ -5,6 +5,7 @@ import { difficultyToColor } from "../types/Difficulty";
 import { FaBook, FaTrash, FaEdit, FaBookmark, FaStickyNote } from "react-icons/fa";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
+import { RichTextRenderer } from "./RichTextRenderer";
 
 type CardProps = {
   law: PhysicsLaw;
@@ -98,7 +99,7 @@ export function Card(props: CardProps) {
 
         <div className="card-content">
           <div className="card-description">
-            <div dangerouslySetInnerHTML={{ __html: law.description }} />
+            <RichTextRenderer html={law.description} />
             
             {law.notes && law.notes.length > 0 && (
               <div className="note-buttons-container">
@@ -123,7 +124,9 @@ export function Card(props: CardProps) {
                         <div className="noted-text-header">
                           <FaBookmark /> <span>{note.title}</span>
                         </div>
-                        <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
+                        <div className="noted-text-content">
+                          <RichTextRenderer html={note.text} />
+                        </div>
                       </motion.div>
                     )}
                   </div>

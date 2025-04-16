@@ -1,0 +1,140 @@
+.rich-text-renderer {
+    line-height: 1.5;
+    color: var(--text-primary);
+
+    p {
+        margin: 0 0 10px 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul,
+    ol {
+        margin: 0 0 10px 0;
+        padding-left: 20px;
+    }
+
+    code {
+        background-color: rgba(var(--primary-rgb), 0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: var(--border-radius-sm);
+        font-family: 'Space Grotesk', monospace;
+        color: var(--primary-color);
+        font-size: 0.9em;
+    }
+
+    blockquote {
+        border-left: 3px solid var(--border-color);
+        margin-left: 0;
+        padding-left: 16px;
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    .formula-wrapper {
+        display: inline-block;
+        background-color: rgba(var(--primary-rgb), 0.1);
+        border-radius: var(--border-radius-sm);
+        padding: 2px 6px;
+        margin: 0 2px;
+        vertical-align: middle;
+        user-select: none;
+
+        .formula-display {
+            font-family: 'Space Grotesk', 'Times New Roman', Times, serif;
+            font-style: italic;
+            color: var(--primary-color);
+
+            .formula-fraction {
+                display: inline-flex;
+                flex-direction: column;
+                vertical-align: middle;
+                text-align: center;
+                margin: 0 0.2rem;
+
+                .formula-numerator {
+                    border-bottom: 1px solid var(--text-primary);
+                    padding: 0 0.2rem;
+                }
+
+                .formula-denominator {
+                    padding: 0 0.2rem;
+                }
+            }
+
+            .formula-subscript {
+                display: inline-block;
+                font-size: 0.7em;
+                vertical-align: sub;
+                position: relative;
+                bottom: -0.2em;
+                margin-left: 0.05em;
+                color: var(--text-primary);
+            }
+
+            .formula-superscript {
+                display: inline-block;
+                font-size: 0.7em;
+                vertical-align: super;
+                position: relative;
+                top: 0;
+                margin-left: 0.05em;
+                color: var(--text-primary);
+            }
+
+            .formula-vector {
+                display: inline-block;
+                position: relative;
+
+                &::before {
+                    content: "→";
+                    position: absolute;
+                    top: -0.6em;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 0.7em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.dark-theme {
+    .rich-text-renderer {
+        color: var(--text-primary);
+
+        code {
+            background-color: rgba(var(--primary-rgb), 0.15);
+            color: var(--primary-color);
+            text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+        }
+
+        blockquote {
+            border-left-color: var(--primary-color);
+            color: var(--text-secondary);
+        }
+
+        .formula-wrapper {
+            background-color: rgba(var(--primary-rgb), 0.15);
+
+            .formula-display {
+                color: var(--primary-color);
+                text-shadow: 0 0 5px rgba(var(--primary-rgb), 0.3);
+
+                .formula-fraction .formula-numerator {
+                    border-bottom: 1px solid rgba(var(--primary-rgb), 0.5);
+                }
+
+                .formula-subscript,
+                .formula-superscript,
+                .formula-vector::before {
+                    color: var(--secondary-color);
+                    text-shadow: 0 0 2px rgba(var(--primary-rgb), 0.15);
+                }
+            }
+        }
+    }
+}

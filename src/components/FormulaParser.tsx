@@ -141,7 +141,7 @@ function applyTransformations(input: string) {
   );
 }
 
-function parseFormula(input: string) {
+export function parseFormula(input: string) {
   if (!input) {
     return "";
   }

@@ -4,6 +4,7 @@ import { PhysicsLaw } from "../types/PhysicsLaw";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 import { FaStickyNote, FaBookmark } from "react-icons/fa";
+import { RichTextRenderer } from "./RichTextRenderer";
 
 type TrainingCardProps = {
   law: PhysicsLaw;
@@ -21,17 +22,17 @@ export function TrainingCard(props: TrainingCardProps) {
       setActiveNotes([]);
     }
   }, [law]);
-  
+
   useEffect(() => {
     if (isFlipped && law.notes && law.notes.length > 0) {
       const timerId = setTimeout(() => {
-        setActiveNotes(prev => {
+        setActiveNotes((prev) => {
           const newActiveNotes = [...prev];
           newActiveNotes[0] = true;
           return newActiveNotes;
         });
       }, 500);
-      
+
       return () => clearTimeout(timerId);
     }
   }, [isFlipped, law.notes]);
@@ -42,7 +43,7 @@ export function TrainingCard(props: TrainingCardProps) {
 
   const toggleNote = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
-    setActiveNotes(prev => {
+    setActiveNotes((prev) => {
       const newActiveNotes = [...prev];
       newActiveNotes[index] = !newActiveNotes[index];
       return newActiveNotes;
@@ -70,14 +71,15 @@ export function TrainingCard(props: TrainingCardProps) {
             <h3 className="training-card-name">{law.name}</h3>
 
             <div className="training-card-description">
-              <p>{law.description}</p>
-              
+              <RichTextRenderer html={law.description} />
               {law.notes && law.notes.length > 0 && (
                 <div className="note-buttons-container">
                   {law.notes.map((note, index) => (
                     <div key={index} className="note-item">
                       <motion.button
-                        className={`note-button ${activeNotes[index] ? 'active' : ''}`}
+                        className={`note-button ${
+                          activeNotes[index] ? "active" : ""
+                        }`}
                         onClick={(e) => toggleNote(e, index)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -86,7 +88,7 @@ export function TrainingCard(props: TrainingCardProps) {
                         <FaStickyNote />
                         <span>Примечание {index + 1}</span>
                       </motion.button>
-                      
+
                       {activeNotes[index] && (
                         <motion.div
                           className="note-content"
@@ -97,7 +99,10 @@ export function TrainingCard(props: TrainingCardProps) {
                           <div className="noted-text-header">
                             <FaBookmark /> <span>{note.title}</span>
                           </div>
-                          <div className="noted-text-content" dangerouslySetInnerHTML={{ __html: note.text }} />
+
+                          <div className="noted-text-content">
+                            <RichTextRenderer html={note.text} />
+                          </div>
                         </motion.div>
                       )}
                     </div>
@@ -114,7 +119,9 @@ export function TrainingCard(props: TrainingCardProps) {
             )}
 
             <div className="training-card-meta">
-              {law.discoveredBy && <p>Закон открыл: {law.discoveredBy || "Не указано"}</p>}
+              {law.discoveredBy && (
+                <p>Закон открыл: {law.discoveredBy || "Не указано"}</p>
+              )}
             </div>
           </div>
 
