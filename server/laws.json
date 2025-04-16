@@ -140,17 +140,6 @@
   },
   {
     "name": "Скорость (равномерного движения)",
-    "description": "Скорость - это физическая величина, характеризующая  быстроту механического движения,  равная  отношению пути, пройденного телом за некоторое время, к этому времени, и  показывающая  путь, пройденный за единичный временной интервал или Скорость - это физическая величина, характеризующая быстроту механического движения, равная отношению пути, пройденного телом за некоторое время, к этому времени, численное значение которой показывает путь, пройденный за единичный временной интервал.",
-    "formula": "V=(S/t)",
-    "category": "Mechanics",
-    "difficulty": "Medium",
-    "class": 7,
-    "year": 2025,
-    "discoveredBy": "",
-    "id": "11"
-  },
-  {
-    "name": "Скорость (равномерного движения)",
     "description": "Скорость это физическая величина,&nbsp;<i><b>характеризующая</b></i>&nbsp;быстроту механического движения,&nbsp;<b style=\"font-style: italic;\">равная&nbsp;</b>отношению пути, пройденного телом за некоторое время, к этому времени,&nbsp;<b><i>показывающая</i></b>&nbsp;путь, пройденный за единичный временной интервал.",
     "notes": [
       {
@@ -165,5 +154,54 @@
     "year": 2025,
     "discoveredBy": "",
     "id": "12"
+  },
+  {
+    "name": "м/c",
+    "description": "м/с - единица измерения <b style=\"font-style: italic;\">скорости, равная скорости </b>такого равномерного движения, в ходе которого тело проходит путь один метр за одну секунду.",
+    "notes": [
+      {
+        "title": "Уточнение:",
+        "text": "Правильнее говорить не «единица измерения скорости», а <b><i>«единица скорости».</i></b>"
+      }
+    ],
+    "formula": "",
+    "category": "Mechanics",
+    "difficulty": "Medium",
+    "class": 7,
+    "discoveredBy": "",
+    "topic": "Кинематика",
+    "subtopic": "Равномерное движение ",
+    "id": "13"
+  },
+  {
+    "name": "Формула скорости                  (три вида с выводом)",
+    "description": "<span style=\"font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto; background-color: rgb(240, 244, 252);\">v=</span><span class=\"formula-fraction\" style=\"margin-right: 0.2rem; margin-left: 0.2rem; display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto;\"><span class=\"formula-numerator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem; border-bottom: 1px solid var(--text-primary);\">S</span><span class=\"formula-denominator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem;\">t</span></span><br>S=vt<br><br><span style=\"font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto; background-color: rgb(240, 244, 252);\">t=</span><span class=\"formula-fraction\" style=\"margin-right: 0.2rem; margin-left: 0.2rem; display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto;\"><span class=\"formula-numerator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem; border-bottom: 1px solid var(--text-primary);\">S</span><span class=\"formula-denominator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem;\">v</span></span>",
+    "notes": [],
+    "formula": "",
+    "category": "Mechanics",
+    "difficulty": "Medium",
+    "class": 7,
+    "discoveredBy": "",
+    "topic": "",
+    "subtopic": "",
+    "id": "14"
+  },
+  {
+    "name": "Алгоритм определения цены деления шкалы",
+    "description": "1) Найти два ближайших штриха со значением<br>2) Из большего значения вычесть меньшее<br>3) Полученный результат поделить на число делений между выбранными штрихами со значением",
+    "notes": [
+      {
+        "title": "Дополнение",
+        "text": "- нельзя путать штрих и деление; в третьем пункте алгоритма надо считать именно число делений, а не штрихов!<br>- цену деления, как правило, можно использовать как абсолютную погрешность измерения"
+      }
+    ],
+    "formula": "",
+    "category": "Mechanics",
+    "difficulty": "Medium",
+    "class": 7,
+    "discoveredBy": "",
+    "topic": "",
+    "subtopic": "",
+    "id": "15"
   }
 ]
