@@ -174,9 +174,14 @@
     "id": "13"
   },
   {
-    "name": "Формула скорости                  (три вида с выводом)",
-    "description": "<span style=\"font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto; background-color: rgb(240, 244, 252);\">v=</span><span class=\"formula-fraction\" style=\"margin-right: 0.2rem; margin-left: 0.2rem; display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto;\"><span class=\"formula-numerator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem; border-bottom: 1px solid var(--text-primary);\">S</span><span class=\"formula-denominator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem;\">t</span></span><br>S=vt<br><br><span style=\"font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto; background-color: rgb(240, 244, 252);\">t=</span><span class=\"formula-fraction\" style=\"margin-right: 0.2rem; margin-left: 0.2rem; display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; font-family: &quot;Space Grotesk&quot;, &quot;Times New Roman&quot;, Times, serif; font-size: 17.6px; -webkit-text-size-adjust: auto;\"><span class=\"formula-numerator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem; border-bottom: 1px solid var(--text-primary);\">S</span><span class=\"formula-denominator\" style=\"padding-right: 0.2rem; padding-left: 0.2rem;\">v</span></span>",
-    "notes": [],
+    "name": "Формула скорости (три вида с выводом)",
+    "description": "<span class=\"formula-wrapper\" data-id=\"formula-1744898472414\" data-formula=\"\\upsilon=S/t\" contenteditable=\"false\" draggable=\"true\"><span class=\"formula-display\">υ=<span class=\"formula-fraction\"><span class=\"formula-numerator\">S</span><span class=\"formula-denominator\">t</span></span></span></span><br><br><span class=\"formula-wrapper\" data-id=\"formula-1744898548562\" data-formula=\"S=\\upsilon\\cdott\" contenteditable=\"false\" draggable=\"true\"><span class=\"formula-display\">S=υ·t</span></span><br><br><span class=\"formula-wrapper\" data-id=\"formula-1744898586967\" data-formula=\"t=S/\\upsilon\" contenteditable=\"false\" draggable=\"true\"><span class=\"formula-display\">t=<span class=\"formula-fraction\"><span class=\"formula-numerator\">S</span><span class=\"formula-denominator\">υ</span></span></span></span><br><br>",
+    "notes": [
+      {
+        "title": "Для любознательных",
+        "text": "<span class=\"formula-wrapper\" data-id=\"formula-1744899036294\" data-formula=\"\\upsilon=r_t'=dr/dt=\\intd\\upsilon\" contenteditable=\"false\" draggable=\"true\"><span class=\"formula-display\">υ=r<span class=\"formula-subscript\">t</span>'=<span class=\"formula-fraction\"><span class=\"formula-numerator\">dr</span><span class=\"formula-denominator\">dt</span></span>=∫dυ</span></span>"
+      }
+    ],
     "formula": "",
     "category": "Mechanics",
     "difficulty": "Medium",
