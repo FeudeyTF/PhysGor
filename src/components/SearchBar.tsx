@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaSearch } from "react-icons/fa";
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
+  small?: boolean;
 };
 
-export function SearchBar(props: SearchBarProps) {
-  const { onSearch } = props;
+export function SearchBar({ onSearch, small = false }: SearchBarProps) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export function SearchBar(props: SearchBarProps) {
 
   return (
     <motion.div
-      className="search-bar"
+      className={`search-bar ${small ? 'search-bar-small' : ''}`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -32,6 +33,9 @@ export function SearchBar(props: SearchBarProps) {
           onChange={(e) => setQuery(e.target.value)}
           className="search-input"
         />
+        <span className="search-icon">
+          <FaSearch />
+        </span>
       </div>
     </motion.div>
   );

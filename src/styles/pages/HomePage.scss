@@ -1,11 +1,14 @@
 @import '../base.scss';
 
 .home-page {
+  padding-top: 70px;
   padding-bottom: var(--spacing-xl);
+  min-height: 100vh;
+  position: relative;
 
   .page-header {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 70px;
 
     h1 {
       margin-bottom: var(--spacing-sm);
@@ -97,16 +100,27 @@
     }
   }
 
+  .filter-tooltip-wrapper {
+    position: relative;
+    z-index: 10;
+
+    .filter-tooltip-container {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+    }
+  }
+
   .notification {
     position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
+    top: 90px;
+    right: 20px;
+    padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--border-radius-md);
-    box-shadow: var(--card-shadow);
-    z-index: 1000;
     font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    max-width: 300px;
+    z-index: 1000;
 
     &.notification-success {
       background-color: var(--success-color);
@@ -167,27 +181,33 @@
 }
 
 .error-container {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
   text-align: center;
-  box-shadow: var(--card-shadow);
-  border-left: 4px solid var(--danger-color);
 
   h3 {
-    color: var(--danger-color);
     margin-bottom: var(--spacing-md);
+    color: var(--danger-color);
   }
 
   p {
     color: var(--text-secondary);
+    max-width: 400px;
   }
 }
 
 @media (max-width: 768px) {
   .home-page {
     .page-header {
-      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-lg) var(--spacing-md);
+
+      h1 {
+        font-size: 2rem;
+      }
 
       p {
         font-size: 1rem;
@@ -208,9 +228,24 @@
       }
     }
 
+    .filter-tooltip-wrapper {
+      .filter-tooltip-container {
+        right: 0;
+        width: 100%;
+      }
+    }
+
     .cards-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      padding: var(--spacing-md);
+      gap: var(--spacing-md);
+    }
+
+    .notification {
+      top: 80px;
+      right: 10px;
+      left: 10px;
+      max-width: unset;
     }
   }
 }

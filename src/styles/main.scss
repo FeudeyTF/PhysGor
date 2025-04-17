@@ -158,6 +158,7 @@ button {
 @include meta.load-css("./components/Filters.scss");
 @include meta.load-css("./components/ThemeToggle.scss");
 @include meta.load-css("./components/FloatingFormulas.scss");
+@include meta.load-css("./components/FilterTooltip.scss");
 
 /* Стили элементов */
 

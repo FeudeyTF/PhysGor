@@ -3,17 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "../components/Card";
 import { AddLawForm } from "../modals/AddLawModal";
 import { EditLawForm } from "../modals/EditLawFModal";
-import { CategoryFilter } from "../components/CategoryFilter";
-import { SearchBar } from "../components/SearchBar";
-import { DifficultyFilter } from "../components/DifficultyFilter";
-import { ClassFilter } from "../components/ClassFilter";
-import { TopicFilter } from "../components/TopicFilter";
-import { SubtopicFilter } from "../components/SubtopicFilter";
+import { FilterTooltip } from "../components/FilterTooltip";
+import { Header } from "../components/Header";
 import { useLaws } from "../data/Laws";
 import { PhysicsCategory } from "../types/PhysicsCategory";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { Difficulty } from "../types/Difficulty";
-import { FaFilter, FaPlus } from "react-icons/fa";
 import { difficulties, schoolClasses } from "../constants";
 import { useAuth } from "../context/AuthContext";
 
@@ -32,7 +27,7 @@ export function HomePage() {
   const [topics, setTopics] = useState<string[]>([]);
   const [subtopics, setSubtopics] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [isFilterTooltipVisible, setIsFilterTooltipVisible] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState<{
     success: boolean;
     message: string;
@@ -134,8 +129,8 @@ export function HomePage() {
     setSearchQuery(query);
   };
 
-  const toggleFilters = () => {
-    setFiltersVisible(!filtersVisible);
+  const toggleFilterTooltip = () => {
+    setIsFilterTooltipVisible(!isFilterTooltipVisible);
   };
 
   const handleDeleteLaw = async (id: string) => {
@@ -235,19 +230,36 @@ export function HomePage() {
     },
   };
 
-  const filtersVariants = {
-    hidden: { opacity: 0, height: 0, overflow: "hidden" },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   return (
     <div className="home-page">
+      <Header 
+        onSearch={handleSearch}
+        onFilterClick={toggleFilterTooltip}
+        onAddClick={isAuthenticated ? () => setIsAddLawFormVisible(true) : undefined}
+      />
+      
+      <div className="filter-tooltip-wrapper">
+        <FilterTooltip
+          isOpen={isFilterTooltipVisible}
+          onClose={() => setIsFilterTooltipVisible(false)}
+          categories={categories as PhysicsCategory[]}
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleCategorySelect}
+          difficulties={difficulties}
+          selectedDifficulty={selectedDifficulty}
+          onSelectDifficulty={handleDifficultySelect}
+          classes={schoolClasses}
+          selectedClass={selectedClass}
+          onSelectClass={handleClassSelect}
+          topics={topics}
+          selectedTopic={selectedTopic}
+          onSelectTopic={handleTopicSelect}
+          subtopics={subtopics}
+          selectedSubtopic={selectedSubtopic}
+          onSelectSubtopic={handleSubtopicSelect}
+        />
+      </div>
+
       <motion.div
         className="page-header"
         initial={{ opacity: 0, y: -20 }}
@@ -287,79 +299,6 @@ export function HomePage() {
         </div>
       ) : (
         <>
-          <div className="filter-section">
-            <div className="search-filter-row">
-              <SearchBar onSearch={handleSearch} />
-              <motion.button
-                className={`toggle-button ${filtersVisible ? "active" : ""}`}
-                onClick={toggleFilters}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                title={filtersVisible ? "Скрыть фильтры" : "Показать фильтры"}
-                aria-label={
-                  filtersVisible ? "Скрыть фильтры" : "Показать фильтры"
-                }
-              >
-                <FaFilter />
-              </motion.button>
-
-              {isAuthenticated && (
-                <motion.button
-                  className="toggle-button"
-                  style={{ backgroundColor: "#38b000" }}
-                  onClick={() => setIsAddLawFormVisible(true)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  title="Добавить новый закон"
-                >
-                  <FaPlus />
-                </motion.button>
-              )}
-            </div>
-
-            <AnimatePresence>
-              {filtersVisible && (
-                <motion.div
-                  className="filters-column"
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  variants={filtersVariants}
-                >
-                  <CategoryFilter
-                    categories={categories as PhysicsCategory[]}
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={handleCategorySelect}
-                  />
-                  <DifficultyFilter
-                    difficulties={difficulties}
-                    selectedDifficulty={selectedDifficulty}
-                    onSelectDifficulty={handleDifficultySelect}
-                  />
-                  <ClassFilter
-                    classes={schoolClasses}
-                    selectedClass={selectedClass}
-                    onSelectClass={handleClassSelect}
-                  />
-                  {topics.length > 0 && (
-                    <TopicFilter
-                      topics={topics}
-                      selectedTopic={selectedTopic}
-                      onSelectTopic={handleTopicSelect}
-                    />
-                  )}
-                  {subtopics.length > 0 && (
-                    <SubtopicFilter
-                      subtopics={subtopics}
-                      selectedSubtopic={selectedSubtopic}
-                      onSelectSubtopic={handleSubtopicSelect}
-                    />
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
           <motion.div
             className="cards-grid"
             variants={containerVariants}

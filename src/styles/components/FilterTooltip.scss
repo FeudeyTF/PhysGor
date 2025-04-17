@@ -1,0 +1,93 @@
+@import '../base.scss';
+
+.filter-tooltip-container {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 1100;
+  width: 320px;
+}
+
+.filter-tooltip {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.2s ease-in-out;
+
+  .tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    
+    h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+    
+    .close-button {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        color: var(--text-primary);
+        background-color: var(--hover-color);
+      }
+    }
+  }
+  
+  .tooltip-content {
+    max-height: 450px;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--background-color);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--border-color);
+      border-radius: 3px;
+    }
+  }
+}
+
+.dark-theme .filter-tooltip {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .filter-tooltip-container {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    max-height: 80vh;
+  }
+  
+  .filter-tooltip {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  }
+}
