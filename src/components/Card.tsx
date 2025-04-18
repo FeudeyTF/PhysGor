@@ -95,7 +95,12 @@ export function Card(props: CardProps) {
         <div className="card-category">
           {translatePhysicsCategory(law.category)}
         </div>
-        <h2 className="card-title">{law.name}</h2>
+        <h2 className="card-title">{law.name.split('\\n').map((line, i) => (
+          <>
+            {i > 0 && <br />}
+            {line}
+          </>
+        ))}</h2>
 
         <div className="card-content">
           <div className="card-description">
