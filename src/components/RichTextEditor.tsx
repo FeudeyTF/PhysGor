@@ -334,6 +334,22 @@ export function RichTextEditor(props: RichTextEditorProps) {
 
   const insertFormula = useCallback(() => {
     if (!formula.trim()) {
+      if (editingFormulaId) {
+        const newContent = content.filter(node => 
+          !(node.type === "formula" && node.id === editingFormulaId)
+        );
+        
+        setContent(newContent);
+        
+        if (editorRef.current) {
+          editorRef.current.innerHTML = generateHTML(newContent);
+          initFormulaEventHandlers();
+          onChange(editorRef.current.innerHTML);
+        }
+        
+        setEditingFormulaId(null);
+      }
+      
       setShowFormulaModal(false);
       return;
     }
