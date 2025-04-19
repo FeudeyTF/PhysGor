@@ -40,12 +40,18 @@ export function HomePage() {
       setFilteredLaws(laws);
 
       const uniqueTopics = Array.from(
-        new Set(laws.filter(law => law.topic).map(law => law.topic as string))
+        new Set(
+          laws.filter((law) => law.topic).map((law) => law.topic as string)
+        )
       );
       setTopics(uniqueTopics);
 
       const uniqueSubtopics = Array.from(
-        new Set(laws.filter(law => law.subtopic).map(law => law.subtopic as string))
+        new Set(
+          laws
+            .filter((law) => law.subtopic)
+            .map((law) => law.subtopic as string)
+        )
       );
       setSubtopics(uniqueSubtopics);
     }
@@ -232,12 +238,14 @@ export function HomePage() {
 
   return (
     <div className="home-page">
-      <Header 
+      <Header
         onSearch={handleSearch}
         onFilterClick={toggleFilterTooltip}
-        onAddClick={isAuthenticated ? () => setIsAddLawFormVisible(true) : undefined}
+        onAddClick={
+          isAuthenticated ? () => setIsAddLawFormVisible(true) : undefined
+        }
       />
-      
+
       <div className="filter-tooltip-wrapper">
         <FilterTooltip
           isOpen={isFilterTooltipVisible}

@@ -57,12 +57,14 @@ export function TrainingCard(props: TrainingCardProps) {
           <div className="training-card-category">
             {translatePhysicsCategory(law.category)}
           </div>
-          <h2 className="training-card-title">{law.name.split('\\n').map((line, i) => (
-            <>
-              {i > 0 && <br />}
-              {line}
-            </>
-          ))}</h2>
+          <h2 className="training-card-title">
+            {law.name.split("\\n").map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </h2>
           <div className="flip-hint">
             <span>Нажмите, чтобы перевернуть...</span>
           </div>
@@ -77,10 +79,11 @@ export function TrainingCard(props: TrainingCardProps) {
               {translatePhysicsCategory(law.category)}
             </div>
             <h3 className="training-card-name">
-              {law.name.split('\\n').map((line, i) => (
-                <>{i > 0 && <br />}
-                  {line}</>
-                  
+              {law.name.split("\\n").map((line, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {line}
+                </>
               ))}
             </h3>
 

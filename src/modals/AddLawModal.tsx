@@ -67,7 +67,11 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
     }
   };
 
-  const handleNoteChange = (index: number, field: 'title' | 'text', value: string) => {
+  const handleNoteChange = (
+    index: number,
+    field: "title" | "text",
+    value: string
+  ) => {
     setFormData((prev) => {
       const newNotes = [...(prev.notes || [])];
       if (newNotes[index]) {
@@ -100,7 +104,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
 
   const toggleNotes = () => {
     setShowNotes(!showNotes);
-    
+
     if (!showNotes && (!formData.notes || formData.notes.length === 0)) {
       setFormData((prev) => ({
         ...prev,
@@ -192,7 +196,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
           placeholder="Например: Закон Ома для участка цепи"
         />
       </ModalWindow.Group>
-      
+
       <ModalWindow.Group title="Описание*" error={errors.description}>
         <RichTextEditor
           value={formData.description}
@@ -202,54 +206,51 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
           rows={4}
         />
       </ModalWindow.Group>
-      
+
       <div className="text-mode-toggle">
         <label>
           <div className="toggle-checkbox">
-            <input 
-              type="checkbox" 
-              checked={showNotes}
-              onChange={toggleNotes}
-            />
+            <input type="checkbox" checked={showNotes} onChange={toggleNotes} />
             <span className="toggle-switch"></span>
           </div>
-          <span className="toggle-text">
-            Добавить примечания
-          </span>
+          <span className="toggle-text">Добавить примечания</span>
         </label>
       </div>
 
       {showNotes && (
         <ModalWindow.Group title="Примечания" error={errors.notes}>
-          {formData.notes && formData.notes.map((note, index) => (
-            <div key={index} className="noted-text-editor">
-              <div className="noted-text-header">
-                <div className="title-input-container">
-                  <input
-                    type="text"
-                    placeholder="Название"
-                    value={note.title}
-                    onChange={(e) => handleNoteChange(index, 'title', e.target.value)}
-                  />
+          {formData.notes &&
+            formData.notes.map((note, index) => (
+              <div key={index} className="noted-text-editor">
+                <div className="noted-text-header">
+                  <div className="title-input-container">
+                    <input
+                      type="text"
+                      placeholder="Название"
+                      value={note.title}
+                      onChange={(e) =>
+                        handleNoteChange(index, "title", e.target.value)
+                      }
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="remove-noted-text-button"
+                    onClick={() => removeNote(index)}
+                  >
+                    <FaTrash />
+                  </button>
                 </div>
-                <button 
-                  type="button" 
-                  className="remove-noted-text-button"
-                  onClick={() => removeNote(index)}
-                >
-                  <FaTrash />
-                </button>
+                <RichTextEditor
+                  value={note.text}
+                  onChange={(value) => handleNoteChange(index, "text", value)}
+                  placeholder="Текст примечания..."
+                  rows={3}
+                />
               </div>
-              <RichTextEditor
-                value={note.text}
-                onChange={(value) => handleNoteChange(index, 'text', value)}
-                placeholder="Текст примечания..."
-                rows={3}
-              />
-            </div>
-          ))}
-          <button 
-            type="button" 
+            ))}
+          <button
+            type="button"
             className="add-noted-text-button"
             onClick={addNote}
           >
@@ -257,7 +258,7 @@ export function AddLawForm({ onSubmit, onCancel }: AddLawFormProps) {
           </button>
         </ModalWindow.Group>
       )}
-      
+
       <ModalWindow.Group title="Формула (необязательно)">
         <input
           type="text"

@@ -46,23 +46,26 @@ export function FilterTooltip({
   onSelectTopic,
   subtopics,
   selectedSubtopic,
-  onSelectSubtopic
+  onSelectSubtopic,
 }: FilterTooltipProps) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
@@ -79,7 +82,11 @@ export function FilterTooltip({
           <div className="filter-tooltip" ref={tooltipRef}>
             <div className="tooltip-header">
               <h4>Фильтры</h4>
-              <button className="close-button" onClick={onClose} aria-label="Закрыть">
+              <button
+                className="close-button"
+                onClick={onClose}
+                aria-label="Закрыть"
+              >
                 <FaTimes />
               </button>
             </div>

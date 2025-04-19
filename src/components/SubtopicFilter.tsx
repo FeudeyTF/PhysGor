@@ -13,7 +13,9 @@ export function SubtopicFilter(props: SubtopicFilterProps) {
       <h3>Подтема:</h3>
       <div className="filter-options">
         <motion.button
-          className={`filter-option ${selectedSubtopic === null ? "active" : ""}`}
+          className={`filter-option ${
+            selectedSubtopic === null ? "active" : ""
+          }`}
           onClick={() => onSelectSubtopic(null)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
