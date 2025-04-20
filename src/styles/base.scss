@@ -125,13 +125,13 @@
     color: var(--text-secondary);
     cursor: pointer;
     transition: all var(--transition-normal);
-    
+
     &:hover {
         transform: translateY(-2px);
         color: var(--text-primary);
         box-shadow: 0 4px 12px var(--shadow-color);
     }
-    
+
     &:active {
         transform: translateY(0);
     }
@@ -150,7 +150,7 @@
     &.#{$color-name} {
         background-color: $light-value;
         color: $color-value;
-        
+
         &:hover {
             background-color: $color-value;
             color: white;

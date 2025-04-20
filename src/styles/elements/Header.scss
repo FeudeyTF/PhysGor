@@ -119,31 +119,31 @@
     cursor: pointer;
     transition: var(--transition-normal);
     box-shadow: 0 2px 8px var(--shadow-color);
-    
+
     &:hover {
       transform: translateY(-2px);
       color: var(--text-primary);
       box-shadow: 0 4px 12px var(--shadow-color);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
-    
+
     &.filter-button {
       background-color: var(--secondary-color-light);
       color: var(--secondary-color);
-      
+
       &:hover {
         background-color: var(--secondary-color);
         color: white;
       }
     }
-    
+
     &.add-button {
       background-color: var(--success-color-light);
       color: var(--success-color);
-      
+
       &:hover {
         background-color: var(--success-color);
         color: white;
@@ -270,7 +270,7 @@
         }
       }
     }
-    
+
     .header-search-controls {
       position: static;
     }

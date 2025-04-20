@@ -2,7 +2,7 @@
 
 .search-bar {
   position: relative;
-  
+
   .search-input-container {
     position: relative;
     display: flex;
@@ -10,7 +10,7 @@
     max-width: 500px;
     margin: 0 auto;
   }
-  
+
   input {
     width: 100%;
     padding: 10px 15px;
@@ -22,18 +22,18 @@
     transition: var(--transition-normal);
     color: var(--text-primary);
     box-shadow: var(--card-shadow);
-    
+
     &:focus {
       outline: none;
       border-color: var(--primary-color);
       box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
     }
-    
+
     &::placeholder {
       color: var(--text-light);
     }
   }
-  
+
   .search-icon {
     position: absolute;
     right: 15px;
@@ -49,14 +49,14 @@
     width: 200px;
     max-width: 100%;
   }
-  
+
   input {
     padding: 8px 12px;
     padding-right: 30px;
     font-size: 0.85rem;
     height: 36px;
   }
-  
+
   .search-icon {
     right: 10px;
     font-size: 0.85rem;
@@ -69,7 +69,7 @@
     border-color: var(--border-color);
     color: var(--text-primary);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    
+
     &:focus {
       border-color: var(--primary-color);
       box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -83,7 +83,7 @@
     padding-right: 35px;
     font-size: 0.9rem;
   }
-  
+
   .search-bar-small .search-input-container {
     width: 160px;
   }
@@ -93,7 +93,7 @@
   .search-bar-small .search-input-container {
     width: 120px;
   }
-  
+
   .search-bar-small input {
     padding: 6px 10px;
     padding-right: 25px;
