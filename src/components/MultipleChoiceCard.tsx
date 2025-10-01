@@ -72,7 +72,12 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
         possibleOptions = Array.from(
           new Set(
             allLaws
-              .filter((l) => l.discoveredBy && l.id !== law.id && l.discoveredBy !== correctAnswer)
+              .filter(
+                (l) =>
+                  l.discoveredBy &&
+                  l.id !== law.id &&
+                  l.discoveredBy !== correctAnswer
+              )
               .map((l) => l.discoveredBy || "")
           )
         );
@@ -92,7 +97,7 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
 
     if (allOptions.length < 4 && possibleOptions.length >= 4) {
       const additionalOptions = possibleOptions
-        .filter(opt => !allOptions.includes(opt))
+        .filter((opt) => !allOptions.includes(opt))
         .sort(() => 0.5 - Math.random())
         .slice(0, 4 - allOptions.length);
 
@@ -184,7 +189,7 @@ export function MultipleChoiceCard(props: MultipleChoiceCardProps) {
             {questionType === QuestionType.Formula ? (
               <FormulaParser formula={option} />
             ) : (
-              <RichTextRenderer html={option} /> 
+              <RichTextRenderer html={option} />
             )}
           </motion.button>
         ))}

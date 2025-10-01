@@ -2,7 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { PhysicsLaw } from "../types/PhysicsLaw";
 import { difficultyToColor } from "../types/Difficulty";
-import { FaBook, FaTrash, FaEdit, FaBookmark, FaStickyNote } from "react-icons/fa";
+import {
+  FaBook,
+  FaTrash,
+  FaEdit,
+  FaBookmark,
+  FaStickyNote,
+} from "react-icons/fa";
 import { translatePhysicsCategory } from "../types/PhysicsCategory";
 import { FormulaParser } from "./FormulaParser";
 import { RichTextRenderer } from "./RichTextRenderer";
@@ -35,7 +41,7 @@ export function Card(props: CardProps) {
 
   const toggleNote = (e: React.MouseEvent, index: number) => {
     e.stopPropagation();
-    setActiveNotes(prev => {
+    setActiveNotes((prev) => {
       const newActiveNotes = [...prev];
       newActiveNotes[index] = !newActiveNotes[index];
       return newActiveNotes;
@@ -95,30 +101,34 @@ export function Card(props: CardProps) {
         <div className="card-category">
           {translatePhysicsCategory(law.category)}
         </div>
-        <h2 className="card-title">{law.name.split('\\n').map((line, i) => (
-          <>
-            {i > 0 && <br />}
-            {line}
-          </>
-        ))}</h2>
+        <h2 className="card-title">
+          {law.name.split("\\n").map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </h2>
 
         <div className="card-content">
           <div className="card-description">
             <RichTextRenderer html={law.description} />
-            
+
             {law.notes && law.notes.length > 0 && (
               <div className="note-buttons-container">
                 {law.notes.map((note, index) => (
                   <div key={index} className="note-item">
                     <motion.button
-                      className={`note-button ${activeNotes[index] ? 'active' : ''}`}
+                      className={`note-button ${
+                        activeNotes[index] ? "active" : ""
+                      }`}
                       onClick={(e) => toggleNote(e, index)}
                       title={note.title}
                     >
                       <FaStickyNote />
                       <span>Примечание {index + 1}</span>
                     </motion.button>
-                    
+
                     {activeNotes[index] && (
                       <motion.div
                         className="note-content"

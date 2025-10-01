@@ -95,38 +95,36 @@ export function Header({ onSearch, onFilterClick, onAddClick }: HeaderProps) {
         </div>
 
         <div className="header-right">
-          
-            <div className="header-search-controls">
-              {onSearch && <SearchBar onSearch={onSearch} small />}
-              
-              {onFilterClick && (
-                <motion.button
-                  className="icon-button filter-button"
-                  onClick={onFilterClick}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  title="Фильтры"
-                  aria-label="Фильтры"
-                >
-                  <FaFilter />
-                </motion.button>
-              )}
-              
-              {isAuthenticated && onAddClick && (
-                <motion.button
-                  className="icon-button add-button"
-                  onClick={onAddClick}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  title="Добавить новый закон"
-                  aria-label="Добавить новый закон"
-                >
-                  <FaPlus />
-                </motion.button>
-              )}
-            </div>
-          
-    
+          <div className="header-search-controls">
+            {onSearch && <SearchBar onSearch={onSearch} small />}
+
+            {onFilterClick && (
+              <motion.button
+                className="icon-button filter-button"
+                onClick={onFilterClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title="Фильтры"
+                aria-label="Фильтры"
+              >
+                <FaFilter />
+              </motion.button>
+            )}
+
+            {isAuthenticated && onAddClick && (
+              <motion.button
+                className="icon-button add-button"
+                onClick={onAddClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title="Добавить новый закон"
+                aria-label="Добавить новый закон"
+              >
+                <FaPlus />
+              </motion.button>
+            )}
+          </div>
+
           {isAuthenticated ? (
             <motion.button
               className="auth-button logout"

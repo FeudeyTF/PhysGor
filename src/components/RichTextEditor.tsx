@@ -38,60 +38,71 @@ export function RichTextEditor(props: RichTextEditorProps) {
   const [editingFormulaId, setEditingFormulaId] = useState<string | null>(null);
   const [cursorPosition, setCursorPosition] = useState<number>(-1);
   const [content, setContent] = useState<ContentNode[]>([]);
-  const [draggedFormulaIndex, setDraggedFormulaIndex] = useState<number | null>(null);
+  const [draggedFormulaIndex, setDraggedFormulaIndex] = useState<number | null>(
+    null
+  );
 
   const parseContentFromHTML = useCallback((html: string): ContentNode[] => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = html;
-    
+
     const result: ContentNode[] = [];
-    
+
     const parseNode = (node: Node): ContentNode[] => {
       const nodes: ContentNode[] = [];
-      
+
       if (node.nodeType === Node.TEXT_NODE && node.textContent) {
         nodes.push({
           id: `text-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           type: "text",
-          content: node.textContent
+          content: node.textContent,
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const element = node as Element;
-        
+
         if (element.classList.contains("formula-wrapper")) {
-          const formulaId = element.getAttribute("data-id") || `formula-${Date.now()}`;
+          const formulaId =
+            element.getAttribute("data-id") || `formula-${Date.now()}`;
           const formulaText = element.getAttribute("data-formula") || "";
-          
+
           nodes.push({
             id: formulaId,
             type: "formula",
-            formula: formulaText
+            formula: formulaText,
           });
         } else {
-          element.childNodes.forEach(childNode => {
+          element.childNodes.forEach((childNode) => {
             nodes.push(...parseNode(childNode));
           });
         }
       }
-      
+
       return nodes;
     };
-    
-    tempDiv.childNodes.forEach(node => {
+
+    tempDiv.childNodes.forEach((node) => {
       result.push(...parseNode(node));
     });
-    
+
     return result;
   }, []);
-  
+
   const generateHTML = useCallback((nodes: ContentNode[]): string => {
-    return nodes.map(node => {
-      if (node.type === "text") {
-        return node.content;
-      } else {
-        return `<span class="formula-wrapper" data-id="${node.id}" data-formula="${node.formula}" contenteditable="false" draggable="true"><span class="formula-display">${parseFormula(node.formula)}</span></span>`;
-      }
-    }).join("");
+    return nodes
+      .map((node) => {
+        if (node.type === "text") {
+          return node.content;
+        } else {
+          return `<span class="formula-wrapper" data-id="${
+            node.id
+          }" data-formula="${
+            node.formula
+          }" contenteditable="false" draggable="true"><span class="formula-display">${parseFormula(
+            node.formula
+          )}</span></span>`;
+        }
+      })
+      .join("");
   }, []);
 
   const handleEditorChange = useCallback(() => {
@@ -104,10 +115,10 @@ export function RichTextEditor(props: RichTextEditorProps) {
 
   const initFormulaEventHandlers = useCallback(() => {
     if (!editorRef.current) return;
-    
-    const formulas = editorRef.current.querySelectorAll('.formula-wrapper');
-    formulas.forEach(formula => {
-      formula.setAttribute('draggable', 'true');
+
+    const formulas = editorRef.current.querySelectorAll(".formula-wrapper");
+    formulas.forEach((formula) => {
+      formula.setAttribute("draggable", "true");
     });
   }, []);
 
@@ -122,15 +133,15 @@ export function RichTextEditor(props: RichTextEditorProps) {
 
   const handleFormulaElementClick = useCallback((event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    const formulaWrapper = target.closest('.formula-wrapper') as HTMLElement;
-    
+    const formulaWrapper = target.closest(".formula-wrapper") as HTMLElement;
+
     if (formulaWrapper) {
       event.preventDefault();
       event.stopPropagation();
-      
-      const formulaId = formulaWrapper.getAttribute('data-id');
-      const formulaText = formulaWrapper.getAttribute('data-formula');
-      
+
+      const formulaId = formulaWrapper.getAttribute("data-id");
+      const formulaText = formulaWrapper.getAttribute("data-formula");
+
       if (formulaId && formulaText) {
         setEditingFormulaId(formulaId);
         setFormula(formulaText);
@@ -139,52 +150,57 @@ export function RichTextEditor(props: RichTextEditorProps) {
     }
   }, []);
 
-  const handleFormulaElementDragStart = useCallback((event: DragEvent) => {
-    const target = event.target as Node;
-    
-    if (target.nodeType !== Node.ELEMENT_NODE) {
-      return;
-    }
-    
-    const htmlTarget = target as HTMLElement;
-    const formulaWrapper = htmlTarget.closest('.formula-wrapper') as HTMLElement;
-    
-    if (formulaWrapper) {
-      const formulaId = formulaWrapper.getAttribute('data-id');
-      
-      if (formulaId) {
-        const index = content.findIndex(node => 
-          node.type === 'formula' && node.id === formulaId
-        );
-        
-        if (index >= 0) {
-          setDraggedFormulaIndex(index);
-          event.dataTransfer?.setData("text/plain", formulaId);
-          
-          formulaWrapper.classList.add('dragging');
-          
-          setTimeout(() => {
-            formulaWrapper.classList.remove('dragging');
-          }, 0);
+  const handleFormulaElementDragStart = useCallback(
+    (event: DragEvent) => {
+      const target = event.target as Node;
+
+      if (target.nodeType !== Node.ELEMENT_NODE) {
+        return;
+      }
+
+      const htmlTarget = target as HTMLElement;
+      const formulaWrapper = htmlTarget.closest(
+        ".formula-wrapper"
+      ) as HTMLElement;
+
+      if (formulaWrapper) {
+        const formulaId = formulaWrapper.getAttribute("data-id");
+
+        if (formulaId) {
+          const index = content.findIndex(
+            (node) => node.type === "formula" && node.id === formulaId
+          );
+
+          if (index >= 0) {
+            setDraggedFormulaIndex(index);
+            event.dataTransfer?.setData("text/plain", formulaId);
+
+            formulaWrapper.classList.add("dragging");
+
+            setTimeout(() => {
+              formulaWrapper.classList.remove("dragging");
+            }, 0);
+          }
         }
       }
-    }
-  }, [content]);
+    },
+    [content]
+  );
 
   useEffect(() => {
     const editor = editorRef.current;
     if (!editor) return;
-    
+
     const handleClick = (e: MouseEvent) => handleFormulaElementClick(e);
-  
+
     const handleDragStart = (e: DragEvent) => handleFormulaElementDragStart(e);
-    
-    editor.addEventListener('click', handleClick);
-    editor.addEventListener('dragstart', handleDragStart);
-    
+
+    editor.addEventListener("click", handleClick);
+    editor.addEventListener("dragstart", handleDragStart);
+
     return () => {
-      editor.removeEventListener('click', handleClick);
-      editor.removeEventListener('dragstart', handleDragStart);
+      editor.removeEventListener("click", handleClick);
+      editor.removeEventListener("dragstart", handleDragStart);
     };
   }, [handleFormulaElementClick, handleFormulaElementDragStart]);
 
@@ -197,66 +213,85 @@ export function RichTextEditor(props: RichTextEditorProps) {
     event.dataTransfer.dropEffect = "move";
   }, []);
 
-  const handleEditorDrop = useCallback((event: React.DragEvent) => {
-    event.preventDefault();
-    
-    if (draggedFormulaIndex === null || !editorRef.current) return;
-    
-    try {
-      const draggedFormula = content[draggedFormulaIndex] as FormulaNode;
-      
-      const dropRange = document.caretRangeFromPoint(event.clientX, event.clientY);
-      if (!dropRange || !editorRef.current.contains(dropRange.commonAncestorContainer)) {
-        console.error("Не удалось определить точку сброса");
-        return;
+  const handleEditorDrop = useCallback(
+    (event: React.DragEvent) => {
+      event.preventDefault();
+
+      if (draggedFormulaIndex === null || !editorRef.current) return;
+
+      try {
+        const draggedFormula = content[draggedFormulaIndex] as FormulaNode;
+
+        const dropRange = document.caretRangeFromPoint(
+          event.clientX,
+          event.clientY
+        );
+        if (
+          !dropRange ||
+          !editorRef.current.contains(dropRange.commonAncestorContainer)
+        ) {
+          console.error("Не удалось определить точку сброса");
+          return;
+        }
+
+        const formulaElement = document.createElement("span");
+        formulaElement.className = "formula-wrapper";
+        formulaElement.setAttribute("data-id", draggedFormula.id);
+        formulaElement.setAttribute("data-formula", draggedFormula.formula);
+        formulaElement.setAttribute("contenteditable", "false");
+        formulaElement.setAttribute("draggable", "true");
+
+        const formulaDisplay = document.createElement("span");
+        formulaDisplay.className = "formula-display";
+        formulaDisplay.innerHTML = parseFormula(draggedFormula.formula);
+        formulaElement.appendChild(formulaDisplay);
+
+        const oldFormulaElement = editorRef.current.querySelector(
+          `.formula-wrapper[data-id="${draggedFormula.id}"]`
+        );
+        if (oldFormulaElement) {
+          oldFormulaElement.remove();
+        }
+
+        dropRange.insertNode(formulaElement);
+
+        const selection = window.getSelection();
+        if (selection) {
+          selection.removeAllRanges();
+          const newRange = document.createRange();
+          newRange.setStartAfter(formulaElement);
+          newRange.collapse(true);
+          selection.addRange(newRange);
+        }
+
+        if (editorRef.current) {
+          const newContentNodes = parseContentFromHTML(
+            editorRef.current.innerHTML
+          );
+          setContent(newContentNodes);
+          onChange(editorRef.current.innerHTML);
+        }
+
+        initFormulaEventHandlers();
+
+        setDraggedFormulaIndex(null);
+      } catch (error) {
+        console.error("Ошибка при перетаскивании формулы:", error);
+        setDraggedFormulaIndex(null);
       }
-      
-      const formulaElement = document.createElement('span');
-      formulaElement.className = 'formula-wrapper';
-      formulaElement.setAttribute('data-id', draggedFormula.id);
-      formulaElement.setAttribute('data-formula', draggedFormula.formula);
-      formulaElement.setAttribute('contenteditable', 'false');
-      formulaElement.setAttribute('draggable', 'true');
-      
-      const formulaDisplay = document.createElement('span');
-      formulaDisplay.className = 'formula-display';
-      formulaDisplay.innerHTML = parseFormula(draggedFormula.formula);
-      formulaElement.appendChild(formulaDisplay);
-      
-      const oldFormulaElement = editorRef.current.querySelector(`.formula-wrapper[data-id="${draggedFormula.id}"]`);
-      if (oldFormulaElement) {
-        oldFormulaElement.remove();
-      }
-      
-      dropRange.insertNode(formulaElement);
-      
-      const selection = window.getSelection();
-      if (selection) {
-        selection.removeAllRanges();
-        const newRange = document.createRange();
-        newRange.setStartAfter(formulaElement);
-        newRange.collapse(true);
-        selection.addRange(newRange);
-      }
-      
-      if (editorRef.current) {
-        const newContentNodes = parseContentFromHTML(editorRef.current.innerHTML);
-        setContent(newContentNodes);
-        onChange(editorRef.current.innerHTML);
-      }
-      
-      initFormulaEventHandlers();
-      
-      setDraggedFormulaIndex(null);
-    } catch (error) {
-      console.error("Ошибка при перетаскивании формулы:", error);
-      setDraggedFormulaIndex(null);
-    }
-  }, [draggedFormulaIndex, content, onChange, parseContentFromHTML, initFormulaEventHandlers]);
+    },
+    [
+      draggedFormulaIndex,
+      content,
+      onChange,
+      parseContentFromHTML,
+      initFormulaEventHandlers,
+    ]
+  );
 
   const handleDragEnd = useCallback(() => {
     setDraggedFormulaIndex(null);
-    
+
     if (editorRef.current) {
       const elements = editorRef.current.querySelectorAll(".drag-over");
       elements.forEach((el) => el.classList.remove("drag-over"));
@@ -271,7 +306,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
         if (editorRef.current?.contains(range.commonAncestorContainer)) {
           let pos = 0;
           const nodes = editorRef.current.childNodes;
-          
+
           for (let i = 0; i < nodes.length; i++) {
             const node = nodes[i];
             if (node.contains(range.commonAncestorContainer)) {
@@ -284,7 +319,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
             }
             pos += node.textContent?.length || 0;
           }
-          
+
           setCursorPosition(pos);
         }
       }
@@ -298,11 +333,14 @@ export function RichTextEditor(props: RichTextEditorProps) {
     };
   }, [handleSelectionChange]);
 
-  const formatText = useCallback((command: string, value: string = "") => {
-    editorRef.current?.focus();
-    document.execCommand(command, false, value);
-    handleEditorChange();
-  }, [handleEditorChange]);
+  const formatText = useCallback(
+    (command: string, value: string = "") => {
+      editorRef.current?.focus();
+      document.execCommand(command, false, value);
+      handleEditorChange();
+    },
+    [handleEditorChange]
+  );
 
   const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     const selection = window.getSelection();
@@ -311,7 +349,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
       if (editorRef.current?.contains(range.commonAncestorContainer)) {
         let pos = 0;
         const nodes = editorRef.current.childNodes;
-        
+
         for (let i = 0; i < nodes.length; i++) {
           const node = nodes[i];
           if (node.contains(range.commonAncestorContainer)) {
@@ -322,7 +360,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
           }
           pos += node.textContent?.length || 0;
         }
-        
+
         setCursorPosition(pos);
       }
     }
@@ -335,115 +373,123 @@ export function RichTextEditor(props: RichTextEditorProps) {
   const insertFormula = useCallback(() => {
     if (!formula.trim()) {
       if (editingFormulaId) {
-        const newContent = content.filter(node => 
-          !(node.type === "formula" && node.id === editingFormulaId)
+        const newContent = content.filter(
+          (node) => !(node.type === "formula" && node.id === editingFormulaId)
         );
-        
+
         setContent(newContent);
-        
+
         if (editorRef.current) {
           editorRef.current.innerHTML = generateHTML(newContent);
           initFormulaEventHandlers();
           onChange(editorRef.current.innerHTML);
         }
-        
+
         setEditingFormulaId(null);
       }
-      
+
       setShowFormulaModal(false);
       return;
     }
 
     if (editingFormulaId) {
-      const newContent = content.map(node => {
+      const newContent = content.map((node) => {
         if (node.type === "formula" && node.id === editingFormulaId) {
           return {
             ...node,
-            formula: formula
+            formula: formula,
           };
         }
         return node;
       });
-      
+
       setContent(newContent);
-      
+
       if (editorRef.current) {
         editorRef.current.innerHTML = generateHTML(newContent);
         initFormulaEventHandlers();
       }
-      
+
       setEditingFormulaId(null);
     } else {
       const formulaId = `formula-${Date.now()}`;
       const formulaNode: FormulaNode = {
         id: formulaId,
         type: "formula",
-        formula: formula
+        formula: formula,
       };
-      
+
       if (cursorPosition >= 0) {
         let currentPos = 0;
-        
+
         for (let i = 0; i < content.length; i++) {
           const node = content[i];
           const nodeLength = node.type === "text" ? node.content.length : 1;
-          
-          if (currentPos <= cursorPosition && currentPos + nodeLength >= cursorPosition) {
+
+          if (
+            currentPos <= cursorPosition &&
+            currentPos + nodeLength >= cursorPosition
+          ) {
             if (node.type === "text") {
-              const beforeText = node.content.substring(0, cursorPosition - currentPos);
-              const afterText = node.content.substring(cursorPosition - currentPos);
-              
+              const beforeText = node.content.substring(
+                0,
+                cursorPosition - currentPos
+              );
+              const afterText = node.content.substring(
+                cursorPosition - currentPos
+              );
+
               const newContent = [...content];
-              
+
               newContent.splice(i, 1);
-              
+
               if (beforeText) {
                 newContent.splice(i, 0, {
                   id: `text-${Date.now()}-1`,
                   type: "text",
-                  content: beforeText
+                  content: beforeText,
                 });
                 i++;
               }
-              
+
               newContent.splice(i, 0, formulaNode);
-              
+
               if (afterText) {
                 newContent.splice(i + 1, 0, {
                   id: `text-${Date.now()}-2`,
                   type: "text",
-                  content: afterText
+                  content: afterText,
                 });
               }
-              
+
               setContent(newContent);
-              
+
               if (editorRef.current) {
                 editorRef.current.innerHTML = generateHTML(newContent);
                 initFormulaEventHandlers();
               }
-              
+
               break;
             } else {
               const newContent = [...content];
               newContent.splice(i + 1, 0, formulaNode);
               setContent(newContent);
-              
+
               if (editorRef.current) {
                 editorRef.current.innerHTML = generateHTML(newContent);
                 initFormulaEventHandlers();
               }
-              
+
               break;
             }
           }
-          
+
           currentPos += nodeLength;
         }
       } else {
         const newContent = [...content, formulaNode];
         setContent(newContent);
-        
+
         if (editorRef.current) {
           editorRef.current.innerHTML = generateHTML(newContent);
           initFormulaEventHandlers();
@@ -454,21 +500,29 @@ export function RichTextEditor(props: RichTextEditorProps) {
     if (editorRef.current) {
       onChange(editorRef.current.innerHTML);
     }
-    
+
     setShowFormulaModal(false);
     setFormula("");
-  }, [formula, editingFormulaId, content, cursorPosition, generateHTML, onChange, initFormulaEventHandlers]);
+  }, [
+    formula,
+    editingFormulaId,
+    content,
+    cursorPosition,
+    generateHTML,
+    onChange,
+    initFormulaEventHandlers,
+  ]);
 
   const openFormulaModal = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       const range = selection.getRangeAt(0);
       if (editorRef.current?.contains(range.commonAncestorContainer)) {
         let pos = 0;
         const nodes = editorRef.current.childNodes;
-        
+
         for (let i = 0; i < nodes.length; i++) {
           const node = nodes[i];
           if (node.contains(range.commonAncestorContainer)) {
@@ -479,11 +533,11 @@ export function RichTextEditor(props: RichTextEditorProps) {
           }
           pos += node.textContent?.length || 0;
         }
-        
+
         setCursorPosition(pos);
       }
     }
-    
+
     setEditingFormulaId(null);
     setFormula("");
     setShowFormulaModal(true);

@@ -49,15 +49,9 @@ function applyTransformations(input: string) {
   return (
     input
       // Векторы (например, \vec{x})
-      .replace(
-        /\\vec\{([^{}]+)\}/g,
-        '<span class="formula-vector">$1</span>'
-      )
+      .replace(/\\vec\{([^{}]+)\}/g, '<span class="formula-vector">$1</span>')
       // Векторы (например, \vecx)
-      .replace(
-        /\\vec([a-zA-Z0-9])/g,
-        '<span class="formula-vector">$1</span>'
-      )
+      .replace(/\\vec([a-zA-Z0-9])/g, '<span class="formula-vector">$1</span>')
 
       // Подстрочные символы (x_a, x_1, и т.д.)
       .replace(

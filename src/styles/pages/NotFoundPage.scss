@@ -40,7 +40,7 @@
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
-  
+
   strong {
     color: var(--accent-color);
   }
@@ -59,11 +59,11 @@
   transform: translateX(-50%);
   width: 20px;
   height: 90px;
-  background: linear-gradient(to bottom, 
-    transparent 0%, 
-    var(--text-color) 30%, 
-    var(--text-color) 70%, 
-    transparent 100%);
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--text-color) 30%,
+      var(--text-color) 70%,
+      transparent 100%);
   opacity: 0.5;
 }
 
@@ -86,7 +86,7 @@
   height: 2px;
   background: var(--accent-color-transparent);
   transform: translateY(-50%);
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -94,14 +94,12 @@
     bottom: -20px;
     left: 0;
     right: 0;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      var(--accent-color-transparent) 30%,
-      transparent 50%,
-      var(--accent-color-transparent) 70%,
-      transparent 100%
-    );
+    background: linear-gradient(to right,
+        transparent 0%,
+        var(--accent-color-transparent) 30%,
+        transparent 50%,
+        var(--accent-color-transparent) 70%,
+        transparent 100%);
     opacity: 0.2;
     animation: wave-oscillate 3s infinite;
   }
@@ -118,7 +116,7 @@
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-3px);
     color: white;
@@ -131,18 +129,22 @@
     left: 10%;
     opacity: 1;
   }
+
   45% {
     left: 45%;
     opacity: 0.8;
   }
+
   50% {
     left: 50%;
     opacity: 0.1;
   }
+
   55% {
     left: 55%;
     opacity: 0.3;
   }
+
   100% {
     left: 90%;
     opacity: 1;
@@ -150,9 +152,12 @@
 }
 
 @keyframes wave-oscillate {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.1;
   }
+
   50% {
     opacity: 0.4;
   }
@@ -162,8 +167,9 @@
   0% {
     text-shadow: 0 0 5px var(--accent-color-transparent);
   }
+
   100% {
-    text-shadow: 0 0 20px var(--accent-color-transparent), 
-                0 0 30px var(--accent-color-transparent);
+    text-shadow: 0 0 20px var(--accent-color-transparent),
+      0 0 30px var(--accent-color-transparent);
   }
 }

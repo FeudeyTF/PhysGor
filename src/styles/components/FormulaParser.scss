@@ -47,11 +47,11 @@
       margin-left: 0.05em;
       color: var(--text-primary);
     }
-    
+
     .formula-vector {
       display: inline-block;
       position: relative;
-      
+
       &::before {
         content: "→";
         position: absolute;

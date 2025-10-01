@@ -64,7 +64,9 @@ export function TrainingPage() {
     if (physicsLaws.length > 0) {
       const uniqueTopics = Array.from(
         new Set(
-          physicsLaws.filter((law) => law.topic).map((law) => law.topic as string)
+          physicsLaws
+            .filter((law) => law.topic)
+            .map((law) => law.topic as string)
         )
       );
       setTopics(uniqueTopics);

@@ -22,13 +22,13 @@
     align-items: center;
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--border-color);
-    
+
     h4 {
       margin: 0;
       font-size: 1.1rem;
       color: var(--text-primary);
     }
-    
+
     .close-button {
       background: none;
       border: none;
@@ -41,27 +41,27 @@
       font-size: 1.1rem;
       border-radius: 50%;
       transition: all 0.2s ease;
-      
+
       &:hover {
         color: var(--text-primary);
         background-color: var(--hover-color);
       }
     }
   }
-  
+
   .tooltip-content {
     max-height: 450px;
     overflow-y: auto;
     padding: var(--spacing-md);
-    
+
     &::-webkit-scrollbar {
       width: 6px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background: var(--background-color);
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background-color: var(--border-color);
       border-radius: 3px;
@@ -83,7 +83,7 @@
     border-radius: 0;
     max-height: 80vh;
   }
-  
+
   .filter-tooltip {
     border-bottom: none;
     border-left: none;

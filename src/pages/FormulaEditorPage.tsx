@@ -146,7 +146,8 @@ export function FormulaEditorPage() {
             <code>\times, \div, \pm, ...</code> - для математических символов
           </li>
           <li>
-            <code>\vec{"{x}"}</code> или <code>\vecx</code> - для векторов со стрелкой
+            <code>\vec{"{x}"}</code> или <code>\vecx</code> - для векторов со
+            стрелкой
           </li>
         </ul>
         <motion.button
